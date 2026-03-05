@@ -1,0 +1,15 @@
+<section class="page-hero">
+  <h1>Our Services</h1>
+  <p>Professional bike & car services at your doorstep</p>
+</section>
+
+<section class="services container">
+  <div class="grid">
+    <div class="card" *ngFor="let s of services">
+      <img [src]="s.img" alt="{{s.title}}">
+      <h3>{{ s.title }}</h3>
+      <p>Starting at ₹{{ s.price }}</p>
+      <button class="btn">Book Now</button>
+    </div>
+  </div>
+</section>

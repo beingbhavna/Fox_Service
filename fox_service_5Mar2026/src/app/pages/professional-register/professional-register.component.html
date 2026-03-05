@@ -1,0 +1,146 @@
+<header class="top-header" [class.sticky]="isSticky">
+  <div class="container nav">
+    <a routerLink="/" class="logo" (click)="goToHome()">
+      <img src="/assets/images/logo.png" />
+    </a>
+    <div class="top-bar">
+      <div class="top-left">
+        <a href="/register-as-a-professional" class="register-link">Register as a Professional</a>
+      </div>
+      <div class="top-right">
+        <span class="phone">(888) 999-83-82 </span>
+        <a class="login-btn" (click)="openLoginModal()"> Login / Sign Up</a>
+      </div>
+      <!-- <div class="cart">
+        🛒<span class="badge">1</span>
+      </div> -->
+    </div>
+  </div>
+</header>
+<div class="register-wrapper">
+
+
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <span (click)="goToHome()"> Home Page &gt; </span> <span> Register as a Professional</span>
+  </div>
+
+  <!-- Title -->
+  <h2 class="page-title">Register As A Professional</h2>
+
+  <div class="mobile-menu-icon" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Animated Menu -->
+  <div class="mobile-menu" [class.open]="menuOpen">
+    <a routerLink="/register-as-a-professional">Register as a Professional</a>
+    <a routerLink="/login">Login / Sign Up</a>
+  </div>
+
+
+ <a class="whatsapp" (click)="openWhatsApp()">
+  <img src="assets/images/waicongreen.png">
+</a>
+  <!-- Form Card -->
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>First Name*</label>
+        <input type="text" formControlName="firstName" placeholder="First Name" />
+      </div>
+
+      <div class="form-group">
+        <label>Last Name*</label>
+        <input type="text" formControlName="lastName" placeholder="Last Name" />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="Your Email" />
+      </div>
+
+      <div class="form-group">
+        <label>Phone number*</label>
+        <input type="tel" formControlName="phone" placeholder="+91 Mobile Number" />
+      </div>
+
+      <div class="form-group">
+        <label>City*</label>
+        <select formControlName="city">
+          <option value="">Select City</option>
+          <option *ngFor="let city of cityList" [value]="city.id">
+            {{ city.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Your Photo</label>
+        <input type="file" (change)="onFileSelect($event, 'photo')" />
+      </div>
+
+      <div class="form-group">
+        <label>Aadhaar</label>
+        <input type="file" (change)="onFileSelect($event, 'aadhaar')" />
+      </div>
+
+    </div>
+
+    <div class="submit-row">
+      <button type="submit">SUBMIT</button>
+    </div>
+
+  </form>
+  <div class="error-popup" *ngIf="showErrorPopup">
+    <div class="popup-box">
+      <h3>Message</h3>
+      <p>{{ errorMessage }}</p>
+      <button (click)="closePopup()">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- login modal -->
+
+<div class="login-modal" *ngIf="loginShowModal">
+  <div class="login-box">
+    <span class="close-btn" (click)="closeLoginModal()">×</span>
+    <img src="assets/images/logo.png" class="logo" />
+
+    <p class="tagline">Our energy is working for you</p>
+    <p class="sub-text">Quick · Affordable · Trusted</p>
+
+    <div *ngIf="!showOtpScreen">
+      <input type="text" placeholder="Your Phone Number" class="input" [(ngModel)]="phone" maxlength="10"
+        (keypress)="checkInput($event)" />
+
+      <button (click)="continue()">CONTINUE</button>
+    </div>
+    <!-- OTP SCREEN -->
+    <div *ngIf="showOtpScreen">
+      <input type="text" class="input" placeholder="Enter Your OTP" formControlName="otp">
+      <button (click)="loginWithOtp()">CONTINUE</button>
+      <div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
+          <p class="resend">
+            Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Popup -->
+  <div class="error-overlay" *ngIf="showError">
+    <div class="error-box">
+      <div class="error-header">Message</div>
+      <div class="error-body">
+        10 digit Phone number is required
+      </div>
+      <button (click)="closeError()">OK</button>
+    </div>
+  </div>

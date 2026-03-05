@@ -1,0 +1,97 @@
+.testimonials-section {
+  padding: 80px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+/* Title */
+.section-title {
+  font-size: 26px;
+  color: #777;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:black;
+}
+
+.title-icon {
+  width: 40px;
+  height: 12px;
+  background: linear-gradient(to right, #000, #999);
+  margin-right: 10px;
+}
+
+/* Card */
+.testimonial-card {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Avatar */
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #ff0000;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+/* Text */
+.testimonial-card h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.message {
+  font-style: italic;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: auto;
+}
+
+.testimonial-card h4 {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* DOTS */
+.dots {
+  margin-top: 25px;
+}
+
+.dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #bbb;
+  border-radius: 50%;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dots span.active {
+  background: #777;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .message {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+}

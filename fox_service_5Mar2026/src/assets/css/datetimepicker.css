@@ -1,0 +1,101 @@
+.cursorily{ cursor: pointer;}
+.hov:hover{ color: #000;}
+.ico-size{font-size: 16px;}
+.ico-size-month{    font-size: 20px!important;
+    line-height: 20px!important;}
+.ico-size-large{     font-size: 22px!important;
+    line-height: 18px;}
+.dtp_main{
+      border: solid 1px #eee;
+      border-radius: 3px;
+      background-color: #fff;
+      padding: 0px 0 0px 8px;
+      text-align: right;
+      padding: 15px !important;
+      font-size: 22px;
+}
+.dtp_main span, .dtp_main i{display: inline-block;padding-right: 8px;font-size: 18px;}
+.dtp_modal-win{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 999;
+    background-color: #000;
+    opacity: 0.6;
+    }
+.dtp_modal-content{
+       background-color: #fff;
+    border-radius: 10px;
+    width: 300px;
+    position: fixed;
+    z-index: 1000;
+    height: 485px;
+    display: flow-root;
+    top: 0 !important;
+    left: 0 !important;
+    font-size: 16px;
+    font-weight: normal;
+    right: 0 !important;
+    bottom: 0 !important;
+    margin: auto;
+    font-family: 'Nunito',sans-serif;
+    }
+.dtp_modal-content-no-time{ background-color: #fff; border-radius: 10px; width: 312px;
+    position: absolute; z-index: 1000; top: 100px; left: 100px; font-size: 16px;font-weight: normal;}
+.dtp_modal-title{border-bottom: solid 3px #ff5722;padding: 10px 15px;margin-bottom: 10px;font-size: 16px;}
+.dtp_modal-cell-date{ width: 300px;  float: none; margin-bottom: 0px; margin-top: 0px;}
+.dtp_modal-cell-time{width: 300px; float: none; direction: ltr; border-right: solid 1px #000;}
+.dtp_modal-months{ color: #7d7d7d; text-align: center; font-size: 20px; padding: 0 20px;}
+.dtp_modal-months span{    
+    display: inline-block;
+    padding: 10px 20px;
+    width: 182px;}
+.dtp_modal-calendar{ width: 266px; margin-left: 22px; font-size: 12px;}
+.dtp_modal-calendar-cell{ width: 38px; padding: 4px 0; display: inline-block; text-align: center;}
+.dtp_modal-colored{ color: #ff5722 }
+.dtp_modal-grey{ color: #7d7d7d; }
+.dtp_modal-cell-selected{ background-color: #ff5722;color: #fff; border-radius: 48%;  transition: background-color 1s ease-out;}
+.dtp_modal-time-block{ height: auto; width: 310px; }
+.dpt_modal-button{
+      background-color: #ff5722;
+    color: #fff;
+    font-size: 18px;
+    padding: 8px 40px;
+    float: left;
+    width: 150px;
+    text-align: center;
+    display: inline-block;
+    margin-left: calc(50% - 75px);
+    cursor: pointer;
+    border: solid 1px #fff;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 13px;
+    }
+.dtp_modal-time-line{text-align: center;color: #ff5722;font-size: 16px;padding-top: 15px;font-weight: bold;display: none;}
+.dtp_modal-time-mechanic{ padding-top: 0px;}
+.dtp_modal-append{color: #7d7d7d;padding-left: 89px;font-weight: normal;}
+.dtp_modal-midle{ display: inline-block; width: 40px; }
+.dtp_modal-midle-dig{display: inline-block; width: 16px; text-align: center; }
+.dtp_modal-digits{    font-size: 32px;
+    padding-left: 79px;}
+.dtp_modal-digit{  }
+span.cross-icn {
+    position: absolute;
+    right: 0;
+    width: 42px;
+    height: 42px;
+    text-align: center;
+    line-height: 42px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #b7b7b7;
+    cursor: pointer;
+}
+span.cross-icn:hover{
+    color:#000;
+}

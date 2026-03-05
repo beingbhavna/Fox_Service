@@ -1,0 +1,36 @@
+.page-hero {
+  background: #222;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.about .content {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.about img {
+  width: 50%;
+  border-radius: 12px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .about .content {
+    flex-direction: column;
+  }
+
+  .about img {
+    width: 100%;
+  }
+}

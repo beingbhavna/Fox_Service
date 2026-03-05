@@ -1,0 +1,36 @@
+<div class="login-modal">
+    <div class="login-box">
+        <span class="close-btn" (click)="close()">×</span>
+        <img src="assets/images/logo.png" class="logo" />
+
+        <p class="tagline">Our energy is working for you</p>
+        <p class="sub-text">Quick · Affordable · Trusted</p>
+
+        <div *ngIf="!showOtpScreen">
+            <input type="text" placeholder="Your Phone Number" [(ngModel)]="phone" maxlength="10"
+                (keypress)="checkInput($event)" />
+
+            <button (click)="continue()">CONTINUE</button>
+        </div>
+        <!-- OTP SCREEN -->
+        <div *ngIf="showOtpScreen">
+            <input type="text" placeholder="Enter Your OTP" formControlName="otp">
+            <button>CONTINUE</button>
+            <div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
+                    <p class="resend">
+                        Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>
+                    </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Popup -->
+    <div class="error-overlay" *ngIf="showError">
+        <div class="error-box">
+            <div class="error-header">Message</div>
+            <div class="error-body">
+                10 digit Phone number is required
+            </div>
+            <button (click)="closeError()">OK</button>
+        </div>
+    </div>

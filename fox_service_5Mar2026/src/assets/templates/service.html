@@ -1,0 +1,40 @@
+<style>.modal-backdrop {
+        z-index: 10;
+    }
+    .modal {
+        z-index: 20;
+    }
+   a.infocircle {
+    top: 203px;
+    z-index: 9;
+}
+
+.caninfo{
+    margin-right: -37px !important;
+    width: 30px !important;
+    height: 30px !important;
+    background: #fff;
+    text-align: center;
+     color:#000 !important;
+    line-height: 28px;
+    border: 1px solid #333;
+    padding: 0px !important;
+    border-radius: 50%;
+    top: -27px !important;
+}
+.seritem li {
+    margin-bottom: 0px;
+    color: #4d4d4d;
+    font-size: 14px;
+    line-height: 24px;
+}
+.seritem>img {
+    min-height: 150px;
+     max-height: 150px;
+}
+.blink_me {
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    padding: 0px;
+}</style><div class="preloader" ng-show="preloader === true"></div><section class="modaltab" style="background-image: url('{{images + subsubcatnew.banner}}')"><div class="autowidth"><div class="col-md-12 breadcrumb-new"><div class="starttag"><img src="images/tag1.png"></div><a ui-sref="mainLayout.frontPage">Home</a> / <a ui-sref="mainLayout.frontPage">{{city}}</a> / <a ui-sref="mainLayout.frontPage">{{selectedCategory.name}}</a> / <a ui-sref="mainLayout.frontPage">{{subcatnew.name}}</a> / <a href="javascript:void(0)">{{subsubcatnew.name}}</a></div><div class="col-md-12"><h2>{{subsubcatnew.name}} Service in {{city}}</h2><h3>Get instant access to reliable and affordable services</h3></div></div></section><section class="ser-sec"><div class="row clr-w" ng-show="modalservice.length"><h2><div class="starttag"><img src="images/tag2.png"></div>Choose Your Service</h2></div><div class="row clr-fb"><div class="container"><div class="col-md-12 margin-top-10 margin-bottom-50 dflex loadsk1" style="display: inline-block;" ng-hide="modalservice.length === 0"><div class="col-lg-3 col-md-3 col-sm-4" ng-repeat="modal in modalservice track by $index"><div class="seritem"><img ng-src="{{images + modal.image}}" ng-click="showInfo(modal)"><h5 ng-repeat="piv in modal.cities"><i class="fa fa-rupee"></i>{{piv.pivot.price}} /-</h5><a class="infocircle" ng-click="showInfo(modal)"><i class="fa fa-info"></i></a><h4>{{modal.name}}</h4><a href="" ng-click="showInfo(modal)" class="blink_me">View whats included </a><a class="addedhd" href="javascript:void(0)" ng-show="modal.added === true"><span>Added</span><i class="fa fa-check"></i></a> <a class="btn btn-book" ng-click="booknow(modal)" ng-hide="modal.added === true">Add to Cart <img src="images/cart-white.png"></a></div></div></div><div class="preload_mod" ng-hide="modalservice.length === 0"><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div></div><h4 ng-show="loaddone === true" class="nomodal">Coming Soon...</h4></div></div><div class="row clr-w" ng-show="modalpackage.length"><h2><div class="starttag"><img src="images/tag2.png"></div>Choose Your Package</h2></div><div class="row clr-fb"><div class="container"><div class="col-md-10 dflex margin-top-50 margin-bottom-50" style="display: inline-block;;margin-left:auto;margin-right: auto;"><div class="col-lg-4 col-md-4 col-sm-6" ng-repeat="modal in modalpackage track by $index"><div class="package"><h5 ng-repeat="piv in modal.cities"><i class="fa fa-rupee"></i>{{piv.pivot.price}} /-</h5><h3>{{modal.duration}} {{modal.duration_type}}</h3><h4 style="color:#{{color}}">{{modal.name}}</h4><a class="infocircle" ng-click="showInfo(modal)"><i class="fa fa-info"></i></a> <span ng-bind-html="modal.specifications"></span> <a class="addedpkg" href="javascript:void(0)" ng-show="modal.added === true"><span>Added</span> <i class="fa fa-check"></i></a> <a class="btn addpackage" ng-click="booknow(modal)" ng-hide="modal.added === true">Add to Cart<img src="images/cart-white.png"></a></div></div></div></div></div></section><a class="proceedfix" ng-show="cart.length" ui-sref="mainLayout.cart"><img src="images/cart.png"> Proceed to Cart</a><div id="datetcart" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-sm modal-dialog-centered"><!-- Modal content--><div class="modal-content" style="padding: 40px;"><div class="col-md-12 align-center"><h4 style="margin-bottom: 26px;">You have already selected items for another location Do you want to discard the previous cart item?</h4><button class="btn btn-checkout-proceed" ng-click="deleteCart()" ng-hide="currentuser">YES</button> <button class="btn btn-checkout-proceed" ng-click="deleteCart2()" ng-show="currentuser">YES</button> <button class="btn cancel btn-default">NO</button></div></div></div></div><div id="info" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-sm modal-dialog-centered"><!-- Modal content--><div class="modal-content" style="padding: 10px;"><div class="col-md-12 align-center"><a class="cancel caninfo"><i class="fa fa-times"></i></a><h4 style="color:#{{color}}">{{modal.name}}</h4><h5 ng-repeat="piv in modal.cities"><i class="fa fa-rupee"></i>{{piv.pivot.price}} /-</h5><span ng-bind-html="uCanTrust(modal.specifications)"></span> <button class="btn btn-default cancel">Close</button></div></div></div></div>

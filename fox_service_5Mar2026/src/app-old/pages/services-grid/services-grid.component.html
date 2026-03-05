@@ -1,0 +1,11 @@
+<section class="services-grid-section">
+  <div class="container">
+    <div class="grid">
+      <a class="grid-card" *ngFor="let s of services" [routerLink]="s.link">
+        <img [src]="s.img" alt="{{ s.name }}" />
+        <p>{{ s.name }}</p>
+        <p>{{ s.button }}</p>
+      </a>
+    </div>
+  </div>
+</section>

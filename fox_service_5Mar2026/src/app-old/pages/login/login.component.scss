@@ -1,0 +1,123 @@
+.sub-text {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+input {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    // margin: 20px;
+    width: 215px;
+    display: block;
+    margin: 20px auto;
+}
+
+button {
+    background-color: #212121;
+    background-size: 100%;
+    transition: background 0s;
+    color: #fff;
+    width: 215px;
+    border-radius: 4px;
+    height: 40px;
+}
+.timer{
+  margin-top:10px;
+}
+
+
+.login-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-box {
+  background: #fff;
+  width: 400px;
+  padding: 30px;
+  border-radius: 6px;
+  text-align: center;
+  position: relative;
+
+  @media(max-width:768px){
+    width: 90%;
+  }
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.resend {
+  margin-top: 10px;
+  font-size: 13px;
+
+  span {
+    color: red;
+    cursor: pointer;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ERROR POPUP */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.error-box {
+  background: #fff;
+  width: 350px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  @media(max-width:768px){
+    width: 90%;
+  }
+}
+
+.error-header {
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.error-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.error-box button {
+  display: block;
+  margin: 10px auto 15px;
+  background: #000;
+  color: #fff;
+  padding: 6px 20px;
+  border: none;
+}

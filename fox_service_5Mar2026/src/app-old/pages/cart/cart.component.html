@@ -1,0 +1,61 @@
+<!-- <section class="cart-page container">
+	<h2>Your Cart</h2>
+	<div *ngIf="(cart$ | async) as items">
+		<div *ngIf="items.length; else empty">
+			<table class="cart-table">
+				<thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr></thead>
+				<tbody>
+					<tr *ngFor="let it of items">
+						<td>{{ it.title || ('Item ' + it.id) }}</td>
+						<td>{{ it.price || 0 | currency }}</td>
+						<td><input type="number" [value]="it.quantity" (change)="updateQuantity(it.id, $any($event.target).value)" min="1" /></td>
+						<td>{{ (it.price || 0) * (it.quantity || 1) | currency }}</td>
+						<td><button (click)="remove(it.id)">Remove</button></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="cart-actions">
+				<button (click)="clear()">Clear Cart</button>
+			</div>
+		</div>
+		<ng-template #empty>
+			<p>Your cart is empty.</p>
+			<a routerLink="/service">Browse services</a>
+		</ng-template>
+	</div>
+</section> -->
+
+<section class="page-hero">
+  <h1>Your Cart</h1>
+</section>
+
+<section class="cart container" *ngIf="(cart$ | async) as items">
+  <div *ngIf="items.length; else empty">
+
+    <div class="cart-item" *ngFor="let it of items">
+      <div>
+        <h3>{{ it.title }}</h3>
+        <p>₹{{ it.price }}</p>
+      </div>
+
+      <input type="number" min="1"
+        [value]="it.quantity"
+        (change)="updateQuantity(it.id, $any($event.target).value)" />
+
+      <strong>₹{{ (it.price || 0) * (it.quantity || 1) }}</strong>
+
+      <button (click)="remove(it.id)">Remove</button>
+    </div>
+
+    <div class="checkout">
+      <button class="btn" (click)="clear()">Clear Cart</button>
+      <button class="btn primary">Checkout</button>
+    </div>
+
+  </div>
+
+  <ng-template #empty>
+    <p>Your cart is empty.</p>
+  </ng-template>
+</section>

@@ -1,0 +1,33 @@
+.page-hero {
+  background: #ff6a00;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  background: #ff6a00;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

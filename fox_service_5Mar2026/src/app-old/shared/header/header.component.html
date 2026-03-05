@@ -1,0 +1,35 @@
+<!-- <header class="header" [class.sticky]="isSticky">
+  <div class="container nav">
+    <a routerLink="/" class="logo">
+      <img src="/assets/images/logo.png" />
+    </a>
+	<div class="top-bar">
+    <div class="top-left">
+      <a href="#" class="register-link">Register as a Professional</a>
+    </div>
+    <div class="top-right">
+      <span class="phone">(888) 999-83-82</span>
+      <a class="login-btn" routerLink="/login">Login / Sign Up</a>
+    </div>
+  </div>
+  </div>
+</header> -->
+
+<header class="main-header">
+  <div class="left">
+    <img src="assets/images/logo.png" class="logo" />
+  </div>
+
+  <nav class="nav">
+    <a routerLink="/">Home</a>
+    <a routerLink="/services">Services</a>
+    <a routerLink="/login">Login / Sign Up</a>
+  </nav>
+
+  <div class="right">
+    <span class="phone">📞 888-999-83-82</span>
+    <div class="cart" routerLink="/cart">
+      🛒 <span class="badge">{{cartCount}}</span>
+    </div>
+  </div>
+</header>

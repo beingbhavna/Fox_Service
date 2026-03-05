@@ -1,0 +1,22 @@
+<div class="preloader" ng-show="preloader === true"></div><style>.row {
+    margin: auto;
+}
+.mt-50{
+   margin:50px auto;
+}
+.form-control {
+    padding: 9px 12px !important;
+    margin-bottom: 20px;
+ }span.addonnum {
+    color: #000;
+    position: absolute;
+    margin-top: -52px;
+    padding-left: 10px;
+}input.numvar.form-control {
+    text-indent: 30px;
+}</style><link rel="stylesheet" href="css/new.css"><!--                <div ng-bind-html="about.description">
+                </div>--><div class="page-header-area-2 gray"><div class="container"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="small-breadcrumb"><div class="breadcrumb-link"><ul><li><a href="index.html">Home Page</a></li><li><a class="active" href="#">Register as a Professional</a></li></ul></div><div class="header-page"><h1>Register as a Professional</h1></div></div></div></div></div></div><div class="row"><div class="container"><form name="myForm" novalidate class="mt-50"><div class="col-md-6"><label>First Name*</label> <input type="text" ng-model="newadd.first_name" placeholder="First Name*" class="form-control" name="fname" required="" ng-class="{ 'is-invalid': submitted && myForm.fname.$error.required }"></div><div class="col-md-6"><label>Last Name*</label> <input type="text" ng-model="newadd.last_name" placeholder="Last Name*" class="form-control" name="lname" required="" ng-class="{ 'is-invalid': submitted && myForm.lname.$error.required }"></div><div class="col-md-6"><label>Email</label> <input type="email" ng-model="newadd.email" name="email" class="form-control" placeholder="Your Email" ng-class="{ 'is-invalid': submitted && (myForm.email.$error.pattern)}" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"></div><div class="col-md-6"><label>Phone number*</label> <input type="text" ng-model="newadd.phone" class="numvar form-control" placeholder="Mobile Number*" name="phone" maxlength="10" minlength="10" required="numvar" ng-class="{ 'is-invalid': submitted && (myForm.phone.$error.required || (newadd.phone.length !== 10))}"> <span class="addonnum">+91</span></div><div class="col-md-6"><label>City*</label> <select ng-model="newadd.city_id" class="form-control"><option ng-repeat="city in cities" value="{{city.id}}" ng-click="changeCity(city)" class="ng-binding ng-scope">{{city.name}}</option></select></div><div class="col-md-6"><label>Your Photo</label> <input type="file" ng-model="newadd.photo" placeholder="Your Photo" class="dp-input1 form-control" name="photo"> <span style="margin-top: -17px;
+    display: block;
+    position: absolute;">(accepted format png, jpg, jpeg etc.)</span></div><div class="col-md-6"><label>Aadhaar</label> <input type="file" ng-model="newadd.aadhar" placeholder="Aadhar card photo" class="dp-input2 form-control" name="aadhar"> <span style="margin-top: -17px;
+    display: block;
+    position: absolute;">(accepted format png, jpg, jpeg etc.)</span></div><div class="col-md-6"><button class="btn save-add-btn" type="submit" ng-click="save(newadd)">Submit</button></div></form></div></div><div class="main-content-area clearfix"></div>

@@ -1,0 +1,219 @@
+<style>.modal-backdrop {
+        z-index: 10;
+    }
+    .modal {
+        z-index: 20;
+    }
+       #detail h4{
+        line-height: 25px !important;
+    }
+    div#datepicker-demo {
+        text-align: center;
+        width: 286px;
+        margin-left: calc(50% - 143px);
+    }
+    div#datepicker-demo-input-years {
+        pointer-events: none;
+    }
+    .demo-picked {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+a.cloc {
+    background: #fff;
+}
+    .demo-picked span {
+        font-weight: bold;
+    }
+    .paynowbtn{
+        width: auto !important;
+        position: relative !important;
+        padding: 8px 30px !important;
+        font-size: 18px !important;
+    }
+    a.infocircle {
+       position: absolute;
+    z-index: 9;
+    top: auto;
+    bottom: auto;
+    margin-top: 9px;
+    right: 10px;
+}
+a.closeinfo {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    width: 36px;
+    padding: 10px;
+    float: right;
+    right: 13px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 999;
+    top: 0;
+}
+.ng-invalid-email {
+    border-bottom: 2px solid red !important;
+}
+#detail a.infocircle {
+    margin-top: -5px;
+}
+.is-invalid {
+    border-color: red !important;
+}
+.summary ul li b{
+    font-size: 12px;
+    color: #b10000;
+    margin-left: 10px;
+}
+.cartit-left h4 b {
+    font-size: 12px;
+    color: #b10000;
+    display:block;
+    line-height: 16px;
+}
+.cart-content h4 {
+    font-size: 14px;
+}
+.cspec h6 {
+    font-size: 14px;
+}
+.summary ul li{
+    font-size: 14px;
+    display: flow-root;
+}
+.pricetext h4 {
+    font-size: 14px !important;
+}
+#detail h4 {
+    font-size: 14px;
+}
+.timeslot label {
+    width: 50%;
+    margin: 3px 0px;
+}
+.caninfo{
+    margin-right: -37px !important;
+    width: 30px !important;
+    height: 30px !important;
+    background: #fff;
+    color:#000 !important;
+    text-align: center;
+    line-height: 28px;
+    border: 1px solid #333;
+    padding: 0px !important;
+    border-radius: 50%;
+    top: -27px !important;
+}
+.summary ul li>div {
+    float: left;
+    width: calc(100% - 80px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.summary ul li span {
+    float: right;
+    font-weight: bold;
+    width: 80px;
+    text-align: right;
+}
+.cspec ul li {
+    font-size: 12px;
+    line-height: 20px;
+}
+.cspec {
+    overflow: hidden;
+    height:107px;
+}
+.specsec {
+    height: 91px;
+    }
+    .specsec li {
+    font-size: 12px;
+    line-height: 15px;
+}
+button.btn.add-date-btn{
+    float:none !important;
+}
+
+.timeslot .checkspan.active{
+    border-radius: 22px;
+  background-color: #038fca;
+  color: #fff;
+}
+@media (max-width: 600px){
+#detail li img {
+    width: 100%;
+}
+#detail .cartit-left {
+    width: 100%;
+    padding-right: 15px;
+}
+#detail h4 {
+    line-height: 25px !important;
+    width: calc(100% - 15px) !important;
+}
+#detail a.infocircle {
+    margin-top: 0px;
+    right: 31px;
+}
+}
+
+.cloc img {
+    width: 18px;
+    margin-top: -8px;
+}
+.cloc {
+    border: 1px solid #000;
+    padding: 5px;
+    border-radius: 6px;
+    height: 30px;
+    position: absolute;
+    right: 18px;
+    margin-top: -36px;
+}
+.cartit-left h4 span {
+    color: #000;
+    font-weight: 100;
+    font-size: 12px;
+    display: block;
+    line-height: 14px;
+    float: none !important;
+}
+.cart-content h4{
+    height: 58px;
+}
+#comment{
+    margin-bottom: 15px;
+}
+
+</style><div class="preloader" ng-show="preloader === true"></div><section class="gray padding-top-60"><div ng-hide="cart.length || cartitems.length" class="" style="text-align: center;
+         margin: 50px;"><img src="images/cart-black.png" style="margin-bottom: 20px;
+           opacity: 0.5;
+           width: 120px;"><h3 style="color: #7b7b7b;
+           font-size: 18px;
+           font-weight: bold;">Your cart has been empty. Please add your service.</h3><a ui-sref="mainLayout.frontPage" style="background: #000;
+           padding: 12px 40px;
+           color: #fff;
+           font-size: 18px;
+           font-weight: bold;
+           display: block;
+           width: 187px;
+           margin: 20px auto;">Continue</a></div><div class="row" ng-show="cart.length || cartitems.length" style="padding: 0px;"><div class="col-md-8" style="padding: 0px;"><h2 class="hding-main"><div class="starttag"><img src="images/tag2.png"></div>My Added Services</h2><h3 ng-hide="cartitems.length" class="subhd">{{cart[0].category.name}} service in {{cart[0].city}}</h3><h3 ng-show="cartitems.length" class="subhd">{{dbcart.category.name}} service in {{dbcart.city.name}}</h3><div ng-show="currentuser"><div class="loadsk2"><div class="col-md-12 cart-content" ng-show="cartitems.length" ng-repeat="item in cartitems"><ul><li><img ng-src="{{images + item.service.image}}"><div class="cartit-left"><a class="infocircle" ng-click="showInfo(item)"><i class="fa fa-info"></i></a><h4>{{item.service.name}}<span>{{item.category.category.name}}</span> <b>( {{item.category.name}} )</b></h4><div class="cspec"><h6>Specifications:</h6><span ng-bind-html="item.service.specifications"></span></div><h5><i class="fa fa-rupee"></i> {{item.price}} /-</h5></div><a href="javascript:void(0)" class="rembtn" ng-click="removeItemfromlist(item)">Remove</a></li></ul></div></div><div class="preload_cart"><div class="post_cart"><div class="avatar_cart"></div><div class="line_cart"></div></div><div class="post_cart"><div class="avatar_cart"></div><div class="line_cart"></div></div></div></div><div ng-hide="currentuser"><div class="loadsk2" ng-hide="currentuser"><!--            <div class="col-md-12 cart-content align-center" ng-hide="cart.length">
+                                        <h3 >No service added in your cart.</h3>
+                                    </div>--><div class="col-md-12 cart-content" ng-show="cart.length" ng-repeat="item in cart"><ul><li><img ng-src="{{images + item.image}}"><div class="cartit-left"><h4>{{item.name}}<b>( {{item.subsubcategory.name}} )</b></h4><a class="infocircle" ng-click="showInfo1(item)"><i class="fa fa-info"></i></a><div class="cspec"><h6>Specifications:</h6><span ng-bind-html="uCanTrust(item.specifications)"></span></div><h5 ng-repeat="piv in item.cities"><i class="fa fa-rupee"></i> {{piv.pivot.price}} /-</h5></div><a href="" class="rembtn" ng-click="removeItem(item)">Remove</a></li></ul></div></div><div class="preload_cart"><div class="post_cart"><div class="avatar_cart"></div><div class="line_cart"></div></div><div class="post_cart"><div class="avatar_cart"></div><div class="line_cart"></div></div></div><div class="col-md-12 cart-content align-center" ng-hide="cart.length"><h3>No service added in your cart.</h3></div></div></div><div class="col-md-4 summary"><h2>Summary</h2><ul><li ng-repeat="item in cartitems" ng-show="currentuser && cartitems.length"><div>{{item.service.name}}<b>( {{item.category.name}} )</b></div><span><i class="fa fa-rupee"></i> {{item.price}} /-</span></li><li ng-repeat="item in cart" ng-show="!currentuser && cart.length"><div>{{item.name}}<b>( {{item.subsubcategory.name}} )</b></div><span ng-repeat="piv in item.cities"><i class="fa fa-rupee"></i> {{piv.pivot.price}} /-</span></li><li>Sub Total <span><i class="fa fa-rupee"></i> {{without_gst_total}} /-</span></li><!-- <li>GST 18% <span><i class="fa fa-rupee"></i>{{gst}} /-</span></li> --><!-- <li ng-show="coupon_id">
+                   Sub Total <span><i class="fa fa-rupee"></i>&nbsp;&nbsp;{{total_without_coupon}} </span>
+                </li> --><li ng-show="coupon_id">Coupon({{coupon.code}}): <span>-<i class="fa fa-rupee"></i> {{coupon_price}} /-</span></li><li style="background: #e2e2e2;padding: 0px 15px;">Total<b>(GST Included)</b> <span><i class="fa fa-rupee"></i> {{total}} /-</span></li></ul><button class="coupbtn" ng-click="removecoupen()" ng-show="coupons.length && user.id && coupon_id" style="float: left;
+    margin-left: 0px;
+    color: #b10000;">Remove Coupon?</button> <button class="coupbtn" ng-click="showcoupen()" ng-show="coupons.length && user.id">Apply Coupon?</button> <button class="btn btn-checkout-proceed" ng-click="proceed()">Continue</button></div></div></section><div id="location-modal" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-lg modal-dialog-centered" style="padding: 15px;"><!-- Modal content--><div class="modal-content"><a class="cancel">X</a><div class="modal-body" style="padding: 50px 0px;"><h2 class="addhding">Add new address</h2><button class="btn btn-primary" ng-click="addAddressModal()"><i class="fa fa-map-marker"></i> Add New Address</button><!--                <button class="btn btn-default"> Some Other Location</button>--><hr ng-show="addresses.length"><div class="ortext" ng-show="addresses.length">OR</div><h2 class="addhding" ng-show="addresses.length">Choose your address.</h2><div class="row padding-top-30" ng-show="addresses.length"><div class="col-md-12"><div class="col-md-4" ng-repeat="add in addresses" ng-click="selectAddress(add)" ng-class="{'selectedadd':(selectedaddress.id === add.id)}"><div class="address-blk"><a class="editadd" ng-click="editaddress(add, modal)"><i class="fa fa-edit"></i></a><h3>{{add.type}}</h3><p><b>Area:</b>{{add.road_area_colony}},<br><b>Pincode:</b> {{add.pincode}}<br><b>Residence:</b> {{add.house_building_name}}<br><b>Landmark: </b>{{add.landmark}}<br><b>City:</b>{{add.city.name}}<br><b>{{add.name}}, {{add.phone}},</b><br><b>{{add.email}}</b></p></div></div></div></div><button class="btn btn-default" ng-click="selectDateTime()" ng-show="selectedaddress">Continue</button>-</div></div></div></div><div id="datetimemodal" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-dialog-centered" style="max-width: 800px;"><!-- Modal content--><div class="modal-content"><h2 class="addhding">Select you Date & Time</h2><a class="cancel">X</a><div class="modal-body" style="padding: 50px 0px;"><div class="row"><div class="col-md-6"><h6 class="dthding"><i class="fa fa-calendar"></i> Confirm Date</h6><div id="v-cal"><div class="vcal-header"><button class="vcal-btn" data-calendar-toggle="previous"><svg height="24" version="1.1" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path></svg></button><div class="vcal-header__label" data-calendar-label="month">March 2017</div><button class="vcal-btn" data-calendar-toggle="next"><svg height="24" version="1.1" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path></svg></button></div><div class="vcal-week"><span>Mon</span> <span>Tue</span> <span>Wed</span> <span>Thu</span> <span>Fri</span> <span>Sat</span> <span>Sun</span></div><div class="vcal-body" data-calendar-area="month"></div></div><p class="demo-picked" style="opacity:0;position: absolute;"><span data-calendar-label="picked"></span></p></div><div class="timeslot col-md-6"><h6 class="dthding"><i class="fa fa-clock-o"></i> Confirm Time Slot</h6><div class="timeslotbox"><label ng-repeat="s in timeslot" ng-class="{'active':(time_slot.id === s.id)}" ng-hide="s.disable === 0"><!-- <input type="radio" ng-model="time_slot.id" name="timelot" value="{{s.id}}" ng-change="selectSlot(s)"/>  --> <span class="checkspan" ng-class="{'active':(time_slot.id === s.id)}" ng-click="selectSlot(s)">{{s.new_start_time}} to {{s.new_end_time}}</span></label></div></div></div><div class="col-md-12 align-center" style="clear: both;"><button class="btn add-date-btn" ng-click="addDateTime(time_slot)">Continue</button></div></div></div></div></div><div id="coupenbox" class="modal fade" role="dialog" style="z-index:99 !important;"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-sm modal-dialog-centered"><!-- Modal content--><div class="modal-content"><h2 class="modhd">Select your coupon</h2><a class="cancel">X</a><div class="modal-body" style="padding: 50px 0px;"><div class="col-md-12"><div class="col-md-12" style="line-height: 29px;
+                         background: #fff;
+                         padding-bottom: 46px;
+                         text-align: center;"><div class="coupenbox"><label ng-repeat="val in coupons"><input type="radio" name="coupon" ng-model="$parent.mycoupon" ng-value="val"> <span class="checkspan">{{val.code}} ( <b ng-if="val.type != 'Percent'">Rs.</b> {{val.value}} <b ng-if="val.type === 'Percent'">%</b> )</span></label></div></div></div><div class="col-md-12 align-center"><button class="btn btn-aaply-coupen" ng-click="applyCoupen(mycoupon)">Apply Coupon</button></div></div></div></div></div><div id="detail" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-lg modal-dialog-centered"><!-- Modal content--><div class="modal-content"><h2 class="modhd">Your Cart Details</h2><a class="cancel">X</a><div class="modal-body" style="padding: 0px 0px;"><div class="col-md-12"><div class="col-md-8" style="margin-top: 12px;"><div class="cart-content" ng-repeat="item in cartitems"><ul><li><img ng-src="{{images + item.service.image}}"><div class="cartit-left"><h4>{{item.service.name}}<span>{{item.category.category.name}}</span> <b>( {{item.category.name}} )</b></h4><a class="infocircle" ng-click="showInfo(item)"><i class="fa fa-info"></i></a><div class="specsec"><h6>Specifications:</h6><span ng-bind-html="uCanTrust(item.service.specifications)"></span></div><h5><i class="fa fa-rupee"></i> {{item.price}} /-</h5></div></li></ul></div></div><div class="col-md-4"><div class="right-det"><ul><li><span><div class="address-blk"><h3>{{selectedaddress.type}}</h3><p><b>Area:</b>{{selectedaddress.road_area_colony}},<br><b>Pincode:</b> {{selectedaddress.pincode}}<br><b>Residence:</b> {{selectedaddress.house_building_name}}<br><b>Landmark: </b>{{selectedaddress.landmark}}<br><b>City: </b>{{selectedaddress.city.name}}<br><b>{{selectedaddress.name}}, {{selectedaddress.phone}},</b><br><b>{{selectedaddress.email}}</b></p></div></span></li><li><div class="pricetext"><h4>Service Date: <span><i class="fa fa-calendar"></i> &nbsp;&nbsp;{{newdate1}}</span></h4></div></li><li><div class="pricetext"><h4>Service Slot: <span><i class="fa fa-clock-o"></i> &nbsp;&nbsp;{{time_slot.new_start_time}} to {{time_slot.new_end_time}}</span></h4></div></li><li ng-show="coupon_id"><div class="pricetext"><h4>Sub Total <span>&nbsp;&nbsp;{{total_without_coupon}}</span></h4></div></li><li ng-show="coupon_id"><div class="pricetext"><h4>Coupon({{coupon.code}}): <span>&nbsp;&nbsp;<i class="fa fa-rupee"></i> {{coupon_price}} /-</span></h4></div></li><li ng-show="!coupon_id"><h4>Sub Total <span><i class="fa fa-rupee"></i> {{without_gst_total}} /-</span></h4></li><!-- <li>
+                                    <h4>GST 18% <span><i class="fa fa-rupee"></i>{{gst}} /-</span></h4>
+                                </li> --><li><div class="pricetext"><h4>Total<b style="font-size: 12px;color: #b10000;margin-left: 10px;">(GST Included)</b>: <span><i class="fa fa-rupee"></i> {{total}} /-</span></h4></div></li></ul><textarea placeholder="Comment" id="comment" class="form-control" maxlength="200"></textarea></div></div></div><br><div class="col-md-12 align-center" style="display: flow-root;padding-bottom: 20px;clear:both;"><!--  <button class="btn btn-primary" ng-click="showcoupen()" ng-show="coupons.length"> Apply Coupon?</button> --> <button class="btn btn-checkout-proceed paynowbtn" ng-click="checkout('COD')" style="background: #000;">Pay Later</button><!--  <button class="btn btn-checkout-proceed paynowbtn" ng-click="checkout('Prepaid')" > Proceed to Pay</button> --><br><h3 style="margin: 20px 0px 7px 0px;color:#f41616;font-size: 14px;font-weight: bold;">Due to Covid-19, we encourage use of digital payment after service.</h3></div></div></div></div></div><div id="map-modal" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-lg modal-dialog-centered"><!-- Modal content--><div class="modal-content"><div class="modal-body row" style="padding:0px;"><div class="col-md-1 mapwrap"><a class="showmap"><i class="fa fa-arrow-left"></i></a><div id="map_wrapper" style="display:none;"><div id="map_canvas" class="mapping"></div></div></div><div class="col-md-11 rightofloc addwrap"><a class="showadd"><i class="fa fa-arrow-right"></i></a><!--                    <a class="cancel">X</a>--><h2 class="mod-main-hd" ng-hide="editadd === true">Add Address</h2><h2 class="mod-main-hd" ng-if="editadd === true">Update Address</h2><form name="myForm" novalidate><div class="col-md-12"><label>Search Location</label> 
+                                <input id="pac-input" ng-model="newadd.road_area_colony" class="controls form-control" type="text" placeholder="Search Location" name="area" required=""  ng-class="{ 'is-invalid': submitted && myForm.area.$error.required }">
+                                <input type="text" id="lat" ng-model="newadd.lat" style="display: none"> <input type="text" id="lng" ng-model="newadd.lng" style="display: none"> <a class="cloc" href="javascript:void(0);" ng-click="getCurrentLocation()"><img src="images/current.png"></a><span id="latitudeAndLongitude" style="display: none;"></span> <span id="latlongerror" style="color: red"></span></div><div class="col-md-6"><label>Your Name*</label> <input type="text" ng-model="newadd.name" placeholder="Your Name*" name="name" required="" ng-class="{ 'is-invalid': submitted && myForm.name.$error.required }"></div><div class="col-md-6"><label>Email*</label> <input type="email" ng-model="newadd.email" name="email" placeholder="Your Email" required="" ng-class="{ 'is-invalid': submitted && (myForm.email.$error.required || myForm.email.$error.pattern)}" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"></div><div class="col-md-6"><label>Your mobile number*</label> <input type="text" ng-model="newadd.phone" readonly="" class="numvar" placeholder="Mobile Number*" name="phone" maxlength="12" minlength="12" required="numvar" ng-class="{ 'is-invalid': submitted && (myForm.phone.$error.required || (newadd.phone.length !== 12))}"></div><!--  <div class="col-md-6">
+                            <label>Enter your pincode*</label>
+                            <input type="text" ng-model="newadd.pincode" placeholder="Pincode*"  name="pincode" required="" ng-class="{ 'is-invalid': submitted && myForm.pincode.$error.required }" />
+                        </div> --><div class="col-md-6"><label>City*</label><!-- <input type="text" ng-hide="currentuser"  ng-model="cart[0].cities[0].name" name="city" placeholder="City" readonly="" ng-class="{ 'is-invalid': submitted && myForm.city.$error.required }" /> --> <input type="text" ng-model="cartcity.name" name="city" placeholder="City" readonly="" ng-class="{ 'is-invalid': submitted && myForm.city.$error.required }"></div><div class="col-md-6"><label>Landmark</label> <input type="text" ng-model="newadd.landmark" placeholder="Landmark" name="landmark"></div><div class="col-md-6"><label>Residence No</label> <textarea rows="2" ng-model="newadd.house_building_name" name="flat" placeholder="Flat / House No. / Floor / Building"></textarea></div><div class="col-md-6"><label>Address Type*</label><div class="addtype"><label ng-class="{'active':(newadd.type === 'Home')}" ng-click="addtype = ''"><input type="radio" ng-model="newadd.type" value="Home"> <span>Home</span></label> <label ng-class="{'active':(newadd.type === 'Office')}" ng-click="addtype = ''"><input type="radio" ng-model="newadd.type" value="Office"> <span>Office</span></label> <label ng-class="{'active':(addtype === 'Other')}" ng-click="newadd.type = ''"><input type="radio" ng-model="addtype" value="Other"> <span>Other</span></label></div><input type="text" ng-if="addtype === 'Other'" name="otherinput" ng-model="newadd.type" placeholder="Enter Address Type" required="" ng-class="{ 'is-invalid': submitted && myForm.otherinput.$error.required }"></div><button class="btn save-add-btn" ng-click="addAddress(newadd)">Save Address <i class="fa fa-arrow-right" style="margin-left: 5px;"></i></button></form></div></div></div></div></div><div id="datetcart" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-sm modal-dialog-centered"><!-- Modal content--><div class="modal-content" style="padding: 40px;"><div class="col-md-12 align-center"><h4 style="margin-bottom: 26px;">You have already selected items for another location Do you want to discard the previous cart item?</h4><button class="btn btn-checkout-proceed" ng-click="deleteCart2()" ng-show="currentuser">YES</button> <button class="btn btn-default" ng-click="deletecartno()">NO</button></div></div></div></div><form method="post" action="" name="paytm" id="paytmform"><input type="hidden" name="MID" value="YOUR_MID_HERE"> <input type="hidden" name="WEBSITE" value="YOUR_WEBSITE_HERE"> <input type="hidden" name="ORDER_ID" value="YOUR_ORDER_ID"> <input type="hidden" name="CUST_ID" value="CUSTOMER_ID"> <input type="hidden" name="INDUSTRY_TYPE_ID" value="YOUR_INDUSTRY_TYPE_ID_HERE"> <input type="hidden" name="CHANNEL_ID" value="YOUR_CHANNEL_ID"> <input type="hidden" name="TXN_AMOUNT" value="ORDER_TRANSACTION_AMOUNT"> <input type="hidden" name="CALLBACK_URL" value="YOUR_CALLBACK_URL"> <input type="hidden" name="CHECKSUMHASH" value="GENERATED_CHECKSUM_VALUE"><script type="text/javascript">//       document.paytm.submit();</script></form><div id="info" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-sm modal-dialog-centered"><!-- Modal content--><div class="modal-content" style="padding: 10px;"><div class="col-md-12 align-center"><a class="closeinfo caninfo" ng-click="closeinfo()"><i class="fa fa-times"></i></a><h4>{{item.name}}</h4><h5 ng-repeat="piv in item.cities"><i class="fa fa-rupee"></i> {{piv.pivot.price}} /-</h5><span ng-bind-html="uCanTrust(item.specifications)"></span> <button class="btn btn-default" ng-click="closeinfo()">Close</button></div></div></div></div>

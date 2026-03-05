@@ -1,0 +1,103 @@
+<div class="modal-overlay">
+  <div class="modal-box">
+
+    <button class="close-btn" (click)="close()">×</button>
+
+    <h2 class="modal-title">Quick Booking</h2>
+
+    <form [formGroup]="bookingForm" (ngSubmit)="submit()">
+
+      <div class="row">
+        <div class="field">
+          <label>Phone Number:</label>
+          <input type="tel" placeholder="+91" formControlName="phone">
+        </div>
+
+        <div class="field">
+          <label>Name:</label>
+          <input type="text" placeholder="Enter name" formControlName="name">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Email:</label>
+          <input type="email" placeholder="Enter email" formControlName="email">
+        </div>
+
+        <div class="field">
+          <label>City:</label>
+          <select formControlName="city">
+            <option value="">Select City</option>
+            <option *ngFor="let city of cityList" [value]="city.id">
+              {{ city.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Select Vehicle Type:</label>
+          <select formControlName="service">
+            <option value="">Select Vehicle</option>
+            <option>Bike</option>
+            <option>Car</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Select CC Details:</label>
+          <select>
+            <option value="">Select CC</option>
+            <option>100-150cc</option>
+            <option>150-250cc</option>
+            <option>250cc+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Select Model:</label>
+          <select>
+            <option value="">Select Model</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Select Service:</label>
+          <select>
+            <option>Bike Service</option>
+            <option>Car Service</option>
+            <option>Oil Change</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Select Date:</label>
+          <input type="date">
+        </div>
+
+        <div class="field">
+          <label>Select Slot:</label>
+          <select>
+            <option value="">Select Slot</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label>Enter Address:</label>
+        <textarea rows="3" placeholder="Enter address"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="bookingForm.invalid">
+        SUBMIT
+      </button>
+
+    </form>
+  </div>
+</div>

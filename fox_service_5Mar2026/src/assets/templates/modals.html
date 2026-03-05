@@ -1,0 +1,130 @@
+<style>.modalitem {
+   
+    width: 70px;
+    height: 70px;
+    padding: 15px;
+    float: left;
+    border-radius: 50%;
+}
+.mod-sec h4 {
+    float: left;
+    width: calc(100% - 90px);
+    margin-top: 50px;
+    padding-left: 10px;
+    height: 26px;
+    margin-bottom: auto;
+    cursor:pointer;
+}
+label{
+        color: #4d4d4d;
+    font-size: 16px;
+    line-height: 40px;
+    text-align: right;
+}
+select{
+    padding: 0px;
+    height: 40px;
+}
+
+
+.bt-menu-filter {
+    margin-bottom: 20px;
+}
+.example-one-header {
+    display: none;
+}
+.bt-menu-filter ul {
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    width: 100%;
+    background: #eaeaea;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.bt-menu-filter ul li {
+    float: left;
+    list-style-type: none;
+    margin: 0 1px;
+    height: 48px;
+    line-height: 48px;
+    font-family: 'Nunito',sans-serif;
+}
+.bt-menu-filter ul li a {
+    position: relative;
+    cursor: pointer;
+    color: #000;
+    font-size: 12px;
+    line-height: 1;
+    display: block;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-bottom: 2px solid #eaeaea;
+    padding: 17px 17px;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+.bt-menu-filter ul li.active a, .bt-menu-filter ul li:hover a {
+    color: #ff5722;
+    border-bottom: 2px solid #ff5722;
+    display: block;
+    font-weight: bold;
+}
+@media (max-width: 490px){
+.hide-in-mob {
+    display: none !important;
+}
+.example-one-header, nav {
+    font-size: 0;
+}
+.example-one-header {
+    border-radius: 3px;
+    display: block;
+}
+.example-one-header {
+    background: #eaeaea;
+}
+.scroll {
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.nav-item, .vertical-align-middle {
+    display: inline-block;
+    vertical-align: middle;
+}
+.nav-item.active {
+    color: #ff5722;
+    font-weight: bold;
+}
+.nav-item {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 13px;
+    color: #000000;
+    line-height: 30px;
+    text-align: center;
+    font-family: 'Nunito',sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+}
+}</style><div class="preloader" ng-show="preloader === true"></div><section class="modaltab" style="background-image: url('{{images + subcatnew.banner}}')"><div class="autowidth"><div class="col-md-12 breadcrumb-new"><div class="starttag"><img src="images/tag1.png"></div><a ui-sref="mainLayout.frontPage">Home</a> / <a ui-sref="mainLayout.frontPage">{{city}}</a> / <a ui-sref="mainLayout.frontPage">{{selectedCategory.name}}</a>/ <a href="javascript:void(0);">{{subcatnew.name}}</a></div><div class="col-md-12"><h2>{{subcatnew.name}} Service in {{city}}</h2><h3>Get instant access to reliable and affordable services</h3></div></div></section><section class="mod-sec"><div class="row clr-w"><h2><div class="starttag"><img src="images/tag2.png"></div>{{subcatnew.title}}</h2></div><div class="row clr-fb"><div class="container"><div class="col-md-12 margin-top-30 margin-bottom-50" ng-show="modallength === 0"><h4 class="nomodal">Coming Soon...</h4></div><!--            <div class="col-md-12 margin-top-20 margin-bottom-50 loadsk1" ng-show="modallength != 0" ng-init="filteritem = ''">
+                <div class="col-md-offset-7 col-md-5" style="float: right;">
+                    <label class="col-md-5">Filter By</label>
+                    <Select class="col-md-7" ng-model="filteritem">
+                        <option value="">All</option>
+                        <option ng-repeat="item in arrunique" value="{{item}}" >{{item}}</option>
+                    </Select>
+                </div>
+             </div>--><div class="bt-menu-filter" ng-show="modallength != 0" ng-init="filteritem = ''"><div class="example-one-header scroll"><nav class="vertical-align-middle"><span class="nav-item" ng-class="{'active':(filteritem === '')}" ng-click="filteritem = ''">All</span> <span class="nav-item" ng-repeat="item in arrunique" ng-class="{'active':(item === filteritem)}" ng-click="filter(item)">{{item}}</span></nav></div><ul class="hide-in-mob"><li class="slug-bt-menu-item hideres" ng-class="{'active':(filteritem === '')}"><a ng-click="filteritem = ''">All</a></li><li class="slug-bt-menu-item hideres" ng-class="{'active':(item === filteritem)}" ng-repeat="item in arrunique"><a ng-click="filter(item)">{{item}}</a></li></ul></div><div class="col-md-12 dflex margin-top-20 margin-bottom-50 loadsk1" style="display: inline-block;"><div class="col-lg-3 col-md-3 col-sm-12" ng-repeat="modal in modals track by $index" ng-show="filteritem === '' || filteritem === modal.uniquename" ng-click="viewServices(modal)"><div class="modalitem"><img ng-src="{{images + modal.image}}" class="h110"></div><h4>{{modal.name}}</h4></div></div><div class="preload_mod"><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div><div class="post_mod"><div class="avatar_mod"></div><div class="line_mod"></div></div></div></div></div></section><div id="specification" class="modal fade" role="dialog"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-dialog-centered"><!-- Modal content--><div class="modal-content"><h2 class="modhd">Select your Additional Type</h2><a class="cancel">X</a><div class="modal-body"><div class="row"><div class="col-md-12 fuelbox" ng-repeat="fuel in additional_specifications"><input type="radio" ng-model="selectedfuel" value="{{fuel}}" id="{{fuel}}" name="fuel" ng-change="fuleSelect(selectedfuel)"> <label for="{{fuel}}">{{fuel.name}}</label></div></div></div></div></div></div>

@@ -1,0 +1,40 @@
+<section class="brands-we-service">
+   <h2><img src="assets/images/tag2.png" alt="How It Works" class="how-it-works-image" style="height: 28px;">
+ Brands We Service</h2>
+
+  <div class="slider">
+    <div 
+      class="slider-track" 
+      [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+
+      <div class="slide">
+        <img src="assets/images/brand1.png">
+        <img src="assets/images/brand1.jpg">
+        <img src="assets/images/brand2.png">
+        <img src="assets/images/brand3.png">
+        <img src="assets/images/brand3.jpg">
+        <img src="assets/images/brand4.jpg">
+        
+       
+      </div>
+
+      <div class="slide">
+        <img src="assets/images/brand4.png">
+         <img src="assets/images/brand5.png">
+        <img src="assets/images/brand5.jpg">
+        <img src="assets/images/brand6.png">
+        <img src="assets/images/brand7.png">
+        <!-- <img src="assets/images/brand9.png"> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots">
+    <span 
+      *ngFor="let d of slides; let i = index"
+      (click)="goToSlide(i)"
+      [class.active]="currentIndex === i">
+    </span>
+  </div>
+</section>

@@ -1,0 +1,280 @@
+// .main-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 10px 30px;
+//   background: #fff;
+//   position: sticky;
+//   top: 0;
+//   z-index: 1000;
+//   box-shadow: 0 2px 6px rgba(0,0,0,.1);
+// }
+
+// .logo {
+//   height: 40px;
+// }
+
+// .nav a {
+//   margin: 0 15px;
+//   font-weight: 600;
+//   color: #333;
+//   text-decoration: none;
+// }
+
+// .nav a:hover {
+//   color: #ff6a00;
+// }
+
+// .right {
+//   display: flex;
+//   align-items: center;
+//   gap: 15px;
+// }
+
+// .cart {
+//   position: relative;
+//   cursor: pointer;
+//   font-size: 20px;
+// }
+
+// .badge {
+//   position: absolute;
+//   top: -6px;
+//   right: -8px;
+//   background: red;
+//   color: white;
+//   border-radius: 50%;
+//   padding: 2px 6px;
+//   font-size: 12px;
+// }
+
+// /* Mobile */
+// @media (max-width: 768px) {
+//   .nav {
+//     display: none;
+//   }
+// }
+
+/* HEADER */
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+  }
+
+  .logo img {
+    height: 45px;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 14px;
+
+    .phone {
+      font-weight: bold;
+    }
+
+    .login-btn {
+      cursor: pointer;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .register-link {
+      color: #555;
+    }
+  }
+
+
+  .cart {
+    position: relative;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .nav-links {
+    margin: 10px 0;
+  }
+
+  .hero {
+    height: 220px;
+  }
+
+  .slide {
+    padding-left: 20px;
+  }
+
+  .bike-grid {
+    padding: 20px;
+    gap: 20px;
+  }
+}
+
+/* ================= LOGIN MODAL ================= */
+.login-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+
+  .login-box {
+    background: #fff;
+    padding: 30px;
+    width: 350px;
+    border-radius: 10px;
+    text-align: center;
+
+    // .logo {
+    //   width: 120px;
+    //   margin-bottom: 10px;
+    // }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #000;
+      color: #fff;
+      border-radius: 25px;
+      border: none;
+      font-weight: 600;
+    }
+
+    .timer {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .resend span {
+      color: red;
+      cursor: pointer;
+    }
+  }
+}
+
+.breadcrumb-new a {
+    color: #e5e5e5;
+    font-size: 18px;
+    line-height: 1.75;
+    letter-spacing: normal;
+    font-weight: 500;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+.whatsapp {
+  position: fixed;
+  left: 15px;
+  top: 55%;
+  z-index: 1000;
+
+  img {
+    width: 45px;
+  }
+}
+
+/* Hamburger Icon */
+.mobile-menu-icon {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: #fff;
+  z-index: 1001;
+}
+
+.mobile-menu-icon span {
+  width: 18px;
+  height: 2px;
+  background: #000;
+  margin: 3px 0;
+}
+
+/* Menu Box */
+.mobile-menu {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  width: 220px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  overflow: hidden;
+
+  transform: translateY(-20px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+/* When Open */
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Links */
+.mobile-menu a {
+  display: block;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu a:hover {
+  background: #f5f5f5;
+}
+
+/* Show only on mobile */
+@media (max-width: 768px) {
+  .mobile-menu-icon {
+    display: flex;
+  }
+}

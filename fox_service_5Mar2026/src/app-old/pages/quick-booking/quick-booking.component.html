@@ -1,0 +1,37 @@
+<div class="modal-backdrop">
+  <div class="modal-box">
+    <button class="close-btn" (click)="close()">×</button>
+
+    <h2>Quick Booking</h2>
+
+    <form [formGroup]="bookingForm" (ngSubmit)="submit()">
+
+      <input type="text" placeholder="Name" formControlName="name">
+      <!-- <small *ngIf="f.name.touched && f.name.invalid">Name required</small> -->
+
+      <input type="tel" placeholder="Phone" formControlName="phone">
+      <!-- <small *ngIf="f.phone.touched && f.phone.invalid">Valid phone required</small> -->
+
+      <input type="email" placeholder="Email" formControlName="email">
+
+      <select formControlName="city">
+        <option value="">Select City</option>
+        <option>Noida</option>
+        <option>Delhi</option>
+        <option>Ghaziabad</option>
+      </select>
+
+      <select formControlName="service">
+        <option value="">Select Service</option>
+        <option>Bike Service</option>
+        <option>Car Service</option>
+        <option>Oil Change</option>
+      </select>
+
+      <button type="submit" class="submit-btn" [disabled]="bookingForm.invalid">
+        Book Now
+      </button>
+
+    </form>
+  </div>
+</div>

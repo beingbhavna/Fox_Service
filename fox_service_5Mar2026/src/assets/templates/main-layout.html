@@ -1,0 +1,83 @@
+<style>.navbar-brand img {
+    width: auto;
+    max-height: 58px;
+}
+.navbar{
+        padding: 0rem 1rem !important;
+}
+
+
+ul.navbar-nav{
+    margin-left: auto;
+    float: right;
+    margin-right: 100px !important;
+}
+@media (max-width: 769px){
+    ul.navbar-nav{
+        margin-left: auto;
+        float: right;
+             margin-right: -16px !important;
+        text-align: right;
+    }
+}
+.f-main .col-md-3 {
+    min-height: 215px;
+    max-height: 215px;
+    overflow: hidden;
+}
+.login-blk img {
+    width: 115px;
+}
+
+div#some_div {
+    margin: 15px;
+}
+
+a.resendotp {
+   color: red;
+   font-weight: 600;
+}
+.resenddiv{
+    display: none;
+    text-align: center;
+    margin: 10px auto
+}
+
+#wa-widget-send-button {
+    padding-left: 10px !important;
+    padding-right: 8px !important;
+    }
+    a.wabtn {
+    position: fixed;
+    top: 290px;
+    left: 10px;
+    background: #46c656;
+    width: 54px;
+    height: 54px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 3px 5px 9px 0px rgb(49 49 49 / 33%);
+    z-index: 9;
+}
+.wabtn img {
+    width: 41px;
+    margin-top: 7px;
+}</style><div class="preloader" ng-show="preloader === true"></div><header><nav class="navbar navbar-expand-lg fixed navbar-light"><a class="navbar-brand" ui-sref="mainLayout.frontPage" ng-if="allsetting.site_logo"><img ng-src="{{img + allsetting.site_logo.image}}" title="{{allsetting.site_logo.heading}}"></a><div class="nav-item mobnum"><a class="nav-link wablock" href="tel:{{citynumber}}" style="margin-top: -7px;    padding-right: 0px !important;"><img src="images/waicon.png"><span>{{citynumber}}</span></a></div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav mr-auto" style=""><li class="nav-item" ng-hide="currentuser.token"><a class="nav-link" ui-sref="mainLayout.becomePartner">Register as a Professional</a></li><li class="nav-item hideinmob"><a class="nav-link wablock" href="tel:{{citynumber}}" style="width: 202px;margin-top: -7px;    padding-right: 0px !important;"><img src="images/waicon.png"><span>{{citynumber}}</span></a></li><li class="nav-item" ng-controller="AuthController" ng-hide="currentuser.token"><a class="nav-link login" ng-click="loginNow()">Login / Sign Up</a></li><li class="nav-item dropdown" ng-controller="AuthController" ng-show="currentuser.token"><a class="nav-link login dropdown-toggle" data-toggle="dropdown"><i class="usricn fa fa-user"></i></a><ul class="dropdown-menu"><li><a ui-sref="mainLayout.profile">Profile</a></li><li><a ui-sref="mainLayout.orders">My Orders</a></li><li><a ng-click="logout()">Logout</a></li></ul></li></ul></div><div class="nav-item" style="position: absolute;" ng-show="cartitems.length || cart.length"><a class="nav-link lasstitem" ui-sref="mainLayout.cart"><img src="images/carticon.png"> <span><b ng-show="!currentuser.token && cart.length">{{cart.length}}</b> <b ng-show="currentuser.token && cartitems.length">{{cartitems.length}}</b></span></a></div></nav></header><div ui-view style="min-height: 500px;"></div><footer class="footer"><div class="footer-header"><div class="container"><div class="fh-item" ng-show="currentuser.token"><a title="My Profile" ui-sref="mainLayout.profile">Profile</a></div><div class="fh-item" ng-show="currentuser.token"><a title="My orders" ui-sref="mainLayout.orders">My Orders</a></div><div class="fh-item" ng-show="currentuser.token"><a title="Logout" ng-click="logout()">Logout</a></div></div></div><div class="f-main"><div class="container" style="display: flow-root;padding-bottom: 20px;"><div class="col-md-3"><div class="fmain-hd">About Fox Service</div><div><a class="f-item" title="Know more about www.foxservice.in" ui-sref="mainLayout.about">About Us</a></div><div><a class="f-item" target="_blank" ui-sref="mainLayout.faq" title="faq" rel="noopener">FAQ's</a></div><div><a class="f-item" title="Read our terms and conditions" ui-sref="mainLayout.terms">Terms &amp; Conditions</a></div><div><a class="f-item" ui-sref="mainLayout.contactus">Address: E-5 Shatabdi Vihar Scetor 52 Noida (U.P) India E-Mail: contactus@foxservice.in</a></div></div><div class="col-md-3" ng-repeat="item in footerdata"><div class="fmain-hd">{{item.name}}</div><div ng-repeat="subitem in item.data"><a class="f-item" href="{{subitem.url}}">{{subitem.name}}</a></div></div></div></div><footer class="bottom-footer" itemscope=""><div class="container"><div class=""><a class="bfooter-logo" itemprop="url" href="#"><img src="images/footer-logo.png"></a><div class="footer-para">Copyright © 2021 Fox Service | All Rights Reserved.</div><a class="wablock" href="tel:{{citynumber}}"><img src="images/waicon.png"><span>{{citynumber}}</span></a><div class="footer-right"><div class="frb-1 social"><!--  <a target="_blank" href="javascript:void(0);">
+                            <div>
+                                <img alt="Whatsapp logo" itemscope="" itemprop="image" src="images/waicon.png">
+                            </div>
+                        </a> --> <a target="_blank" href="{{allsetting.social_link_twitter.url}}"><div><img alt="Whatsapp logo" itemscope="" itemprop="image" src="images/waicongrey.png" style="width: 21px;"></div></a><a target="_blank" href="{{allsetting.social_link_facebook.url}}"><div><img alt="Facebook logo" itemscope="" itemprop="image" src="images/Facebook.svg"></div></a><!--   <a target="_blank" href="{{allsetting.social_link_linkedin.url}}">
+                            <div>
+                                <img alt="Linked In logo" itemscope="" itemprop="image" src="images/link.svg">
+                            </div>
+                        </a>
+                        <a target="_blank" href="{{allsetting.social_link_instagram.url}}">
+                            <div>
+                                <img alt="Instagram logo" itemscope="" itemprop="image" src="images/Instagram.svg">
+                            </div>
+                        </a>
+                        <a target="_blank" href="{{allsetting.social_link_youtube.url}}">
+                            <div>
+                                <img alt="YouTube logo" itemscope="" itemprop="image" src="images/YouTube.svg">
+                            </div>
+                        </a> --></div></div></div></div></footer></footer><a href="https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about" class="wabtn" target="_blank"><img src="images/waicongreen.png"></a><div id="login-modal" class="modal fade" role="dialog" ng-controller="AuthController"><div class="preloader" ng-show="preloader === true"></div><div class="modal-dialog modal-dialog-centered"><!-- Modal content--><div class="modal-content"><a class="cancel" ng-hide="otpbox === true">X</a> <a class="cancelotp" ng-show="otpbox === true" ng-click="otpclose()">X</a><div class="modal-body login-blk"><img src="images/logo.png" alt="Doorstep Bike Service Noida"><h2>Our energy is working for you</h2><ul><li>Quick</li><li>Affordable</li><li>Trusted</li></ul><input type="text" maxlength="10" minlength="10" class="numvar" ng-model="mobile" ng-hide="otpbox === true" placeholder="Your Phone Number"> <input type="text" ng-model="otp" placeholder="Enter Your OTP" ng-show="otpbox === true"> <button class="btn btn-login" ng-click="login(mobile)" ng-hide="otpbox === true">Continue</button> <button class="btn btn-login" ng-click="LoginNowConfirm(otp,mobile)" ng-show="otpbox === true">Continue</button><div id="some_div"></div><div class="resenddiv">Didn't receive code? <a href="javascript:void(0)" class="resendotp" ng-click="resendotp(mobile)">Resend OTP</a></div></div></div></div></div>

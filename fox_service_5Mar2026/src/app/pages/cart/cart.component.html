@@ -1,0 +1,134 @@
+<!-- <header class="header">
+  <div class="logo">FOX SERVICE</div>
+  <div class="cart-icon">
+    🛒 <span class="badge">{{ cartItems.length }}</span>
+  </div>
+</header>
+
+<div class="cart-page">
+
+  <div class="cart-left">
+    <h2>My Added Services</h2>
+    <p class="location">Bike/Scooty service in Noida</p>
+
+
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <img [src]="'https://www.foxservice.in/admin/' + item.image" width="80">
+      <div class="details">
+        <h3>{{ item.name }} <span>({{ item.model }})</span></h3>
+
+      </div>
+      <span style="font-size: 12px;">Specifications:
+      <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+      </span>
+
+      <div class="price">
+        ₹ {{ item.cities[0].pivot.price }}/-
+        <span class="remove" (click)="removeItem(item.id)">Remove</span>
+      </div>
+    </div>
+
+
+    <div *ngIf="cartItems.length === 0" class="empty">
+      Your cart is empty
+      <button class="continue-btn" (click)="backToHome()">CONTINUE</button>
+    </div>
+  </div>
+
+  <div class="cart-right" *ngIf="cartItems.length">
+    <h3>Summary</h3>
+
+    <div class="summary-item" *ngFor="let item of cartItems">
+      <span>{{ item.name }} ({{ item.model }})</span>
+      <span>₹ {{ item.price }}/-</span>
+    </div>
+
+    <hr>
+
+    <div class="summary-item">
+      <b>Sub Total</b>
+      <b>₹ {{ total }}/-</b>
+    </div>
+
+    <div class="summary-item total">
+      <b>Total (GST Included)</b>
+      <b>₹ {{ total }}/-</b>
+    </div>
+
+    <button class="continue-btn" (click)="continue()">CONTINUE</button>
+  </div>
+
+</div> -->
+
+<header class="header">
+  <div class="logo">FOX SERVICE</div>
+  <div class="cart-icon">
+    🛒 <span class="badge">{{ cartItems.length }}</span>
+  </div>
+</header>
+
+<div class="cart-wrapper">
+
+  <!-- LEFT -->
+  <div class="cart-left">
+    <h2>My Added Services</h2>
+    <p class="location">Bike/Scooty service in Noida</p>
+
+    <div *ngFor="let item of cartItems" class="cart-card">
+      <div class="card-left">
+        <img [src]="'https://www.foxservice.in/admin/' + item.image">
+
+      <div class="title-spec-row">
+
+  <div class="title">
+    <h3>
+      {{ item.name }}
+      <span>({{ item.model }})</span>
+    </h3>
+  </div>
+
+  <div class="specs">
+    <b>Specifications:</b>
+    <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+  </div>
+
+</div>
+      </div>
+
+      <div class="card-right">
+        <div class="price">₹ {{ item.cities[0].pivot.price }}/-</div>
+        <span class="remove" (click)="removeItem(item.id)">Remove</span>
+      </div>
+    </div>
+
+    <div *ngIf="cartItems.length === 0" class="empty">
+      Your cart is empty
+      <button class="continue-btn" (click)="backToHome()">CONTINUE</button>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="cart-right">
+    <h3>Summary</h3>
+
+    <div class="summary-item" *ngFor="let item of cartItems">
+      <span>{{ item.name }} ({{ item.model }})</span>
+      <span>₹ {{ item.cities[0].pivot.price }}/-</span>
+    </div>
+
+    <hr>
+
+    <div class="summary-item">
+      <b>Sub Total</b>
+      <b>₹ {{ total }}/-</b>
+    </div>
+
+    <div class="summary-item total">
+      <b>Total (GST Included)</b>
+      <b>₹ {{ total }}/-</b>
+    </div>
+
+    <button class="continue-btn" (click)="continue()">CONTINUE</button>
+  </div>
+
+</div>

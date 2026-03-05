@@ -1,0 +1,289 @@
+<header class="header" [class.sticky]="isSticky">
+	<div class="container nav">
+		<a routerLink="/" class="logo">
+			<img src="/assets/images/logo.png" />
+		</a>
+		<div class="top-bar">
+			<div class="top-left">
+				<a href="#" class="register-link">Register as a Professional</a>
+			</div>
+			<div class="top-right">
+				<span class="phone">(888) 999-83-82</span>
+				<a class="login-btn" (click)="openLoginModal()">Login / Sign Up</a>
+			</div>
+		</div>
+	</div>
+</header>
+
+<!-- Floating Buttons -->
+<a class="quick-booking" (click)="quickBookingOpenModal()">Quick Booking</a>
+<a class="whatsapp">
+	<img src="assets/images/waicongreen.png">
+</a>
+<section class="hero-slider">
+	<div class="hero">
+		<div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentIndex"
+			[style.backgroundImage]="'url(' + slide.image + ')'">
+
+			<div class="hero-content">
+				<h1>{{ slide.title }}</h1>
+				<p>{{ slide.subtitle }}</p>
+
+				<div class="city-select">
+					<!-- <div class="city-box"> -->
+					<span class="icon">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="#555">
+							<path d="M2 12L22 2L14 22L11 13L2 12Z" />
+						</svg>
+					</span>
+					<select>
+						<option>Noida</option>
+						<option>Delhi</option>
+						<option>Ghaziabad</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- BIKE / SCOOTY ICON -->
+<div class="bike-icon" (click)="openPopup()">
+	<img src="assets/images/bike.png">
+	<p>Bike / Scooty</p>
+</div>
+
+
+<!-- Overlay -->
+<div class="overlay" *ngIf="showPopup" (click)="closePopup()"></div>
+
+<!-- Popup -->
+<div class="vehicle-popup" *ngIf="showPopup">
+	<div class="popup-left">
+		<img src="assets/images/bike.png" />
+		<p>Bike / Scooty</p>
+	</div>
+
+	<div class="popup-right">
+		<div class="item" *ngFor="let item of bikes; let i = index" [class.active]="i === activeIndex" (click)="selectItem(i)" (click)="openBikeList(item.name)">
+			<img [src]="item.icon" />
+			<span>{{item.name}}</span>
+		</div>
+
+		<!-- dots -->
+		<div class="dots">
+			<span *ngFor="let d of bikes; let i = index" [class.active]="i === activeIndex">
+			</span>
+		</div>
+	</div>
+</div>
+
+
+<!-- login modal -->
+
+<div class="login-modal" *ngIf="loginShowModal">
+	<div class="login-box">
+		<span class="close-btn" (click)="close()">×</span>
+		<img src="assets/images/logo.png" class="logo" />
+
+		<p class="tagline">Our energy is working for you</p>
+		<p class="sub-text">Quick · Affordable · Trusted</p>
+
+		<div *ngIf="!showOtpScreen">
+			<input type="text" placeholder="Your Phone Number" [(ngModel)]="phone" maxlength="10"
+				(keypress)="checkInput($event)" />
+
+			<button (click)="continue()">CONTINUE</button>
+		</div>
+		<!-- OTP SCREEN -->
+		<div *ngIf="showOtpScreen">
+			<input type="text" placeholder="Enter Your OTP" formControlName="otp">
+			<button>CONTINUE</button>
+			<div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
+					<p class="resend">
+						Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>
+					</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Error Popup -->
+	<div class="error-overlay" *ngIf="showError">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+				10 digit Phone number is required
+			</div>
+			<button (click)="closeError()">OK</button>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+	<!-- BIKE CATEGORY -->
+	<section class="bike-section">
+		<h2>Bike/Scooty</h2>
+
+		<div class="bike-grid">
+			<div class="bike-card" (click)="openBikeList('150cc')">
+				<img src="assets/images/150cc.jpg">
+				<p>Upto 150cc</p>
+				<p><b>Book Now →</b></p>
+			</div>
+
+			<div class="bike-card" (click)="openBikeList('250cc')">
+				<img src="assets/images/250cc.jpg">
+				<p>150cc - 250cc</p>
+				<p><b>Book Now →</b></p>
+			</div>
+
+			<div class="bike-card" (click)="openBikeList('350cc')">
+				<img src="assets/images/350cc.jpg">
+				<p>251cc - 350cc</p>
+				<p><b>Book Now →</b></p>
+			</div>
+
+			<div class="bike-card" (click)="openBikeList('above350cc')">
+				<img src="assets/images/above350cc.jpg">
+				<p>Above 350cc</p>
+				<p><b>Book Now →</b></p>
+			</div>
+		</div>
+	</section>
+	<section class="services container">
+		<div>Bike / Scooty</div>
+		<!-- <app-services-grid></app-services-grid> -->
+		<app-testimonials></app-testimonials>
+	</section>
+
+
+
+
+	<section class="how-it-works">
+		<h2><img src="assets/images/tag2.png" alt="How It Works" class="how-it-works-image" style="height: 28px;">
+			How We Work</h2>
+
+		<div class="steps-grid">
+			<div class="step-card">
+				<img src="assets/images/step1.png" alt="Step 1">
+				<p>Select Model and Service</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step2.png" alt="Step 2">
+				<p>Choose time slot and location</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step6.png" alt="Step 3">
+				<p>Book appointment</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step4.png" alt="Step 4">
+				<p>Fox Service team will call you</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step5.png" alt="Step 5">
+				<p>Mechanic will visit at your location</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step3.png" alt="Step 6">
+				<p>Pay after service</p>
+			</div>
+		</div>
+	</section>
+
+	<app-brands></app-brands>
+
+	<!-- Overlay -->
+	<div class="modal-overlay" *ngIf="quickBookingShowModal" (click)="quickBookingCloseModal()"></div>
+
+	<!-- Modal -->
+	<div class="quick-booking-modal" *ngIf="quickBookingShowModal">
+		<div class="modal-header">
+			<h2>Quick Booking</h2>
+			<span class="close-btn" (click)="quickBookingCloseModal()">×</span>
+		</div>
+
+		<form class="modal-form">
+			<div class="form-grid">
+
+				<div class="form-group">
+					<label>Phone Number*</label>
+					<input type="text" placeholder="+91">
+				</div>
+
+				<div class="form-group">
+					<label>Name*</label>
+					<input type="text">
+				</div>
+
+				<div class="form-group">
+					<label>Email*</label>
+					<input type="email">
+				</div>
+
+				<div class="form-group">
+					<label>City*</label>
+					<select>
+						<option>Noida</option>
+						<option>Delhi</option>
+						<option>Ghaziabad</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>Select Vehicle Type</label>
+					<select>
+						<option>Bike</option>
+						<option>Scooty</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>Select CC Details</label>
+					<select>
+						<option>Upto 150cc</option>
+						<option>150-250cc</option>
+						<option>250-350cc</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>Select Model</label>
+					<select></select>
+				</div>
+
+				<div class="form-group">
+					<label>Select Service</label>
+					<select></select>
+				</div>
+
+				<div class="form-group">
+					<label>Select Date</label>
+					<input type="date">
+				</div>
+
+				<div class="form-group">
+					<label>Select Slot</label>
+					<select></select>
+				</div>
+
+				<div class="form-group full-width">
+					<label>Enter Address</label>
+					<textarea rows="2"></textarea>
+				</div>
+
+			</div>
+
+			<button class="submit-btn">SUBMIT</button>
+		</form>
+	</div>

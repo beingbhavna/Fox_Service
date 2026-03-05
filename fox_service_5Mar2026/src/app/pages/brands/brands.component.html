@@ -1,0 +1,28 @@
+<section class="brands-we-service">
+  <h2>
+    <img src="assets/images/tag2.png" alt="How It Works" class="how-it-works-image" style="height: 28px;">
+    Brands We Service
+  </h2>
+
+  <div class="slider">
+    <div class="slider-track"
+         [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+
+      <!-- Slides -->
+      <div class="slide" *ngFor="let slide of brandSlides">
+        <img *ngFor="let brand of slide"
+             [src]="'https://www.foxservice.in/admin/' + brand.image"
+             [alt]="brand.name">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots">
+    <span *ngFor="let d of slides; let i = index"
+          (click)="goToSlide(i)"
+          [class.active]="currentIndex === i">
+    </span>
+  </div>
+</section>

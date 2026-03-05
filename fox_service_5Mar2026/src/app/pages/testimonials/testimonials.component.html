@@ -1,0 +1,32 @@
+<section class="testimonials-section">
+  <h2 class="section-title">
+    <img src="assets/images/tag2.png" alt="How It Works" class="how-it-works-image" style="height: 28px;">
+    Our Testimonials
+  </h2>
+
+  <!-- SAFE CHECK -->
+  <div class="testimonial-card" *ngIf="testimonials && testimonials.length > 0">
+
+    <div class="avatar">
+      {{ testimonials[currentIndex]?.initial }}
+    </div>
+
+    <h3>{{ testimonials[currentIndex]?.title }}</h3>
+
+    <p class="message"
+       [innerHTML]="getSafeDescription(testimonials[currentIndex]?.description)">
+    </p>
+
+    <h4>{{ testimonials[currentIndex]?.name }}</h4>
+
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots" *ngIf="testimonials && testimonials.length > 0">
+    <span
+      *ngFor="let t of testimonials; let i = index"
+      (click)="goToSlide(i)"
+      [class.active]="i === currentIndex">
+    </span>
+  </div>
+</section>

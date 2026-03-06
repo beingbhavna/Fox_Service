@@ -1,4 +1,4 @@
-<header class="header" [class.sticky]="isSticky">
+<!-- <header class="header" [class.sticky]="isSticky">
 	<div class="container nav">
 		<a routerLink="/" class="logo">
 			<img src="/assets/images/logo.png" />
@@ -14,8 +14,8 @@
 			</div>
 		</div>
 	</div>
-</header>
-
+</header> -->
+<app-header></app-header>
 <!-- Floating Buttons -->
 <a class="quick-booking" (click)="quickBookingOpenModal()">Quick Booking</a>
 <a class="whatsapp" (click)="openWhatsApp()">
@@ -38,7 +38,7 @@
 						</svg>
 					</span>
 					<select [(ngModel)]="selectedCity" (change)="onCityChange($event)">
-						<option [value]="city.id" *ngFor="let city of cityList">{{ city.name }}</option>
+						<option [value]="city.name" *ngFor="let city of cityList">{{ city.name }}</option>
 					</select>
 				</div>
 			</div>
@@ -80,7 +80,7 @@
 
 <!-- login modal -->
 
-<div class="login-modal" *ngIf="loginShowModal">
+<!-- <div class="login-modal" *ngIf="loginShowModal">
 	<div class="login-box">
 		<span class="close-btn" (click)="closeLoginModal()">×</span>
 		<img src="assets/images/logo.png" class="logo" />
@@ -94,7 +94,7 @@
 
 			<button (click)="continue()">CONTINUE</button>
 		</div>
-		<!-- OTP SCREEN -->
+		
 		<div *ngIf="showOtpScreen">
 			<input class="inputClass" type="text" placeholder="Enter Your OTP" formControlName="otp">
 			<button (click)="loginWithOtp()">CONTINUE</button>
@@ -106,7 +106,7 @@
 		</div>
 	</div>
 
-	<!-- Error Popup -->
+	
 	<div class="error-overlay" *ngIf="showError">
 		<div class="error-box">
 			<div class="error-header">Message</div>
@@ -115,7 +115,7 @@
 			</div>
 			<button (click)="closeError()">OK</button>
 		</div>
-	</div>
+	</div> -->
 
 
 	<!-- BIKE CATEGORY -->

@@ -6,11 +6,12 @@ import { BrandsComponent } from '../brands/brands.component';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ServicesGridComponent, TestimonialsComponent, BrandsComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ServicesGridComponent, TestimonialsComponent, BrandsComponent,HeaderComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
   model: any;
   bikes: any;
   bikeData: any;
+  cityName: any;
   constructor(private router: Router, private fb: FormBuilder, private service: ApiService) {
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
@@ -177,6 +179,7 @@ export class HomeComponent implements OnInit {
       this.showError = true;
       return;
     }
+
     this.sendOtp();
     this.showOtpScreen = true;
     this.startTimer();
@@ -243,8 +246,14 @@ export class HomeComponent implements OnInit {
       next: (data) => {
         console.log('City data:', data);
         this.cityList = data.cities || [];
-        this.selectedCity = this.cityList.length > 0 ? this.cityList[0].id : null;
-        localStorage.setItem('cityId', JSON.stringify(this.cityList[0])); // default to first city if available
+        if (this.cityName) {
+          this.selectedCity = this.cityName;
+          const selectedCityObj = this.cityList.find((city: any) => city.name.toLowerCase() === this.cityName.toLowerCase());
+          localStorage.setItem('cityId', JSON.stringify(selectedCityObj));
+        } else {
+          this.selectedCity = this.cityList.length > 0 ? this.cityList[0].name : null;
+          localStorage.setItem('cityId', JSON.stringify(this.cityList[0])); // default to first city if available
+        }
         this.getSubcategoriesData();
         this.getTimeslotData();
       },
@@ -310,7 +319,9 @@ export class HomeComponent implements OnInit {
   }
 
   onCityChange(event: any) {
-    this.getCityList();
+    this.cityName = event.target.value;
+    this.router.navigate(['/city', this.cityName.toLowerCase()]);
+    this.ngOnInit();
   }
 
   changeBikeCCDetails(event: any) {
@@ -337,7 +348,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  loginWithOtp(){
+  loginWithOtp() {
     const model = this.bookingForm.value;
     const cityName = this.bookingForm.value.city; // or selected city id
     this.service.onQuickBookingSubmit(model, cityName).subscribe({

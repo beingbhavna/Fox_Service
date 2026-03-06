@@ -6,6 +6,7 @@ import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-header',
@@ -29,48 +30,8 @@ export class HeaderComponent {
   intervalId: any;
   activeBrand: string = 'All';
   menuOpen = false;
-
-  // cartCount$: Observable<number>;
-  // user$: Observable<any> = null as any;
-  // showLogin = false;
-  // mobile = '';
-
-  // constructor(private cart: CartService, private auth: AuthService) {
-  //   this.cartCount$ = this.cart.cart$.pipe(map(items => items.reduce((s, i) => s + (i.quantity || 0), 0)));
-  //   this.user$ = this.auth.user$;
-  // }
-
-  // openLogin() { this.showLogin = true; }
-  // closeLogin() { this.showLogin = false; }
-
-  // login() {
-  //   if (!this.mobile) return;
-  //   this.auth.login(this.mobile);
-  //   this.mobile = '';
-  //   this.showLogin = false;
-  // }
-
-  // logout() {
-  //   this.auth.logout();
-  // }
-
-
-
-  //    menuOpen = false;
-  // isSticky = false;
-
-  // @HostListener('window:scroll')
-  // onScroll() {
-  //   this.isSticky = window.scrollY > 50;
-  // }
-
-  //   toggleMenu() {
-  //     this.menuOpen = !this.menuOpen;
-  //   }
-
-  // cartCount = 0;
   @Input() cartCount = 0;
-  constructor(private cartService: CartService, private fb: FormBuilder,private router: Router) {
+  constructor(private cartService: CartService, private fb: FormBuilder,private router: Router,private service:ApiService) {
     this.cartService.cart$.subscribe(items => {
       this.cartCount = items.length;
     });
@@ -78,13 +39,39 @@ export class HeaderComponent {
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     });
   }
+   toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+   goToHome() {
+    this.router.navigate(['/']);
+  }
+
+    //login code
 
   openLoginModal() {
     this.loginShowModal = true;
+    this.intervalId = setInterval(() => {
+      if (this.timer > 0) {
+        this.timer--;
+      } else {
+        clearInterval(this.intervalId);
+      }
+    }, 1000);
   }
 
-  goToHome() {
-    this.router.navigate(['/']);
+  submit() {
+    if (this.f['phone'].invalid) {
+      this.message = '10 digit Phone number is required';
+      this.showErrorPopup = true;
+      return;
+    }
+    // simulate OTP screen
+    this.showOtpScreen = true;
+  }
+
+  get f() {
+    return this.loginForm.controls;
   }
 
   continue() {
@@ -93,6 +80,7 @@ export class HeaderComponent {
       this.showError = true;
       return;
     }
+    this.sendOtp();
     this.showOtpScreen = true;
     this.startTimer();
     // success logic here (OTP API etc)
@@ -119,19 +107,32 @@ export class HeaderComponent {
     this.showError = false;
   }
 
+    sendOtp() {
+    const model = this.phone
+    this.service.sendOtp(model).subscribe({
+      next: (data) => {
+        console.log('Timeslots data:', data);
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
+
   resendOtp() {
     this.startTimer();
+    this.sendOtp();
     console.log('OTP resent');
   }
 
-  close() {
+  closeLoginModal() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
     // close modal routing
     this.loginShowModal = false;
+    clearInterval(this.intervalId);
   }
-
   // allow only numbers
   public checkInput(event: any) {
     var ctrlCode = (event.ctrlKey) ? event.ctrlKey : event.metaKey;  // get key cross-browser
@@ -151,7 +152,17 @@ export class HeaderComponent {
     }
   }
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
+   loginWithOtp(){
+    const model = this.loginForm.value;
+    const cityName = this.loginForm.value.city; // or selected city id
+    this.service.onQuickBookingSubmit(model, cityName).subscribe({
+      next: (res) => {
+        console.log('Success:', res);
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        alert('Something went wrong');
+      }
+    });
   }
 }

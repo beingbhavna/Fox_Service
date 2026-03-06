@@ -1,4 +1,4 @@
-<header class="top-header" [class.sticky]="isSticky">
+<!-- <header class="top-header" [class.sticky]="isSticky">
   <div class="container nav">
     <a routerLink="/" class="logo" (click)="goToHome()">
       <img src="/assets/images/logo.png" />
@@ -11,9 +11,6 @@
         <span class="phone">(888) 999-83-82 </span>
         <a class="login-btn" (click)="openLoginModal()"> Login / Sign Up</a>
       </div>
-      <!-- <div class="cart">
-        🛒<span class="badge">1</span>
-      </div> -->
     </div>
   </div>
 </header>
@@ -24,12 +21,11 @@
     <span></span>
   </div>
 
-  <!-- Animated Menu -->
   <div class="mobile-menu" [class.open]="menuOpen">
     <a routerLink="/register-as-a-professional">Register as a Professional</a>
     <a routerLink="/login">Login / Sign Up</a>
-  </div>
-
+  </div> -->
+<app-header></app-header>
 
 <a class="whatsapp" (click)="openWhatsApp()">
   <img src="assets/images/waicongreen.png">

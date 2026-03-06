@@ -25,14 +25,15 @@ import { ProfessionalRegisterComponent } from './pages/professional-register/pro
 // ];
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'city/noida', pathMatch: 'full' },
+  { path: 'city/:cityName', component: HomeComponent },
   { path: 'service', component: ServiceComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
   { path: 'city/:name', component: CityComponent },
   { path: 'quick-booking', component: QuickBookingComponent },
-  {path: 'bike-scooty/:model', loadComponent: () => import('./pages/bike-list/bike-list.component').then(m => m.BikeListComponent)},
+  { path: 'bike-scooty/:model', loadComponent: () => import('./pages/bike-list/bike-list.component').then(m => m.BikeListComponent) },
   { path: 'login', component: LoginComponent },
   { path: 'bikeDetail/:model', component: BikeDetailComponent },
   { path: 'register-as-a-professional', component: ProfessionalRegisterComponent },

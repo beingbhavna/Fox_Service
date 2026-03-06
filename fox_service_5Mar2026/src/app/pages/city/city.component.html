@@ -1,25 +1,288 @@
-<section class="page-hero">
-  <h1>FoxService in {{ city }}</h1>
-  <p>Doorstep car & bike service in {{ city }}</p>
+<header class="header" [class.sticky]="isSticky">
+	<div class="container nav">
+		<a routerLink="/" class="logo">
+			<img src="/assets/images/logo.png" />
+		</a>
+		<div class="top-bar">
+			<div class="top-left">
+				<a href="/register-as-a-professional" class="register-link">Register as a Professional </a>
+			</div>
+			<div class="top-right">
+				<img src="assets/images/waicon.png" class="weblock" style="height: 16px; margin-right: 5px;">
+				<span class="phone"> (888) 999-83-82 </span>
+				<a class="login-btn" (click)="openLoginModal()"> Login / Sign Up</a>
+			</div>
+			<!-- <ul class="">
+				<li><a href="/register-as-a-professional" class="register-link">Register as a Professional </a></li>
+				<li><a ><img src="assets/images/waicon.png" style="height: 16px; margin-right: 5px;">
+				<span class="phone"> (888) 999-83-82 </span></a></li>
+				<li><a class="login-btn" (click)="openLoginModal()"> Login / Sign Up</a></li>
+			</ul> -->
+		</div>
+	</div>
+</header>
+
+<!-- Floating Buttons -->
+<a class="quick-booking" (click)="quickBookingOpenModal()">Quick Booking</a>
+<a class="whatsapp" (click)="openWhatsApp()">
+  <img src="assets/images/waicongreen.png">
+</a>
+<section class="hero-slider">
+	<div class="hero">
+		<div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentIndex"
+			[style.backgroundImage]="'url(' + slide.image + ')'">
+
+			<div class="hero-content">
+				<h1>{{ slide.title }}</h1>
+				<p>{{ slide.subtitle }}</p>
+
+				<div class="city-select">
+					<!-- <div class="city-box"> -->
+					<span class="icon">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="#555">
+							<path d="M2 12L22 2L14 22L11 13L2 12Z" />
+						</svg>
+					</span>
+					<select [(ngModel)]="selectedCity" (change)="onCityChange($event)">
+						<option [value]="city.id" *ngFor="let city of cityList">{{ city.name }}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
+<!-- BIKE / SCOOTY ICON -->
+<div class="bike-icon" (click)="openPopup()">
+	<img src="assets/images/bike.png">
+	<p>Bike / Scooty</p>
+</div>
 
-<section class="services container">
-  <h2>Popular Services in {{ city }}</h2>
 
-  <div class="grid">
-    <div class="card">
-      <img src="/assets/images/mechanic.jpg">
-      <h3>General Service</h3>
-    </div>
+<!-- Overlay -->
+<div class="overlay" *ngIf="showPopup" (click)="closePopup()"></div>
 
-    <div class="card">
-      <img src="/assets/images/oilchange.jpg">
-      <h3>Oil Change</h3>
-    </div>
+<!-- Popup -->
+<div class="vehicle-popup" *ngIf="showPopup">
+	<div class="popup-left">
+		<img src="assets/images/bike.png" />
+		<p>Bike / Scooty</p>
+	</div>
 
-    <div class="card">
-      <img src="/assets/images/hand.png">
-      <h3>Tyre Change</h3>
-    </div>
-  </div>
-</section>
+	<div class="popup-right">
+		<div class="item" *ngFor="let item of subcategoriesList; let i = index" [class.active]="i === activeIndex"
+			(click)="selectItem(i)" (click)="openBikeList(item.slug)">
+			<img [src]="'https://www.foxservice.in/admin/' + item.image" />
+			<span>{{item.name}}</span>
+		</div>
+
+		<!-- dots -->
+		<!-- <div class="dots">
+			<span *ngFor="let d of bikes; let i = index" [class.active]="i === activeIndex">
+			</span>
+		</div> -->
+	</div>
+</div>
+
+
+<!-- login modal -->
+
+<div class="login-modal" *ngIf="loginShowModal">
+	<div class="login-box">
+		<span class="close-btn" (click)="closeLoginModal()">×</span>
+		<img src="assets/images/logo.png" class="logo" />
+
+		<p class="tagline">Our energy is working for you</p>
+		<p class="sub-text">Quick · Affordable · Trusted</p>
+
+		<div *ngIf="!showOtpScreen">
+			<input class="inputClass" type="text" placeholder="Your Phone Number" [(ngModel)]="phone" maxlength="10"
+				(keypress)="checkInput($event)" />
+
+			<button (click)="continue()">CONTINUE</button>
+		</div>
+		<!-- OTP SCREEN -->
+		<div *ngIf="showOtpScreen">
+			<input class="inputClass" type="text" placeholder="Enter Your OTP" formControlName="otp">
+			<button (click)="loginWithOtp()">CONTINUE</button>
+			<div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
+					<p class="resend">
+						Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>
+					</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Error Popup -->
+	<div class="error-overlay" *ngIf="showError">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+				10 digit Phone number is required
+			</div>
+			<button (click)="closeError()">OK</button>
+		</div>
+	</div>
+
+
+	<!-- BIKE CATEGORY -->
+	<section class="bike-section">
+		<div>Bike / Scooty</div>
+
+		<div class="bike-grid">
+			<div class="bike-card" (click)="openBikeList(subCategories.slug)"
+				*ngFor="let subCategories of subcategoriesList">
+				<img [src]="'https://www.foxservice.in/admin/' + subCategories.image" alt="{{subCategories.name}}">
+				<p>{{subCategories.name}}</p>
+				<p><b>Book Now →</b></p>
+			</div>
+
+		</div>
+	</section>
+	<section class="services container">
+		<app-testimonials></app-testimonials>
+	</section>
+
+
+
+
+	<section class="how-it-works">
+		<h2><img src="assets/images/tag2.png" alt="How It Works" class="how-it-works-image" style="height: 28px;">
+			How We Work</h2>
+
+		<div class="steps-grid">
+			<div class="step-card">
+				<img src="assets/images/step1.png" alt="Step 1">
+				<p>Select Model and Service</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step2.png" alt="Step 2">
+				<p>Choose time slot and location</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step6.png" alt="Step 3">
+				<p>Book appointment</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step4.png" alt="Step 4">
+				<p>Fox Service team will call you</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step5.png" alt="Step 5">
+				<p>Mechanic will visit at your location</p>
+			</div>
+
+			<div class="step-card">
+				<img src="assets/images/step3.png" alt="Step 6">
+				<p>Pay after service</p>
+			</div>
+		</div>
+	</section>
+
+	<app-brands></app-brands>
+
+	<!-- Overlay -->
+	<div class="modal-overlay" *ngIf="quickBookingShowModal" (click)="quickBookingCloseModal()"></div>
+
+	<div class="modal-overlay" *ngIf="quickBookingShowModal">
+		<div class="modal-box">
+
+			<button class="close-btn" (click)="quickBookingCloseModal()">×</button>
+
+			<h2 class="modal-title">Quick Booking</h2>
+
+			<form [formGroup]="bookingForm" (ngSubmit)="onQuickBookingSubmit()">
+
+				<div class="row">
+					<div class="field">
+						<label>Phone Number:</label>
+						<input type="tel" placeholder="+91" formControlName="phone">
+					</div>
+
+					<div class="field">
+						<label>Name:</label>
+						<input type="text" placeholder="Enter name" formControlName="name">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="field">
+						<label>Email:</label>
+						<input type="email" placeholder="Enter email" formControlName="email">
+					</div>
+
+					<div class="field">
+						<label>City:</label>
+						<select formControlName="city">
+							<option value="">Select City</option>
+							<option *ngFor="let city of cityList" [value]="city.id">
+								{{ city.name }}
+							</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="field">
+						<label>Select Vehicle Type:</label>
+						<select formControlName="vehicleType">
+							<option value="">Select Vehicle</option>
+							<option>Bike/Scooty</option>
+						</select>
+					</div>
+
+					<div class="field">
+						<label>Select CC Details:</label>
+						<select formControlName="ccDetails" (change)="changeBikeCCDetails($event)">
+							<option value="">Select CC</option>
+							<option *ngFor="let subCategories of subcategoriesList" value="{{subCategories.slug}}">
+								{{subCategories.name}}</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="field">
+						<label>Select Model:</label>
+						<select formControlName="model" (change)="changeBikeModel($event)">
+							<option *ngFor="let bike of bikes" value="{{bike.slug}}">{{bike.name}}</option>
+						</select>
+					</div>
+
+					<div class="field">
+						<label>Select Service:</label>
+						<select formControlName="service">
+							<option *ngFor="let service of bikeData" value="{{service.slug}}">{{service.name}}</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="field">
+						<label>Select Date:</label>
+						<input type="date" formControlName="date">
+					</div>
+
+					<div class="field">
+						<label>Select Slot:</label>
+						<select formControlName="timeSlot">
+							<option *ngFor="let slot of timeSlotsList">{{slot.start_time}} to {{slot.end_time}}</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="field full">
+					<label>Enter Address:</label>
+					<textarea rows="3" placeholder="Enter address" formControlName="address"></textarea>
+				</div>
+
+				<button type="submit" class="submit-btn" [disabled]="bookingForm.invalid">
+					SUBMIT
+				</button>
+
+			</form>
+		</div>
+	</div>

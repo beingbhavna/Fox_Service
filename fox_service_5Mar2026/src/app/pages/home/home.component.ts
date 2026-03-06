@@ -71,13 +71,6 @@ export class HomeComponent implements OnInit {
   timer: number = 30;
   intervalId: any;
 
-  // bikes = [
-  //   { name: 'Upto 150cc', icon: 'assets/images/150cc.jpg' },
-  //   { name: 'Upto 151 to 250cc', icon: 'assets/images/250cc.jpg' },
-  //   { name: '251 to 350cc', icon: 'assets/images/350cc.jpg' },
-  //   { name: 'Above 351cc', icon: 'assets/images/above350cc.jpg' }
-  // ];
-
   @HostListener('window:scroll')
   onScroll() {
     this.isSticky = window.scrollY > 50;

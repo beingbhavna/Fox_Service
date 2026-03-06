@@ -23,7 +23,7 @@ export class TestimonialsComponent implements OnInit {
   }
 
   next() {
-    this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+    this.currentIndex = (this.currentIndex + 1) % this.testimonials?.length;
   }
 
    getSafeDescription(desc: string): SafeHtml {

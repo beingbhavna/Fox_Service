@@ -60,39 +60,39 @@
 
 </div> -->
 <app-header></app-header>
-<header class="header">
+<!-- <header class="header">
   <div class="logo">FOX SERVICE</div>
   <div class="cart-icon">
     🛒 <span class="badge">{{ cartItems.length }}</span>
   </div>
-</header>
+</header> -->
 
 <div class="cart-wrapper">
-
+  <a class="whatsapp" (click)="openWhatsApp()">
+    <img src="assets/images/waicongreen.png">
+  </a>
   <!-- LEFT -->
   <div class="cart-left">
     <h2>My Added Services</h2>
-    <p class="location">Bike/Scooty service in Noida</p>
+    <p class="location">Bike/Scooty service in {{ selectedCity }}</p>
 
     <div *ngFor="let item of cartItems" class="cart-card">
       <div class="card-left">
         <img [src]="'https://www.foxservice.in/admin/' + item.image">
 
-      <div class="title-spec-row">
+        <div class="title-spec-row">
 
-  <div class="title">
-    <h3>
-      {{ item.name }}
-      <span>({{ item.model }})</span>
-    </h3>
-  </div>
+          <div class="specs">
+            <b>{{ item.name }}</b>
+            <div>({{ item.model }})</div>
+          </div>
 
-  <div class="specs">
-    <b>Specifications:</b>
-    <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
-  </div>
+          <div class="specs">
+            <b>Specifications:</b>
+            <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+          </div>
 
-</div>
+        </div>
       </div>
 
       <div class="card-right">
@@ -125,7 +125,7 @@
 
     <div class="summary-item total">
       <b>Total (GST Included)</b>
-      <b>₹ {{ total }}/-</b>
+      <b>₹ {{ getTotalWithGST() | number:'1.0-2' }}/-</b>
     </div>
 
     <button class="continue-btn" (click)="continue()">CONTINUE</button>

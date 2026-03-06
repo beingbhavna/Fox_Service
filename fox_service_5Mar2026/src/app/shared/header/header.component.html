@@ -10,26 +10,15 @@
       <div class="top-right">
         <img src="assets/images/waicon.png" class="weblock" style="height: 16px; margin-right: 5px;">
         <span class="phone">(888) 999-83-82 </span>
-        <a class="login-btn" (click)="toggleMenu(); openLoginModal()"> Login / Sign Up</a>
+        <a class="login-btn" (click)=" openLoginModal()"> Login / Sign Up</a>
       </div>
-      <!-- <div class="cart">
-        🛒<span class="badge">1</span>
-      </div> -->
+      <div class="cart" routerLink="/cart">
+        🛒<span class="badge">{{cartCount}}</span>
+      </div>
     </div>
   </div>
 </header>
 <div class="register-wrapper">
-
-
-
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <span (click)="goToHome()"> Home Page &gt; </span> <span> Register as a Professional</span>
-  </div>
-
-  <!-- Title -->
-  <h2 class="page-title">Register As A Professional</h2>
-
   <div class="mobile-menu-icon" (click)="toggleMenu()">
     <span></span>
     <span></span>
@@ -37,6 +26,7 @@
   </div>
 
   <!-- Animated Menu -->
+   {{menuOpen}}
   <div class="mobile-menu" [class.open]="menuOpen">
     <a routerLink="/register-as-a-professional">Register as a Professional</a>
     <a routerLink="/login">Login / Sign Up</a>

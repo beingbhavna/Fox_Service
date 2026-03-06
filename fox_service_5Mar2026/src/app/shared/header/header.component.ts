@@ -1,11 +1,8 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
-import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -131,6 +128,7 @@ export class HeaderComponent {
     }
     // close modal routing
     this.loginShowModal = false;
+    this.menuOpen = false;
     clearInterval(this.intervalId);
   }
   // allow only numbers

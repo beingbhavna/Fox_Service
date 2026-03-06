@@ -19,13 +19,13 @@ export class CartService {
 
   private cartSubject = new BehaviorSubject<CartItem[]>(this.load());
 
-  constructor() {}
+  constructor() { }
 
   // SAVE TO LOCAL STORAGE
   private save(items: CartItem[]) {
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items));
-    } catch {}
+    } catch { }
   }
 
   // LOAD FROM LOCAL STORAGE
@@ -44,28 +44,28 @@ export class CartService {
   }
 
   // ADD TO CART
-  addToCart(item: any,model:any) {
-
+  addToCart(item: any, model: any) {
     const items = this.cartSubject.value;
-
-    // CHECK SAME SERVICE + SAME MODEL
     const exists = items.find(x =>
       x.id === item.id &&
       x.model === model
     );
-
     if (!exists) {
-      const updatedItems = [...items, item];
+      const newItem = {
+        ...item,
+        model: model
+      };
+      const updatedItems = [...items, newItem];
       this.cartSubject.next(updatedItems);
       this.save(updatedItems);
     }
   }
 
   // CHECK IF ITEM IS IN CART
-  isInCart(item: any): boolean {
+  isInCart(item: any, model: any): boolean {
     return this.cartSubject.value.some(x =>
       x.id === item.id &&
-      x.model === item.model
+      x.model === model
     );
   }
 

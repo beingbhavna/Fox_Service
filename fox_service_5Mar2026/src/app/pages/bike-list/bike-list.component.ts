@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 interface BikeModel {
   id: number;
@@ -15,7 +16,7 @@ interface BikeModel {
 @Component({
   selector: 'app-bike-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,HeaderComponent],
   templateUrl: './bike-list.component.html',
   styleUrl: './bike-list.component.scss'
 })

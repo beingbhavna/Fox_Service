@@ -26,68 +26,6 @@ export class BikeDetailComponent {
   showPopup = false;
   selectedService: any = null;
 
-  // services = [
-  //   {
-  //     name: 'Fault Inspection',
-  //     price: 699,
-  //     image: 'assets/images/fault.jpg',
-  //     includes: [
-  //       'Wash: Deep hand Cleaning.',
-  //       'Engine oil: Change.',
-  //       'Air filter: Basic Cleaning.',
-  //       'Fuel filter: Check free flow.',
-  //       'Spark Plug: Cleaning & gap adjust.',
-  //       'Brake front & rear: Adjust and greasing.',
-  //       'Clutch: Check tightness & oiling.',
-  //       'Drive Chain: Cleaning & slack check.',
-  //       'Battery: Top up if necessary.',
-  //       'Coolant: Top up if necessary.',
-  //       'Control cables: Adjust if required.',
-  //       'Sanitization: Bike sanitization process.'
-  //     ]
-  //   },
-  //   {
-  //     name: 'Basic Service',
-  //     price: 349,
-  //     image: 'assets/images/basicservice.jpg',
-  //     includes: [
-  //       'Engine oil check',
-  //       'Brake check',
-  //       'Chain lubrication',
-  //       'Air filter cleaning'
-  //     ]
-  //   },
-  //   {
-  //     name: 'Standard Service',
-  //     price: 699,
-  //     image: 'assets/images/standardservice.jpg',
-  //     includes: [
-  //       'Wash: Deep hand Cleaning.',
-  //       'Engine oil: Change.',
-  //       'Air filter: Basic Cleaning.',
-  //       'Fuel filter: Check free flow.',
-  //       'Spark Plug: Cleaning & gap adjust.',
-  //       'Brake front & rear: Adjust and greasing.',
-  //       'Clutch: Check tightness & oiling.',
-  //       'Drive Chain: Cleaning & slack check.',
-  //       'Battery: Top up if necessary.',
-  //       'Coolant: Top up if necessary.',
-  //       'Control cables: Adjust if required.',
-  //       'Sanitization: Bike sanitization process.'
-  //     ]
-  //   },
-  //   {
-  //     name: 'Washing',
-  //     price: 70,
-  //     image: 'assets/images/washing.jpg',
-  //     includes: [
-  //       'Full bike wash',
-  //       'Dry cleaning',
-  //       'Polish'
-  //     ]
-  //   }
-  // ];
-
   ngOnInit() {
     this.getBikeData();
   }
@@ -127,11 +65,8 @@ export class BikeDetailComponent {
   getSafeDescription(desc: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(desc);
   }
-  // addToCart() {
-  //   console.log('Added to cart with quantity:', this.quantity);
-  // }
-
-  // goBack() {
-  //   this.router.navigate(['../'], { relativeTo: this.route });
-  // }
+  
+  openWhatsApp() {
+    window.open('https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about', '_blank');
+  }
 }

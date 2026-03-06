@@ -283,3 +283,14 @@
 #info strong{
   font-weight: 100;
 }
+
+.whatsapp {
+  position: fixed;
+  left: 15px;
+  top: 55%;
+  z-index: 1000;
+
+  img {
+    width: 45px;
+  }
+}

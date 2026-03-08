@@ -10,6 +10,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { BikeDetailComponent } from './pages/bike-detail/bike-detail.component';
 import { ProfessionalRegisterComponent } from './pages/professional-register/professional-register.component';
 import { TermsComponent } from './pages/terms/terms.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 // export const routes: Routes = [
 // 	{ path: '', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
@@ -31,7 +33,9 @@ export const routes: Routes = [
   { path: 'service', component: ServiceComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'terms', component: TermsComponent },
+  { path: 'orders', component: OrdersComponent },
   { path: 'cart', component: CartComponent },
   { path: 'city/:name', component: CityComponent },
   { path: 'quick-booking', component: QuickBookingComponent },

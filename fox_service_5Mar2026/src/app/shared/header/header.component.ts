@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -27,9 +27,10 @@ export class HeaderComponent {
   intervalId: any;
   activeBrand: string = 'All';
   menuOpen = false;
-  login=false;
   @Input() cartCount = 0;
-  constructor(private cartService: CartService, private fb: FormBuilder,private router: Router,private service:ApiService) {
+  loginFlag: any;
+  profileOpen = false;
+  constructor(private cartService: CartService, private fb: FormBuilder, private router: Router, private service: ApiService) {
     this.cartService.cart$.subscribe(items => {
       this.cartCount = items.length;
     });
@@ -39,23 +40,25 @@ export class HeaderComponent {
     });
   }
 
-    ngOnInit() {
+  ngOnInit() {
     this.cartService.openModal$.subscribe(() => {
       this.loginShowModal = true;
     });
+    this.loginFlag = localStorage.getItem('loginFlag');
   }
 
-   toggleMenu() {
+  toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
 
-   goToHome() {
+  goToHome() {
     this.router.navigate(['/']);
   }
 
-    //login code
+  //login code
 
   openLoginModal() {
+    this.menuOpen = false;
     this.loginShowModal = true;
     this.intervalId = setInterval(() => {
       if (this.timer > 0) {
@@ -113,7 +116,7 @@ export class HeaderComponent {
     this.showError = false;
   }
 
-    sendOtp() {
+  sendOtp() {
     const model = this.phone
     this.service.sendOtp(model).subscribe({
       next: (data) => {
@@ -159,21 +162,46 @@ export class HeaderComponent {
     }
   }
 
-loginWithOtp(){
-  const payload = {
-    phone: '91' + this.phone,
-    otp: this.loginForm.value.otp
-  };
+  loginWithOtp() {
+    const payload = {
+      phone: '91' + this.phone,
+      otp: this.loginForm.value.otp
+    };
 
-  this.service.login(payload).subscribe({
-    next: (data) => {
-      console.log('Login successful:', data);
-      this.login = true;
-      // this.router.navigate(['/city', this.cityName.toLowerCase()]);
-    },
-    error: (error) => {
-      console.error('Login error:', error);
-    }
-  });
+    this.service.login(payload).subscribe({
+      next: (data) => {
+        const cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug
+        console.log('Login successful:', data);
+        localStorage.setItem('loginFlag', 'true');
+        this.closeLoginModal();
+        this.router.navigate(['/city/', cityName]);
+        this.ngOnInit();
+      },
+      error: (error) => {
+        console.error('Login error:', error);
+      }
+    });
+  }
+
+toggleProfileMenu(event?: any) {
+  if (event) {
+    event.stopPropagation();
+  }
+  this.profileOpen = !this.profileOpen;
+  console.log('Profile menu clicked', this.profileOpen);
 }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('loginFlag');
+    this.loginFlag = false;
+    this.router.navigate(['/']);
+  }
+
+  // @HostListener('document:click', ['$event'])
+  // clickOutside(event: any) {
+  //   if (!event.target.closest('.profile-menu')) {
+  //     this.profileOpen = false;
+  //   }
+  // }
 }

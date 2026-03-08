@@ -1,1 +1,268 @@
-<div class="old-page" [innerHTML]="pageHtml"></div>
+<div class="profile-page">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <span>Home Page</span>
+    <span class="arrow">›</span>
+    <span>Profile</span>
+  </div>
+
+  <h2 class="page-title">Profile</h2>
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+
+    <div class="profile-info">
+
+      <div class="profile-image">
+        <span>FS</span>
+      </div>
+
+      <div class="profile-details">
+        <h3>Mr.</h3>
+        <p>917895030785</p>
+      </div>
+
+    </div>
+
+    <div class="order-box">
+      <h2>1</h2>
+      <span>TOTAL ORDERS</span>
+    </div>
+
+  </div>
+
+  <!-- Navigation Tabs -->
+  <!-- <div class="profile-tabs">
+
+    <a class="active">PROFILE</a>
+    <a routerLink="/about">ABOUT FOX SERVICE</a>
+    <a routerLink="/support">SUPPORT</a>
+    <a routerLink="/faq">FAQ</a>
+    <a routerLink="/orders">MY ORDERS</a>
+    <a routerLink="/book-now">BOOK NOW</a>
+    <a routerLink="/logout">LOGOUT</a>
+
+  </div> -->
+
+
+  <!-- Tabs -->
+
+  <div class="profile-tabs">
+    <a routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      PROFILE
+    </a>
+
+    <a routerLink="/about" routerLinkActive="active">
+      ABOUT FOX SERVICE
+    </a>
+
+    <a routerLink="/contact" routerLinkActive="active">
+      SUPPORT
+    </a>
+
+    <a routerLink="/faq" routerLinkActive="active">
+      FAQ
+    </a>
+
+    <a routerLink="/orders" routerLinkActive="active">
+      MY ORDERS
+    </a>
+
+    <a routerLink="/" routerLinkActive="active">
+      BOOK NOW
+    </a>
+
+    <!-- <a (click)="logout()">
+LOGOUT
+</a> -->
+
+  </div>
+
+  <!-- Sub Tabs -->
+  <div class="sub-tabs">
+
+    <div class="active">Profile</div>
+    <div [class.active]="activeTab === 'editProfile'" (click)="setTab('editProfile')">Edit Profile</div>
+    <div [class.active]="activeTab === 'manageAddress'" (click)="setTab('manageAddress')">Manage Address</div>
+
+  </div>
+
+  <!-- Profile Section -->
+  <div class="profile-section" *ngIf="activeTab != 'manageAddress' && activeTab != 'editProfile'">
+
+    <h3>Manage Your Profile Details.</h3>
+    <p class="subtitle">
+      Below are the name and email addresses on file for your account.
+    </p>
+
+    <div class="profile-form">
+
+      <!-- Image -->
+      <div class="photo-box">
+        <span>FS</span>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="profile-fields">
+
+        <div class="field">
+          <label>Your name</label>
+          <p>Mr.</p>
+        </div>
+
+        <div class="field">
+          <label>Email Address</label>
+          <p>-</p>
+        </div>
+
+        <div class="field">
+          <label>Phone Number</label>
+          <p>917895030785</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="profile-wrapper" *ngIf="activeTab === 'editProfile'">
+
+  <!-- Tabs -->
+  <div class="profile-tabs">
+    <button>Profile</button>
+    <button class="active">Edit Profile</button>
+    <button>Manage Address</button>
+  </div>
+
+  <!-- Content Card -->
+  <div class="profile-card">
+
+    <div class="profile-header">
+      <h3>Manage Your Security Settings</h3>
+      <p>Manage Your Account</p>
+    </div>
+
+    <div class="profile-body">
+
+      <!-- Avatar -->
+      <div class="avatar-section">
+
+        <div class="avatar-box">
+          FS
+        </div>
+
+      </div>
+
+      <!-- Form -->
+      <div class="form-section">
+
+        <div class="form-group">
+          <label>Your Name</label>
+
+          <div class="name-input">
+            <span class="prefix active">Mr</span>
+            <span class="prefix">Ms</span>
+
+            <input type="text" placeholder="Your Name">
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" placeholder="Your Email">
+        </div>
+
+        <div class="form-group">
+          <label>Contact Number *</label>
+          <input type="text" value="917895030785">
+        </div>
+
+        <button class="update-btn">
+          UPDATE MY INFO
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="manage-address" *ngIf="activeTab === 'manageAddress'">
+
+  <h3>Manage Address</h3>
+  <p class="subtitle">Add or update your service address.</p>
+
+  <!-- Address List -->
+  <div class="address-card">
+
+    <div class="address-info">
+      <h4>Home</h4>
+      <p>
+        B-23 Sector 62,<br>
+        Noida, Uttar Pradesh<br>
+        201301
+      </p>
+      <p class="phone">Phone: 9876543210</p>
+    </div>
+
+    <div class="address-actions">
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn">Delete</button>
+    </div>
+
+  </div>
+
+  <!-- Add Address Form -->
+
+  <div class="address-form">
+
+    <h4>Add New Address</h4>
+
+    <div class="form-grid">
+
+      <div class="form-row">
+        <label>Full Name</label>
+        <input type="text">
+      </div>
+
+      <div class="form-row">
+        <label>Phone Number</label>
+        <input type="text">
+      </div>
+
+      <div class="form-row full">
+        <label>Address</label>
+        <textarea></textarea>
+      </div>
+
+      <div class="form-row">
+        <label>City</label>
+        <input type="text">
+      </div>
+
+      <div class="form-row">
+        <label>State</label>
+        <input type="text">
+      </div>
+
+      <div class="form-row">
+        <label>Pincode</label>
+        <input type="text">
+      </div>
+
+    </div>
+
+    <button class="add-btn">Save Address</button>
+
+  </div>
+
+</div>
+
+</div>
+
+

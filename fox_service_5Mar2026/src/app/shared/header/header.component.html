@@ -4,20 +4,35 @@
       <img src="/assets/images/logo.png" />
     </a>
     <div class="top-bar">
-      <div class="top-left">
+      <div class="top-left" *ngIf="!loginFlag">
         <a href="/register-as-a-professional" class="register-link">Register as a Professional</a>
       </div>
       <div class="top-right">
         <img src="assets/images/waicon.png" class="weblock" style="height: 16px; margin-right: 5px;">
         <span class="phone">(888) 999-83-82 </span>
-        <a class="login-btn" (click)=" openLoginModal()"> Login / Sign Up</a>
+        <a *ngIf="!loginFlag" class="login-btn" (click)=" openLoginModal()"> Login / Sign Up</a>
       </div>
-      <div class="cart" routerLink="/cart">
+      <div class="cart" routerLink="/cart" *ngIf="cartCount > 0">
         🛒<span class="badge">{{cartCount}}</span>
       </div>
-      <div class="cart" *ngIf="login">
-        🛒<span class="badge">{{cartCount}}</span>
+
+  <!-- Right Section -->
+    <div class="header-right" *ngIf="loginFlag">
+      <!-- Profile Icon -->
+      <div class="mobile-menu-icon" (click)="toggleMenu()">
+        <div class="user-icon">
+          👤
+        </div>
+        <!-- Dropdown -->
+        <div class="mobile-menu" [class.open]="menuOpen">
+          <a routerLink="/profile">Profile</a>
+          <a routerLink="/orders">My Orders</a>
+          <a (click)="logout()">Logout</a>
+        </div>
       </div>
+      </div>
+
+
     </div>
   </div>
 </header>
@@ -29,9 +44,9 @@
   </div>
 
   <!-- Animated Menu -->
-  <div class="mobile-menu" [class.open]="menuOpen">
+  <div class="mobile-menu" [class.open]="menuOpen" *ngIf="!loginFlag">
     <a routerLink="/register-as-a-professional">Register as a Professional</a>
-    <a routerLink="/login">Login / Sign Up</a>
+    <a   (click)=" openLoginModal()">Login / Sign Up</a>
   </div>
   <!-- login modal -->
 

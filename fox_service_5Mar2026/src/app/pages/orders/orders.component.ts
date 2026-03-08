@@ -46,4 +46,9 @@ status:'cancelled'
     this.http.get('assets/templates/orders.html', { responseType: 'text' })
       .subscribe(html => this.pageHtml = html);
   }
+
+    openWhatsApp() {
+    window.open('https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about', '_blank');
+  }
 }
+

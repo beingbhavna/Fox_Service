@@ -8,16 +8,19 @@
   <div class="testimonial-card" *ngIf="testimonials && testimonials.length > 0">
 
     <div class="avatar">
-      {{ testimonials[currentIndex]?.initial }}
+      {{ testimonials[currentIndex].initial }}
     </div>
 
-    <h3>{{ testimonials[currentIndex]?.title }}</h3>
+    <h3>{{ testimonials[currentIndex].title }}</h3>
 
-    <p class="message"
+    <!-- <p class="message"
        [innerHTML]="getSafeDescription(testimonials[currentIndex]?.description)">
+    </p> -->
+    <p class="message">
+      {{ testimonials[currentIndex].message }}
     </p>
 
-    <h4>{{ testimonials[currentIndex]?.name }}</h4>
+    <h4>{{ testimonials[currentIndex].name }}</h4>
 
   </div>
 
@@ -30,3 +33,4 @@
     </span>
   </div>
 </section>
+

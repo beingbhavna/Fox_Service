@@ -39,7 +39,7 @@ export class CartComponent {
   }
 
   continue() {
-    alert('Proceed to checkout');
+    this.cartService.openModal();
   }
 
   backToHome() {

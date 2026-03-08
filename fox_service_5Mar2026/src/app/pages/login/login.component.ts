@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent {
   timer: number = 30;
   intervalId: any;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private apiService: ApiService) {
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     });
@@ -103,5 +104,13 @@ export class LoginComponent {
     else {
       return true
     }
+  }
+
+  loginWithOtp(){
+    this.apiService.login(this.loginForm.value).subscribe({
+      next: (data) => {
+        console.log('Login successful:', data);
+      }
+    });
   }
 }

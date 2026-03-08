@@ -16,22 +16,35 @@
 <footer class="site-footer">
   <div class="footer-content container">
     <div class="footer-col">
-      <h3>Fox Service</h3>
-      <p>Trusted doorstep bike & car services.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
+      <h4>About Fox Service</h4>
       <ul>
         <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/about">About</a></li>
-        <li><a routerLink="/service">Services</a></li>
-        <li><a routerLink="/contact">Contact</a></li>
+        <li><a routerLink="/about">About Us</a></li>
+        <li><a routerLink="/faq">FAQ's</a></li>
+        <li><a routerLink="/terms">Terms & Conditions</a></li>
+        <li><a routerLink="/contact">Address: E-5 Shatabdi Vihar Scetor 52 Noida (U.P) India E-Mail: contactus&#64;foxservice.in</a></li>
       </ul>
     </div>
+
+ <div class="footer-col">
+      <h3>Our Services</h3>
+      <!-- <p *ngFor="let footerService of footerData.Our Services">{{ footerService.heading }}</p> -->
+    <ul>
+      <li *ngFor="let footerService of footerData.Our Services">
+        <a routerLink="/{{ footerService.url }}">{{ footerService.name }}</a>
+      </li>
+    </ul>
+    </div>
+
     <div class="footer-col">
-      <h4>Contact Us</h4>
-      <p>888-999-83-82</p>
-      <p>contactus&#64;foxservice.in</p>
+      <h4>Popular Brands</h4>
+      <ul>
+        <li *ngFor="let footerBrand of footerData.Popular Brands">
+          <a routerLink="/{{ footerBrand.url }}">{{ footerBrand.name }}</a>
+        </li>
+      </ul>
+      <!-- <p>888-999-83-82</p>
+      <p>contactus&#64;foxservice.in</p> -->
     </div>
   </div>
 

@@ -59,7 +59,7 @@
   </div>
 
 </div> -->
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <!-- <header class="header">
   <div class="logo">FOX SERVICE</div>
   <div class="cart-icon">
@@ -68,67 +68,81 @@
 </header> -->
 
 <div class="cart-wrapper">
-  <a class="whatsapp" (click)="openWhatsApp()">
-    <img src="assets/images/waicongreen.png">
-  </a>
-  <!-- LEFT -->
+
+  <!-- LEFT SIDE -->
   <div class="cart-left">
-    <h2>My Added Services</h2>
-    <p class="location">Bike/Scooty service in {{ selectedCity }}</p>
 
-    <div *ngFor="let item of cartItems" class="cart-card">
-      <div class="card-left">
+    <h2 class="cart-title">
+      <span class="title-icon"></span>
+      My Added Services
+    </h2>
+
+    <p class="location">
+      Bike/Scooty service in {{ selectedCity }}
+    </p>
+
+    <div *ngFor="let item of cartItems" class="service-card">
+
+      <!-- IMAGE -->
+      <div class="service-img">
         <img [src]="'https://www.foxservice.in/admin/' + item.image">
+      </div>
 
-        <div class="title-spec-row">
-
-          <div class="specs">
-            <b>{{ item.name }}</b>
-            <div>({{ item.model }})</div>
-          </div>
-
-          <div class="specs">
-            <b>Specifications:</b>
-            <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
-          </div>
-
+      <!-- SERVICE INFO -->
+      <div class="service-info">
+        <div class="service-title">
+          {{ item.name }}
+          <span>({{ item.model }})</span>
         </div>
       </div>
 
-      <div class="card-right">
-        <div class="price">₹ {{ item.cities[0].pivot.price }}/-</div>
-        <span class="remove" (click)="removeItem(item.id)">Remove</span>
+       <div class="service-spec">
+          <b>Specifications:</b>
+          <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+        </div>
+
+      <!-- PRICE -->
+      <div class="service-price">
+        ₹ {{ item.cities[0].pivot.price }}/-
+        <div class="remove" (click)="removeItem(item.id)">
+          Remove
+        </div>
       </div>
+
     </div>
 
-    <div *ngIf="cartItems.length === 0" class="empty">
-      Your cart is empty
-      <button class="continue-btn" (click)="backToHome()">CONTINUE</button>
-    </div>
   </div>
 
-  <!-- RIGHT -->
-  <div class="cart-right">
+  <!-- RIGHT SIDE SUMMARY -->
+
+  <div class="cart-summary">
+
     <h3>Summary</h3>
 
-    <div class="summary-item" *ngFor="let item of cartItems">
+    <div class="summary-row" *ngFor="let item of cartItems">
       <span>{{ item.name }} ({{ item.model }})</span>
-      <span>₹ {{ item.cities[0].pivot.price }}/-</span>
+      <span>₹ {{ item.cities[0].pivot.price }}/-</span>    <hr>
     </div>
 
     <hr>
 
-    <div class="summary-item">
+    <div class="summary-row">
       <b>Sub Total</b>
       <b>₹ {{ total }}/-</b>
     </div>
+        <hr>
 
-    <div class="summary-item total">
-      <b>Total (GST Included)</b>
-      <b>₹ {{ getTotalWithGST() | number:'1.0-2' }}/-</b>
+
+    <div class="summary-total">
+      <span>Total <small>(GST Included)</small></span>
+      <span>₹ {{ getTotalWithGST() | number:'1.0-2' }}/-</span>
     </div>
+    <hr>
 
-    <button class="continue-btn" (click)="continue()">CONTINUE</button>
+    <button class="continue-btn" (click)="continue()">
+      CONTINUE
+    </button>
+
   </div>
 
 </div>

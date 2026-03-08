@@ -1,31 +1,31 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  border-bottom: 1px solid #eee;
-  background: #fff;
+// .header {
+//   display: flex;
+//   justify-content: space-between;
+//   padding: 15px 30px;
+//   border-bottom: 1px solid #eee;
+//   background: #fff;
 
-  .logo {
-    font-size: 22px;
-    font-weight: 700;
-  }
+//   .logo {
+//     font-size: 22px;
+//     font-weight: 700;
+//   }
 
-  .cart-icon {
-    position: relative;
-    font-size: 20px;
+//   .cart-icon {
+//     position: relative;
+//     font-size: 20px;
 
-    .badge {
-      background: red;
-      color: #fff;
-      border-radius: 50%;
-      padding: 3px 7px;
-      font-size: 12px;
-      position: absolute;
-      top: -8px;
-      right: -10px;
-    }
-  }
-}
+//     .badge {
+//       background: red;
+//       color: #fff;
+//       border-radius: 50%;
+//       padding: 3px 7px;
+//       font-size: 12px;
+//       position: absolute;
+//       top: -8px;
+//       right: -10px;
+//     }
+//   }
+// }
 
 .cart-wrapper {
   display: grid;
@@ -54,7 +54,7 @@
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-left {
@@ -122,7 +122,7 @@ h3 span {
   border-radius: 8px;
   padding: 20px;
   height: fit-content;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
 
   h3 {
     margin-bottom: 15px;
@@ -187,6 +187,7 @@ h3 span {
     margin-top: 20px;
   }
 }
+
 .whatsapp {
   position: fixed;
   left: 15px;
@@ -196,4 +197,182 @@ h3 span {
   img {
     width: 45px;
   }
+}
+
+.cart-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  padding: 25px;
+  background: #f3f3f3;
+}
+
+/* TITLE */
+
+.cart-title {
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-icon {
+  width: 30px;
+  height: 12px;
+  background: black;
+  display: inline-block;
+  transform: skewX(-20deg);
+}
+
+/* LOCATION */
+
+.location {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* SERVICE CARD */
+
+.service-card {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 52px;
+  padding: 15px;
+  margin-bottom: 12px;
+  padding-left: 0px;
+}
+
+/* IMAGE */
+
+.service-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.service-img img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* INFO */
+
+.service-info {
+  flex: 1;
+}
+
+.service-title {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.service-title span {
+  color: #e60000;
+  font-size: 12px;
+  display: block;
+  line-height: 16px;
+}
+
+.service-spec {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #333;
+  width: 33%;
+}
+
+.service-spec p {
+  margin: 2px 0;
+}
+
+/* PRICE */
+
+.service-price {
+  text-align: right;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.remove {
+  color: red;
+  font-size: 12px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+/* SUMMARY */
+
+.cart-summary {
+  /* background: #fff; */
+  /* border: 1px solid #dcdcdc; */
+  border-radius: 6px;
+  /* padding: 20px; */
+  height: fit-content;
+  padding-top: 0px;
+  margin-top: 75px;
+}
+
+.cart-summary h3 {
+  margin-bottom: 15px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.summary-total {
+  background: #eee;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* BUTTON */
+
+.continue-btn {
+  width: 100%;
+  background: #ff1a1a;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin-top: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:992px) {
+
+  .cart-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media(max-width:600px) {
+
+  .service-card {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .service-price {
+    text-align: left;
+  }
+
 }

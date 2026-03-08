@@ -41,22 +41,22 @@ export class ApiService {
   getSubcategoriesBikeData(model: any, cityName: any): Observable<any> {
     return this.http.get<any>('https://www.foxservice.in/admin/api/getSubCategoriesByCategory?category_slug=' + model + '&city_slug=' + cityName);
   }
-
+  
   onQuickBookingSubmit(model: any, cityName: any): Observable<any> {
-
+    
     const payload = {
       phone: model.phone,
       city_id: cityName,
       email: model.email,
       name: model.name
     };
-
+    
     return this.http.post<any>(
       'https://www.foxservice.in/admin/api/order/quick-booking',
       payload
     );
   }
-
+  
   sendOtp(model: any): Observable<any> {
     const payload = {
       phone: '91' + model,
@@ -66,11 +66,30 @@ export class ApiService {
       payload
     );
   }
+  
+  onRegister(formData: FormData): Observable<any> {
+    return this.http.post<any>(
+      'https://www.foxservice.in/admin/api/partner/store',
+      formData
+    );
+  }
 
-onRegister(formData: FormData): Observable<any> {
-  return this.http.post<any>(
-    'https://www.foxservice.in/admin/api/partner/store',
-    formData
-  );
-}
+  getTermsConditionsData(): Observable<any> {
+    return this.http.get<any>('https://www.foxservice.in/admin/api/cms/terms_and_conditions');
+  }
+
+
+  // {phone: "918768676765", otp: 1234}
+
+  login(payload:any): Observable<any> {
+    return this.http.post<any>('https://www.foxservice.in/admin/api/login',payload);
+  }
+   
+  getCartData(): Observable<any> {
+    return this.http.get<any>('https://www.foxservice.in/admin/api/cart/get');
+  }
+
+  getOrderData(): Observable<any> {
+    return this.http.get<any>('https://www.foxservice.in/admin/api/order/get');
+  }
 }

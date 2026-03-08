@@ -11,12 +11,33 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./testimonials.component.scss']
 })
 export class TestimonialsComponent implements OnInit {
-  testimonials: any;
+  // testimonials: any;
   constructor(private service: ApiService,private sanitizer: DomSanitizer) { }
   currentIndex = 0;
 
+    testimonials = [
+    {
+      initial: 'P',
+      title: 'Best Bike Service',
+      message: 'Fox Service is the best bike service and repairing centre in this designated area. They do the job in a very short span of time. Amazing service and good communication between customers.',
+      name: 'Prateek Agrawal'
+    },
+    {
+      initial: 'A',
+      title: 'Excellent Support',
+      message: 'Very professional staff and quick response. Mechanic arrived on time and service quality was excellent.',
+      name: 'Amit Verma'
+    },
+    {
+      initial: 'R',
+      title: 'Trusted Service',
+      message: 'Highly recommended bike service. Transparent pricing and very friendly staff.',
+      name: 'Rohit Sharma'
+    }
+  ];
+
   ngOnInit() {
-    this.getTestimonials();
+    // this.getTestimonials();
     setInterval(() => {
       this.next();
     }, 4000);

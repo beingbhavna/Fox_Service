@@ -1,1 +1,25 @@
-<div class="old-page" [innerHTML]="pageHtml"></div>
+<!-- <div class="old-page" [innerHTML]="pageHtml"></div> -->
+
+<div class="orders-container">
+    <h2 class="title">My Orders</h2>
+    <div class="order-card" *ngFor="let order of orders">
+        <div class="order-left">
+            <img src="assets/images/service.png" class="service-img">
+            <div class="order-info">
+                <h3>{{order.service}}</h3>
+                <p class="bike">{{order.bike}}</p>
+                <p class="date">
+                    Ordered on: {{order.date}}
+                </p>
+            </div>
+        </div>
+        <div class="order-right">
+            <div class="price">
+                ₹ {{order.price}} /-
+            </div>
+            <div class="status" [ngClass]="order.status">
+                {{order.status}}
+            </div>
+        </div>
+    </div>
+</div>

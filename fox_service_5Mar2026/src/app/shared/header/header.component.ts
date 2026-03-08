@@ -27,6 +27,7 @@ export class HeaderComponent {
   intervalId: any;
   activeBrand: string = 'All';
   menuOpen = false;
+  login=false;
   @Input() cartCount = 0;
   constructor(private cartService: CartService, private fb: FormBuilder,private router: Router,private service:ApiService) {
     this.cartService.cart$.subscribe(items => {
@@ -34,8 +35,16 @@ export class HeaderComponent {
     });
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      otp: ['1234', Validators.required],
     });
   }
+
+    ngOnInit() {
+    this.cartService.openModal$.subscribe(() => {
+      this.loginShowModal = true;
+    });
+  }
+
    toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
@@ -150,17 +159,21 @@ export class HeaderComponent {
     }
   }
 
-   loginWithOtp(){
-    const model = this.loginForm.value;
-    const cityName = this.loginForm.value.city; // or selected city id
-    this.service.onQuickBookingSubmit(model, cityName).subscribe({
-      next: (res) => {
-        console.log('Success:', res);
-      },
-      error: (err) => {
-        console.error('Error:', err);
-        alert('Something went wrong');
-      }
-    });
-  }
+loginWithOtp(){
+  const payload = {
+    phone: '91' + this.phone,
+    otp: this.loginForm.value.otp
+  };
+
+  this.service.login(payload).subscribe({
+    next: (data) => {
+      console.log('Login successful:', data);
+      this.login = true;
+      // this.router.navigate(['/city', this.cityName.toLowerCase()]);
+    },
+    error: (error) => {
+      console.error('Login error:', error);
+    }
+  });
+}
 }

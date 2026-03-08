@@ -15,7 +15,7 @@
         <!-- OTP SCREEN -->
         <div *ngIf="showOtpScreen">
             <input type="text" placeholder="Enter Your OTP" formControlName="otp">
-            <button>CONTINUE</button>
+            <button (click)="loginWithOtp()">CONTINUE</button>
             <div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
                     <p class="resend">
                         Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export interface CartItem {
   id: string | number;
@@ -36,6 +36,12 @@ export class CartService {
     } catch {
       return [];
     }
+  }
+
+  private openModalSource = new Subject<void>();
+  openModal$ = this.openModalSource.asObservable();
+  openModal() {
+    this.openModalSource.next();
   }
 
   // GET CART

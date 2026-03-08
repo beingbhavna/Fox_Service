@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-professional-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,HeaderComponent],
   templateUrl: './professional-register.component.html',
   styleUrl: './professional-register.component.scss'
 })

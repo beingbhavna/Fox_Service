@@ -15,6 +15,9 @@
       <div class="cart" routerLink="/cart">
         🛒<span class="badge">{{cartCount}}</span>
       </div>
+      <div class="cart" *ngIf="login">
+        🛒<span class="badge">{{cartCount}}</span>
+      </div>
     </div>
   </div>
 </header>
@@ -26,7 +29,6 @@
   </div>
 
   <!-- Animated Menu -->
-   {{menuOpen}}
   <div class="mobile-menu" [class.open]="menuOpen">
     <a routerLink="/register-as-a-professional">Register as a Professional</a>
     <a routerLink="/login">Login / Sign Up</a>
@@ -48,13 +50,14 @@
 			<button (click)="continue()">CONTINUE</button>
 		</div>
 		<!-- OTP SCREEN -->
-		<div *ngIf="showOtpScreen">
+		<div *ngIf="showOtpScreen" [formGroup]="loginForm">
 			<input class="inputClass" type="text" placeholder="Enter Your OTP" formControlName="otp">
 			<button (click)="loginWithOtp()">CONTINUE</button>
 			<div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
 					<p class="resend">
 						Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>
 					</p>
+          <p>Please Enter Default OTP: 1234</p>
 			</div>
 		</div>
 	</div>

@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   bikes: any;
   bikeData: any;
   cityName: any;
+  settingsData: any;
   constructor(private router: Router, private fb: FormBuilder, private service: ApiService) {
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
@@ -90,23 +91,6 @@ export class HomeComponent implements OnInit {
     this.activeIndex = i;
   }
   currentIndex = 0;
-  slides = [
-    {
-      image: 'assets/images/slider/01.png',
-      title: 'Your Doorstep Bike Service Expert in Noida',
-      subtitle: 'Get instant access to reliable and affordable services at your door step.'
-    },
-    {
-      image: 'assets/images/royalEnfield.jpg',
-      title: 'Convenient and hassle-free appointments',
-      subtitle: '24 X 7 Convenient Online Booking'
-    },
-    {
-      image: 'assets/images/slides.jpg',
-      title: 'Pick-up & Drop Facility',
-      subtitle: 'Your convenience is our motto, we will pick your bike and deliver at your doorstep, spend that extra time with your loved ones.'
-    }
-  ];
 
   ngOnInit() {
     setInterval(() => {
@@ -118,7 +102,7 @@ export class HomeComponent implements OnInit {
   }
 
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    this.currentIndex = (this.currentIndex + 1) % this.settingsData.length;
   }
 
   goToSlide(index: number) {
@@ -256,10 +240,23 @@ export class HomeComponent implements OnInit {
           localStorage.setItem('cityId', JSON.stringify(this.cityList[0])); // default to first city if available
         }
         this.getSubcategoriesData();
-        this.getTimeslotData();
+        this.getSettingsData();
       },
       error: (error) => {
         console.error('Error fetching city data:', error);
+      }
+    });
+  }
+
+  getSettingsData() {
+    let cityId = localStorage.getItem('cityId') || '1'; // default to 1 if not set
+    this.service.getSettingsData((JSON.parse(cityId)).id).subscribe({
+      next: (data) => {
+        this.settingsData = data.banners || {};
+        this.getTimeslotData();
+      },
+      error: (error) => {
+        console.error('Error fetching settings data:', error);
       }
     });
   }

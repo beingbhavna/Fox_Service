@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent, ReactiveFormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
@@ -22,11 +23,26 @@ export class CartComponent {
   addressType: string = 'home';
   addressForm!: FormGroup;
   showOtherInput = false;
+  showSlotPopup = false;
+  selectedDate: any;
+  selectedSlot: any;
+  timeSlots: string[] = [];
+  currentDate = new Date();
+  currentMonth!: number;
+  currentYear!: number;
+  calendarDays: number[] = [];
+  today = new Date();
+  slotError = false;
+  daysName = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
+  monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
 
   constructor(private cartService: CartService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit() {
     this.cartService.cart$.subscribe(items => {
@@ -34,18 +50,19 @@ export class CartComponent {
     });
     this.selectedCity = this.cartItems.length > 0 ? this.cartItems[0].cities[0].name : '';
     this.addressForm = this.fb.group({
-
       name: [''],
       email: [''],
-      mobile: [''],
+      phone: [''],
       city: [''],
       landmark: [''],
-      residenceNo: [''],
-
+      house_building_name: [''],
       addressType: ['Home'],
-      otherType: ['']
-
+      type: [''],
+      road_area_colony: ['']
     });
+    this.currentMonth = this.currentDate.getMonth();
+    this.currentYear = this.currentDate.getFullYear();
+    this.selectedDate = this.today.getDate();
   }
 
   removeItem(id: number) {
@@ -146,11 +163,19 @@ export class CartComponent {
   }
 
   submitAddress() {
-    let formData = this.addressForm.value;
-    if (formData.addressType === 'Other') {
-      formData.addressType = formData.otherType;
+    // let formData = this.addressForm.value;
+    // if (formData.addressType === 'Other') {
+    //   formData.addressType = formData.otherType;
+    // }
+    // console.log(formData);
+
+
+    let payload = { ...this.addressForm.value };
+
+    if (payload.addressType === 'Other') {
+      payload.addressType = payload.otherType;
     }
-    console.log(formData);
+
     /*
     Example payload sent to backend:
     {
@@ -162,6 +187,125 @@ export class CartComponent {
     addressType:"Friend House"
     }
     */
+    this.apiService.saveAddress(payload).subscribe(response => {
+      console.log('Address saved successfully', response);
+      // close address popup
+      this.showAddressForm = false;
+      // open slot popup
+      this.showSlotPopup = true;
+      this.generateCalendar();
+    });
+  }
+
+
+  generateSlots() {
+
+    this.timeSlots = [
+
+      '09:00 AM - 11:00 AM',
+      '11:00 AM - 01:00 PM',
+      '01:00 PM - 03:00 PM',
+      '03:00 PM - 05:00 PM',
+      '05:00 PM - 07:00 PM'
+
+    ];
 
   }
+
+  confirmSlot() {
+
+    const payload = {
+
+      date: this.selectedDate,
+      slot: this.selectedSlot
+
+    };
+
+    console.log("Slot Payload:", payload);
+
+  }
+
+  generateCalendar() {
+
+    const days = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+    this.calendarDays = [];
+
+    for (let i = 1; i <= days; i++) {
+      this.calendarDays.push(i);
+    }
+  }
+
+  prevMonth() {
+    this.currentMonth--;
+
+    if (this.currentMonth < 0) {
+      this.currentMonth = 11;
+      this.currentYear--;
+    }
+
+    this.generateCalendar();
+  }
+
+  nextMonth() {
+    this.currentMonth++;
+
+    if (this.currentMonth > 11) {
+      this.currentMonth = 0;
+      this.currentYear++;
+    }
+
+    this.generateCalendar();
+  }
+
+  selectDate(day: any) {
+    const selected = new Date(this.currentYear, this.currentMonth, day);
+
+    const todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0);
+
+    if (selected < todayDate) {
+
+      this.slotError = true;
+      this.selectedDate = null;
+      this.selectedSlot = null;
+
+      return;
+    }
+
+    this.slotError = false;
+    this.selectedDate = day;
+    this.generateSlots();
+
+  }
+
+  selectSlot(slot: any) {
+    this.selectedSlot = slot;
+  }
+
+  submit() {
+
+    const payload = {
+      date: this.selectedDate,
+      month: this.currentMonth + 1,
+      year: this.currentYear,
+      timeSlot: this.selectedSlot
+    };
+
+    console.log("Payload:", payload);
+
+  }
+
+  close() {
+    console.log("close modal");
+  }
+  
+  isPastDate(day: number) {
+
+  const date = new Date(this.currentYear, this.currentMonth, day);
+  const today = new Date();
+
+  today.setHours(0,0,0,0);
+
+  return date < today;
+}
 }

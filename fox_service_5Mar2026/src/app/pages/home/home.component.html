@@ -1,34 +1,15 @@
-<!-- <header class="header" [class.sticky]="isSticky">
-	<div class="container nav">
-		<a routerLink="/" class="logo">
-			<img src="/assets/images/logo.png" />
-		</a>
-		<div class="top-bar">
-			<div class="top-left">
-				<a href="/register-as-a-professional" class="register-link">Register as a Professional </a>
-			</div>
-			<div class="top-right">
-				<img src="assets/images/waicon.png" class="weblock" style="height: 16px; margin-right: 5px;">
-				<span class="phone"> (888) 999-83-82 </span>
-				<a class="login-btn" (click)="openLoginModal()"> Login / Sign Up</a>
-			</div>
-		</div>
-	</div>
-</header> -->
-<!-- <app-header></app-header> -->
-<!-- Floating Buttons -->
 <a class="quick-booking" (click)="quickBookingOpenModal()">Quick Booking</a>
 <a class="whatsapp" (click)="openWhatsApp()">
   <img src="assets/images/waicongreen.png">
 </a>
 <section class="hero-slider">
 	<div class="hero">
-		<div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentIndex"
-			[style.backgroundImage]="'url(' + slide.image + ')'">
+		<div class="slide" *ngFor="let slide of settingsData; let i = index" [class.active]="i === currentIndex"
+			[style.backgroundImage]="'url(https://www.foxservice.in/admin/' + slide.image + ')'">
 
 			<div class="hero-content">
-				<h1>{{ slide.title }}</h1>
-				<p>{{ slide.subtitle }}</p>
+				<h1>{{ slide.heading }}</h1>
+				<p>{{ slide.description }}</p>
 
 				<div class="city-select">
 					<!-- <div class="city-box"> -->

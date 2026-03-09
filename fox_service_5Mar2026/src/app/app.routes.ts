@@ -12,6 +12,7 @@ import { ProfessionalRegisterComponent } from './pages/professional-register/pro
 import { TermsComponent } from './pages/terms/terms.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 // export const routes: Routes = [
 // 	{ path: '', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
@@ -35,11 +36,12 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'terms', component: TermsComponent },
+  { path: 'faq', component: FaqComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'cart', component: CartComponent },
   { path: 'city/:name', component: CityComponent },
   { path: 'quick-booking', component: QuickBookingComponent },
-  { path: 'bike-scooty/:model', loadComponent: () => import('./pages/bike-list/bike-list.component').then(m => m.BikeListComponent) },
+  { path: ':cityName/bike-scooty/:model', loadComponent: () => import('./pages/bike-list/bike-list.component').then(m => m.BikeListComponent) },
   { path: 'login', component: LoginComponent },
   { path: 'bikeDetail/:model', component: BikeDetailComponent },
   { path: 'register-as-a-professional', component: ProfessionalRegisterComponent },

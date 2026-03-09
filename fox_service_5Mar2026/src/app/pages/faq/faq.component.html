@@ -1,1 +1,17 @@
-<div class="old-page" [innerHTML]="pageHtml"></div>
+<section class="faq-section">
+    <div class="faq-container">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.active]="activeIndex === i">
+            <div class="faq-question" (click)="toggleFAQ(i)">
+                <span>{{ faq.question }}</span>
+                <span class="icon">
+                    <span *ngIf="activeIndex !== i">+</span>
+                    <span *ngIf="activeIndex === i">−</span>
+                </span>
+            </div>
+            <div class="faq-answer" *ngIf="activeIndex === i">
+                <p>{{ faq.answer }}</p>
+            </div>
+        </div>
+    </div>
+</section>

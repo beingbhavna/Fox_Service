@@ -10,10 +10,33 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./faq.component.scss']
 })
 export class FaqComponent implements OnInit {
-  pageHtml = '';
-  constructor(private http: HttpClient) {}
-  ngOnInit(): void {
-    this.http.get('assets/templates/faq.html', { responseType: 'text' })
-      .subscribe(html => this.pageHtml = html);
+
+  activeIndex: number | null = null;
+
+  faqs = [
+    {
+      question: 'What is FoxService?',
+      answer: 'FoxService provides doorstep bike servicing at affordable prices.'
+    },
+    {
+      question: 'How do I book a service?',
+      answer: 'You can select your bike model and service type from the website.'
+    },
+    {
+      question: 'Do you provide doorstep service?',
+      answer: 'Yes, our mechanic will visit your location.'
+    },
+    {
+      question: 'What cities do you serve?',
+      answer: 'Currently available in Bangalore, Delhi NCR and expanding.'
+    }
+  ];
+
+  ngOnInit(){
+
   }
+  toggleFAQ(index: number) {
+    this.activeIndex = this.activeIndex === index ? null : index;
+  }
+
 }

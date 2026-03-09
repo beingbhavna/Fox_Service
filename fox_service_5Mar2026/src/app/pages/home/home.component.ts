@@ -11,7 +11,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ServicesGridComponent, TestimonialsComponent, BrandsComponent,HeaderComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ServicesGridComponent, TestimonialsComponent, BrandsComponent, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -142,8 +142,9 @@ export class HomeComponent implements OnInit {
   }
 
   openBikeList(category: any) {
+    let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
     console.log('Selected category:', category);
-    this.router.navigate(['/bike-scooty/' + category]);
+    this.router.navigate(['/' + cityName + '/bike-scooty/' + category]);
   }
 
   //login code

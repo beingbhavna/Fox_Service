@@ -140,8 +140,9 @@ export class CityComponent {
   }
 
   openBikeList(category: any) {
+     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
     console.log('Selected category:', category);
-    this.router.navigate(['/bike-scooty/' + category]);
+    this.router.navigate(['/' + cityName + '/bike-scooty/' + category]);
   }
 
   //login code

@@ -96,10 +96,10 @@
         </div>
       </div>
 
-       <div class="service-spec">
-          <b>Specifications:</b>
-          <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
-        </div>
+      <div class="service-spec">
+        <b>Specifications:</b>
+        <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+      </div>
 
       <!-- PRICE -->
       <div class="service-price">
@@ -108,41 +108,104 @@
           Remove
         </div>
       </div>
-
     </div>
-
   </div>
-
   <!-- RIGHT SIDE SUMMARY -->
-
   <div class="cart-summary">
-
     <h3>Summary</h3>
-
     <div class="summary-row" *ngFor="let item of cartItems">
       <span>{{ item.name }} ({{ item.model }})</span>
-      <span>₹ {{ item.cities[0].pivot.price }}/-</span>    <hr>
+      <span>₹ {{ item.cities[0].pivot.price }}/-</span>
+      <hr>
     </div>
-
     <hr>
-
     <div class="summary-row">
       <b>Sub Total</b>
       <b>₹ {{ total }}/-</b>
     </div>
-        <hr>
-
-
+    <hr>
     <div class="summary-total">
       <span>Total <small>(GST Included)</small></span>
       <span>₹ {{ getTotalWithGST() | number:'1.0-2' }}/-</span>
     </div>
     <hr>
-
     <button class="continue-btn" (click)="continue()">
       CONTINUE
     </button>
-
   </div>
+</div>
 
+<!-- First Popup (Add New Address) -->
+<div class="overlay" *ngIf="showAddressPopup">
+  <div class="address-modal">
+    <span class="close" (click)="closeAddressPopup()">✕</span>
+    <h2>Add new address</h2>
+    <button class="add-btn" (click)="openAddressForm()">
+      📍 ADD NEW ADDRESS
+    </button>
+  </div>
+</div>
+
+<!-- Second Popup (Address Form) -->
+<div class="overlay" *ngIf="showAddressForm">
+  <div class="form-modal">
+    <div class="side-bar">
+      <span (click)="backToPopup()">←</span>
+    </div>
+    <div class="form-container">
+      <h2>Add Address</h2>
+      <div class="form-grid">
+
+        <div class="form-group full">
+          <div class="location-input">
+            <input type="text" [(ngModel)]="address" placeholder="Search Location">
+            <button class="locate-btn" (click)="getCurrentLocation()">
+              <img src="assets/images/current.png" width="20">
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Your Name*</label>
+          <input type="text" placeholder="Your Name">
+        </div>
+
+        <div class="form-group">
+          <label>Email*</label>
+          <input type="email" placeholder="Your Email">
+        </div>
+
+        <div class="form-group">
+          <label>Your mobile number*</label>
+          <input type="text" placeholder="Mobile Number">
+        </div>
+
+        <div class="form-group">
+          <label>City*</label>
+          <input type="text" value="Noida">
+        </div>
+
+        <div class="form-group">
+          <label>Landmark</label>
+          <input type="text" placeholder="Landmark">
+        </div>
+
+        <div class="form-group">
+          <label>Residence No</label>
+          <textarea placeholder="Flat / House / Building"></textarea>
+        </div>
+      </div>
+      <div class="address-type">
+        <label>Address Type*</label>
+        <div class="type-btns">
+          <button class="active">Home</button>
+          <button>Office</button>
+          <button>Other</button>
+        </div>
+      </div>
+      <button class="save-btn">
+        SAVE ADDRESS →
+      </button>
+    </div>
+  </div>
 </div>

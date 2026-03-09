@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule,FormsModule, HeaderComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
@@ -19,17 +19,33 @@ export class CartComponent {
   showAddressPopup = false;
   showAddressForm = false;
   address: string = '';
+  addressType: string = 'home';
+  addressForm!: FormGroup;
+  showOtherInput = false;
 
-  constructor(
-    private cartService: CartService,
-    private router: Router
-  ) { }
+
+  constructor(private cartService: CartService,
+    private router: Router,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
     this.cartService.cart$.subscribe(items => {
       this.cartItems = items;
     });
     this.selectedCity = this.cartItems.length > 0 ? this.cartItems[0].cities[0].name : '';
+    this.addressForm = this.fb.group({
+
+      name: [''],
+      email: [''],
+      mobile: [''],
+      city: [''],
+      landmark: [''],
+      residenceNo: [''],
+
+      addressType: ['Home'],
+      otherType: ['']
+
+    });
   }
 
   removeItem(id: number) {
@@ -88,15 +104,15 @@ export class CartComponent {
   }
 
   getAddressFromCoords(lat: number, lng: number) {
-  const apiKey = "YOUR_GOOGLE_MAP_API_KEY";
-  fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.results.length > 0) {
-        this.address = data.results[0].formatted_address;
-      }
-    });
-}
+    const apiKey = "YOUR_GOOGLE_MAP_API_KEY";
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.results.length > 0) {
+          this.address = data.results[0].formatted_address;
+        }
+      });
+  }
 
   getCurrentLocation() {
     if (!navigator.geolocation) {
@@ -115,5 +131,37 @@ export class CartComponent {
         alert("Location permission denied");
       }
     );
+  }
+
+  selectAddressType(type: string) {
+    this.addressForm.patchValue({
+      addressType: type
+    });
+    if (type === 'Other') {
+      this.showOtherInput = true;
+    } else {
+      this.showOtherInput = false;
+      this.addressForm.patchValue({ otherType: '' });
+    }
+  }
+
+  submitAddress() {
+    let formData = this.addressForm.value;
+    if (formData.addressType === 'Other') {
+      formData.addressType = formData.otherType;
+    }
+    console.log(formData);
+    /*
+    Example payload sent to backend:
+    {
+    name:"Rahul",
+    mobile:"918978978789",
+    city:"Noida",
+    landmark:"Sector 62",
+    residenceNo:"Flat 203",
+    addressType:"Friend House"
+    }
+    */
+
   }
 }

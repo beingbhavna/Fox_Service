@@ -195,15 +195,34 @@
           <textarea placeholder="Flat / House / Building"></textarea>
         </div>
       </div>
+
       <div class="address-type">
         <label>Address Type*</label>
-        <div class="type-btns">
-          <button class="active">Home</button>
-          <button>Office</button>
-          <button>Other</button>
+        <div class="type-buttons">
+          <button type="button" [class.active]="addressForm.value.addressType === 'Home'"
+            (click)="selectAddressType('Home')">
+            Home
+          </button>
+
+          <button type="button" [class.active]="addressForm.value.addressType === 'Office'"
+            (click)="selectAddressType('Office')">
+            Office
+          </button>
+
+          <button type="button" [class.active]="addressForm.value.addressType === 'Other'"
+            (click)="selectAddressType('Other')">
+            Other
+          </button>
         </div>
       </div>
-      <button class="save-btn">
+
+      <!-- EXTRA FIELD WHEN OTHER -->
+
+      <div class="form-group" *ngIf="showOtherInput">
+        <label>Enter Address Type</label>
+        <input type="text" formControlName="otherType" placeholder="Example: Friend House">
+      </div>
+      <button class="save-btn" (click)="submitAddress()">
         SAVE ADDRESS →
       </button>
     </div>

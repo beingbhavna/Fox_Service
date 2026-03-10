@@ -211,7 +211,7 @@ button {
 
   .hero-content {
     position: absolute;
-    top: 30%;
+    // top: 30%;
     width: 100%;
     padding: 62px 20px;
     text-align: center;
@@ -234,6 +234,7 @@ button {
       display: flex;
       align-items: center;
       width: 260px;
+      margin-left: 24%;
 
       select {
         border: none;

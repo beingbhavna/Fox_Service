@@ -13,7 +13,7 @@ declare var google: any;
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
-export class CartComponent implements OnInit,AfterViewInit  {
+export class CartComponent implements OnInit, AfterViewInit {
   gstPercent = 18; // example GST %
   cartItems: any[] = [];
   selectedCity: any;
@@ -49,8 +49,8 @@ export class CartComponent implements OnInit,AfterViewInit  {
     '05:00 PM - 06:00 PM',
     '06:00 PM - 07:00 PM'
   ];
-  @ViewChild('locationInput') locationInput!: ElementRef;
-  
+  @ViewChild('locationInput', { static: false }) locationInput!: ElementRef;
+
   constructor(private cartService: CartService,
     private router: Router,
     private fb: FormBuilder, private apiService: ApiService) { }
@@ -131,62 +131,38 @@ export class CartComponent implements OnInit,AfterViewInit  {
     this.showAddressPopup = true;
   }
 
-  getAddressFromCoords(lat: number, lng: number) {
-    const apiKey = "AIzaSyCtf_DX0cKXrOWKeimApPyEW_MIzUS-CV8&sensor=false&libraries=places";
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.results.length > 0) {
-          this.address = data.results[0].formatted_address;
+  ngAfterViewInit() {
+    console.log(google.maps.places)
+      const autocomplete = new google.maps.places.Autocomplete(
+        this.locationInput.nativeElement,
+        {
+          types: ['geocode']
+        }
+      );
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (place && place.formatted_address) {
+          this.addressForm.patchValue({
+            road_area_colony: place.formatted_address
+          });
         }
       });
-  }
-
-  ngAfterViewInit() {
-    const autocomplete = new google.maps.places.Autocomplete(
-      this.locationInput.nativeElement
-    );
-
-    autocomplete.addListener('place_changed', () => {
-
-      const place = autocomplete.getPlace();
-
-      if (place.formatted_address) {
-
-        this.addressForm.patchValue({
-          road_area_colony: place.formatted_address
-        });
-
-      }
-
-    });
   }
 
   getCurrentLocation() {
-
     navigator.geolocation.getCurrentPosition((position) => {
-
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
-
       const geocoder = new google.maps.Geocoder();
-
       const latlng = { lat: lat, lng: lng };
-
       geocoder.geocode({ location: latlng }, (results: any) => {
-
         if (results[0]) {
-
           this.addressForm.patchValue({
             road_area_colony: results[0].formatted_address
           });
-
         }
-
       });
-
     });
-
   }
 
   selectAddressType(type: string) {

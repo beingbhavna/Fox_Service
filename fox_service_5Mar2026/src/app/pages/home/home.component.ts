@@ -227,6 +227,7 @@ export class HomeComponent implements OnInit {
   //login code end
 
   getCityList() {
+    this.service.show();
     this.service.getCityData().subscribe({
       next: (data) => {
         console.log('City data:', data);

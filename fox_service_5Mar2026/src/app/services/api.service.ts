@@ -1,22 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
   constructor(private http: HttpClient) { }
+
+  private loading = new BehaviorSubject<boolean>(false);
+  loading$ = this.loading.asObservable();
+
+  show() {
+    this.loading.next(true);
+  }
+  
+  hide() {
+    this.loading.next(false);
+  }
 
   getCityData(): Observable<any> {
     return this.http.get<any>('https://www.foxservice.in/admin/api/city/get');
   }
 
-  getSettingsData(city_id:any): Observable<any> {
+  getSettingsData(city_id: any): Observable<any> {
     return this.http.get<any>('https://www.foxservice.in/admin/api/cms/settings?city_id=' + city_id);
   }
-  
+
   getTimeslotData(): Observable<any> {
     return this.http.get<any>('https://www.foxservice.in/admin/api/timeslot/get');
   }
@@ -45,22 +56,22 @@ export class ApiService {
   getSubcategoriesBikeData(model: any, cityName: any): Observable<any> {
     return this.http.get<any>('https://www.foxservice.in/admin/api/getSubCategoriesByCategory?category_slug=' + model + '&city_slug=' + cityName);
   }
-  
+
   onQuickBookingSubmit(model: any, cityName: any): Observable<any> {
-    
+
     const payload = {
       phone: model.phone,
       city_id: cityName,
       email: model.email,
       name: model.name
     };
-    
+
     return this.http.post<any>(
       'https://www.foxservice.in/admin/api/order/quick-booking',
       payload
     );
   }
-  
+
   sendOtp(model: any): Observable<any> {
     const payload = {
       phone: '91' + model,
@@ -70,23 +81,23 @@ export class ApiService {
       payload
     );
   }
-  
+
   onRegister(formData: FormData): Observable<any> {
-    return this.http.post<any>('https://www.foxservice.in/admin/api/partner/store',formData);
+    return this.http.post<any>('https://www.foxservice.in/admin/api/partner/store', formData);
   }
 
   saveAddress(formData: FormData): Observable<any> {
-    return this.http.post<any>('https://www.foxservice.in/admin/api/user/addAddress',formData);
+    return this.http.post<any>('https://www.foxservice.in/admin/api/user/addAddress', formData);
   }
 
   getTermsConditionsData(): Observable<any> {
     return this.http.get<any>('https://www.foxservice.in/admin/api/cms/terms_and_conditions');
   }
 
-  login(payload:any): Observable<any> {
-    return this.http.post<any>('https://www.foxservice.in/admin/api/login',payload);
+  login(payload: any): Observable<any> {
+    return this.http.post<any>('https://www.foxservice.in/admin/api/login', payload);
   }
-   
+
   getCartData(): Observable<any> {
     return this.http.get<any>('https://www.foxservice.in/admin/api/cart/get');
   }

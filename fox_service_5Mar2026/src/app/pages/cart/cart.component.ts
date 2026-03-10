@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-
+declare var google: any;
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -13,7 +13,7 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
-export class CartComponent {
+export class CartComponent implements OnInit,AfterViewInit  {
   gstPercent = 18; // example GST %
   cartItems: any[] = [];
   selectedCity: any;
@@ -26,20 +26,31 @@ export class CartComponent {
   showSlotPopup = false;
   selectedDate: any;
   selectedSlot: any;
-  timeSlots: string[] = [];
   currentDate = new Date();
   currentMonth!: number;
   currentYear!: number;
   calendarDays: number[] = [];
-  today = new Date();
-  slotError = false;
+  filteredSlots: any[] = [];
   daysName = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
   monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
-
+  timeSlots = [
+    '09:00 AM - 10:00 AM',
+    '10:00 AM - 11:00 AM',
+    '11:00 AM - 12:00 PM',
+    '12:00 PM - 01:00 PM',
+    '01:00 PM - 02:00 PM',
+    '02:00 PM - 03:00 PM',
+    '03:00 PM - 04:00 PM',
+    '04:00 PM - 05:00 PM',
+    '05:00 PM - 06:00 PM',
+    '06:00 PM - 07:00 PM'
+  ];
+  @ViewChild('locationInput') locationInput!: ElementRef;
+  
   constructor(private cartService: CartService,
     private router: Router,
     private fb: FormBuilder, private apiService: ApiService) { }
@@ -60,9 +71,9 @@ export class CartComponent {
       type: [''],
       road_area_colony: ['']
     });
-    this.currentMonth = this.currentDate.getMonth();
-    this.currentYear = this.currentDate.getFullYear();
-    this.selectedDate = this.today.getDate();
+    this.currentMonth = new Date().getMonth();
+    this.currentYear = new Date().getFullYear();
+    this.selectedDate = new Date().getDate();
   }
 
   removeItem(id: number) {
@@ -121,7 +132,7 @@ export class CartComponent {
   }
 
   getAddressFromCoords(lat: number, lng: number) {
-    const apiKey = "YOUR_GOOGLE_MAP_API_KEY";
+    const apiKey = "AIzaSyCtf_DX0cKXrOWKeimApPyEW_MIzUS-CV8&sensor=false&libraries=places";
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`)
       .then(res => res.json())
       .then(data => {
@@ -131,23 +142,51 @@ export class CartComponent {
       });
   }
 
-  getCurrentLocation() {
-    if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser");
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        console.log(latitude, longitude);
-        this.getAddressFromCoords(latitude, longitude);
-      },
-      (error) => {
-        console.error(error);
-        alert("Location permission denied");
-      }
+  ngAfterViewInit() {
+    const autocomplete = new google.maps.places.Autocomplete(
+      this.locationInput.nativeElement
     );
+
+    autocomplete.addListener('place_changed', () => {
+
+      const place = autocomplete.getPlace();
+
+      if (place.formatted_address) {
+
+        this.addressForm.patchValue({
+          road_area_colony: place.formatted_address
+        });
+
+      }
+
+    });
+  }
+
+  getCurrentLocation() {
+
+    navigator.geolocation.getCurrentPosition((position) => {
+
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      const geocoder = new google.maps.Geocoder();
+
+      const latlng = { lat: lat, lng: lng };
+
+      geocoder.geocode({ location: latlng }, (results: any) => {
+
+        if (results[0]) {
+
+          this.addressForm.patchValue({
+            road_area_colony: results[0].formatted_address
+          });
+
+        }
+
+      });
+
+    });
+
   }
 
   selectAddressType(type: string) {
@@ -163,149 +202,110 @@ export class CartComponent {
   }
 
   submitAddress() {
-    // let formData = this.addressForm.value;
-    // if (formData.addressType === 'Other') {
-    //   formData.addressType = formData.otherType;
-    // }
-    // console.log(formData);
-
-
     let payload = { ...this.addressForm.value };
-
     if (payload.addressType === 'Other') {
       payload.addressType = payload.otherType;
     }
-
-    /*
-    Example payload sent to backend:
-    {
-    name:"Rahul",
-    mobile:"918978978789",
-    city:"Noida",
-    landmark:"Sector 62",
-    residenceNo:"Flat 203",
-    addressType:"Friend House"
-    }
-    */
     this.apiService.saveAddress(payload).subscribe(response => {
       console.log('Address saved successfully', response);
-      // close address popup
       this.showAddressForm = false;
-      // open slot popup
       this.showSlotPopup = true;
       this.generateCalendar();
     });
   }
 
-
-  generateSlots() {
-
-    this.timeSlots = [
-
-      '09:00 AM - 11:00 AM',
-      '11:00 AM - 01:00 PM',
-      '01:00 PM - 03:00 PM',
-      '03:00 PM - 05:00 PM',
-      '05:00 PM - 07:00 PM'
-
-    ];
-
-  }
-
   confirmSlot() {
-
     const payload = {
-
       date: this.selectedDate,
       slot: this.selectedSlot
-
     };
-
     console.log("Slot Payload:", payload);
-
   }
 
   generateCalendar() {
-
     const days = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
     this.calendarDays = [];
-
     for (let i = 1; i <= days; i++) {
       this.calendarDays.push(i);
+    }
+    if (this.selectedDate === new Date().getDate() && this.currentMonth === new Date().getMonth() && this.currentYear === new Date().getFullYear()) {
+      this.filterSlots();
     }
   }
 
   prevMonth() {
     this.currentMonth--;
-
     if (this.currentMonth < 0) {
       this.currentMonth = 11;
       this.currentYear--;
     }
-
     this.generateCalendar();
   }
 
   nextMonth() {
     this.currentMonth++;
-
     if (this.currentMonth > 11) {
       this.currentMonth = 0;
       this.currentYear++;
     }
-
     this.generateCalendar();
   }
 
-  selectDate(day: any) {
-    const selected = new Date(this.currentYear, this.currentMonth, day);
-
-    const todayDate = new Date();
-    todayDate.setHours(0, 0, 0, 0);
-
-    if (selected < todayDate) {
-
-      this.slotError = true;
-      this.selectedDate = null;
-      this.selectedSlot = null;
-
-      return;
-    }
-
-    this.slotError = false;
+  selectDate(day: number) {
     this.selectedDate = day;
-    this.generateSlots();
-
+    const today = new Date();
+    if (day === today.getDate()) {
+      this.filterSlots();
+    } else {
+      this.filteredSlots = this.timeSlots;
+    }
   }
 
   selectSlot(slot: any) {
     this.selectedSlot = slot;
   }
 
-  submit() {
+  isPastDate(day: number) {
+    const date = new Date(this.currentYear, this.currentMonth, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
+  }
 
+  filterSlots() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTime = currentHour * 60 + currentMinute;
+    this.filteredSlots = this.timeSlots.filter((slot: string) => {
+      // get start time only
+      const startTime = slot.split(' - ')[0]; // "09:00 AM"
+      const [time, modifier] = startTime.split(' ');
+      let [hour, minute]: any = time.split(':');
+      hour = parseInt(hour, 10);
+      minute = parseInt(minute, 10);
+      if (modifier === 'PM' && hour !== 12) {
+        hour += 12;
+      }
+      if (modifier === 'AM' && hour === 12) {
+        hour = 0;
+      }
+      const slotTime = hour * 60 + minute;
+      return slotTime > currentTime;
+    });
+  }
+
+  submit() {
     const payload = {
       date: this.selectedDate,
       month: this.currentMonth + 1,
       year: this.currentYear,
       timeSlot: this.selectedSlot
     };
-
     console.log("Payload:", payload);
-
   }
 
   close() {
     console.log("close modal");
   }
-  
-  isPastDate(day: number) {
-
-  const date = new Date(this.currentYear, this.currentMonth, day);
-  const today = new Date();
-
-  today.setHours(0,0,0,0);
-
-  return date < today;
-}
 }

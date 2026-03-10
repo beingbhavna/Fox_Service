@@ -15,7 +15,7 @@ export class ApiService {
   show() {
     this.loading.next(true);
   }
-  
+
   hide() {
     this.loading.next(false);
   }
@@ -88,6 +88,10 @@ export class ApiService {
 
   saveAddress(formData: FormData): Observable<any> {
     return this.http.post<any>('https://www.foxservice.in/admin/api/user/addAddress', formData);
+  }
+
+  payment(formData: FormData): Observable<any> {
+    return this.http.post<any>('https://www.foxservice.in/admin/api/order/checkout', formData);
   }
 
   getTermsConditionsData(): Observable<any> {

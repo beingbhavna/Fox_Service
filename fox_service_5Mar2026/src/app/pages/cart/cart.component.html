@@ -194,7 +194,7 @@
 
         <!-- Error Message -->
         <p *ngIf="filteredSlots.length === 0" class="error-msg">
-          No slots available for today
+          No time slot available today.
         </p>
       </div>
 
@@ -212,5 +212,97 @@
     <div class="modal-footer">
       <button class="continue-btn" (click)="submit()">CONTINUE</button>
     </div>
+  </div>
+</div>
+
+<!-- show cart modal pay later-->
+<div class="cart-overlay" *ngIf="showCartModal">
+  <div class="cart-modal">
+
+    <div class="cart-header">
+      <h2>Your Cart Details</h2>
+      <span class="close" (click)="closeCart()">×</span>
+    </div>
+
+    <div class="cart-body">
+
+      <!-- LEFT SERVICE -->
+      <div class="service-section">
+
+        <div class="service-card">
+          <img src="assets/images/wash.png" class="service-img">
+
+          <div class="service-info" *ngFor="let cart of cartItems">
+            <h4>{{cart.serviceName}}</h4>
+            <p>{{cart.cc}}</p>
+            <span class="model">({{cart.model}})</span>
+          </div>
+
+          <div class="price">
+            ₹ {{cart.price}} /-
+          </div>
+        </div>
+
+        <div class="specification">
+          <h4>Specifications:</h4>
+          <ul>
+            <li *ngFor="let spec of cart.specifications">
+              {{spec}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <!-- RIGHT DETAILS -->
+      <div class="details-section">
+
+        <div class="address-box">
+          <h4>Home</h4>
+          <p>Area: {{cart.area}}</p>
+          <p>Pincode: {{cart.pincode}}</p>
+          <p>Residence: {{cart.residence}}</p>
+          <p>Landmark: {{cart.landmark}}</p>
+          <p>City: {{cart.city}}</p>
+          <p>{{cart.phone}}</p>
+          <p>{{cart.email}}</p>
+        </div>
+
+        <div class="booking-info">
+          <p>
+            <span>Service Date:</span>
+            {{cart.date}}
+          </p>
+
+          <p>
+            <span>Service Slot:</span>
+            {{cart.slot}}
+          </p>
+
+          <p>
+            <span>Sub Total</span>
+            ₹ {{cart.price}}
+          </p>
+
+          <p class="total">
+            <span>Total (GST Included):</span>
+            ₹ {{cart.price}}
+          </p>
+        </div>
+
+        <textarea placeholder="Comment" [(ngModel)]="cart.comment"></textarea>
+
+      </div>
+
+    </div>
+
+    <div class="cart-footer">
+      <button (click)="payLater()">PAY LATER</button>
+      <p class="note">
+        Due to Covid-19, we encourage use of digital payment after service.
+      </p>
+    </div>
+
   </div>
 </div>

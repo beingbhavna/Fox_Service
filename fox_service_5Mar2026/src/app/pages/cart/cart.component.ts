@@ -31,6 +31,7 @@ export class CartComponent implements OnInit, AfterViewInit {
   currentYear!: number;
   calendarDays: number[] = [];
   filteredSlots: any[] = [];
+  showCartModal = false;
   daysName = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
   monthNames = [
@@ -50,6 +51,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     '06:00 PM - 07:00 PM'
   ];
   @ViewChild('locationInput', { static: false }) locationInput!: ElementRef;
+  cartDetails: any;
 
   constructor(private cartService: CartService,
     private router: Router,
@@ -133,20 +135,20 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     console.log(google.maps.places)
-      const autocomplete = new google.maps.places.Autocomplete(
-        this.locationInput.nativeElement,
-        {
-          types: ['geocode']
-        }
-      );
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (place && place.formatted_address) {
-          this.addressForm.patchValue({
-            road_area_colony: place.formatted_address
-          });
-        }
-      });
+    const autocomplete = new google.maps.places.Autocomplete(
+      this.locationInput.nativeElement,
+      {
+        types: ['geocode']
+      }
+    );
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      if (place && place.formatted_address) {
+        this.addressForm.patchValue({
+          road_area_colony: place.formatted_address
+        });
+      }
+    });
   }
 
   getCurrentLocation() {
@@ -279,9 +281,38 @@ export class CartComponent implements OnInit, AfterViewInit {
       timeSlot: this.selectedSlot
     };
     console.log("Payload:", payload);
+    this.showSlotPopup = false;
+    this.showCartModal = true;
   }
 
   close() {
     console.log("close modal");
   }
+
+  closeCart() {
+    this.showCartModal = false;
+  }
+  payLater() {
+    const payload = {
+      // address_id: 7137
+  // cart_id: 11107
+  // comment: ""
+  // date: "2026-03-11"
+  // time_slot_id: 7
+  // total_price: "70.00"
+  // type: "COD"
+    };
+    console.log("Pay Later Payload:", payload);
+    this.apiService.payment(payload as any).subscribe(response => {
+      console.log('Payment successful', response);
+      this.showCartModal = false;
+    });
+  }
 }
+  // address_id: this.cartItems.id
+  // cart_id:  this.cartItems.id
+  // comment: ""
+  // date: "2026-03-11"
+  // time_slot_id: 7
+  // total_price: "70.00"
+  // type: "COD"

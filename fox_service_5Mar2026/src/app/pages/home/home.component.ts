@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { ServicesGridComponent } from '../services-grid/services-grid.component';
@@ -26,7 +26,9 @@ export class HomeComponent implements OnInit {
   bikeData: any;
   cityName: any;
   settingsData: any;
-  constructor(private router: Router, private fb: FormBuilder, private service: ApiService) {
+  showSuccess: boolean=false;
+  succssMessage: any;
+  constructor(private router: Router, private fb: FormBuilder, private service: ApiService,private cd: ChangeDetectorRef) {
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     });
@@ -190,6 +192,7 @@ export class HomeComponent implements OnInit {
 
   closeError() {
     this.showError = false;
+    this.showSuccess = false;
   }
 
   resendOtp() {
@@ -300,22 +303,26 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onQuickBookingSubmit() {
-    const model = this.bookingForm.value;
-    const cityName = this.bookingForm.value.city; // or selected city id
-
-    this.service.onQuickBookingSubmit(model, cityName).subscribe({
-      next: (res) => {
-        console.log('Success:', res);
-        // alert('Booking submitted successfully');
-        // this.bookingForm.reset();
-      },
-      error: (err) => {
-        console.error('Error:', err);
-        alert('Something went wrong');
-      }
-    });
-  }
+onQuickBookingSubmit() {
+  const model = this.bookingForm.value;
+  const cityName = this.bookingForm.value.city;
+  this.service.onQuickBookingSubmit(model, cityName).subscribe({
+    next: (res: any) => {
+      console.log(res);
+      this.succssMessage = res.message || "Booking submitted successfully";
+      this.showSuccess = true;
+      this.cd.detectChanges();
+      this.showError = false;
+    },
+    error: (err) => {
+      console.log(err);
+      this.errorMessage = err?.error?.message || "Something went wrong";
+      this.showError = true;
+      this.cd.detectChanges();
+      this.showSuccess = false;
+    }
+  });
+}
 
   onCityChange(event: any) {
     this.cityName = event.target.value;

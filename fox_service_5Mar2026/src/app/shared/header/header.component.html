@@ -77,12 +77,34 @@
 		</div>
 	</div>
 
+	<!-- success Popup -->
+	<div class="error-overlay" *ngIf="showSuccess">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+					{{succssMessage}}
+			</div>
+			<button (click)="closeError()">OK</button>
+		</div>
+	</div>
+
 	<!-- Error Popup -->
 	<div class="error-overlay" *ngIf="showError">
 		<div class="error-box">
 			<div class="error-header">Message</div>
 			<div class="error-body">
 				10 digit Phone number is required
+			</div>
+			<button (click)="closeError()">OK</button>
+		</div>
+	</div>
+
+	<!-- Error Popup -->
+	<div class="error-overlay" *ngIf="showLogoutMessage">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+				You are successfully logged out.
 			</div>
 			<button (click)="closeError()">OK</button>
 		</div>

@@ -49,54 +49,8 @@
 			<img [src]="'https://www.foxservice.in/admin/' + item.image" />
 			<span>{{item.name}}</span>
 		</div>
-
-		<!-- dots -->
-		<!-- <div class="dots">
-			<span *ngFor="let d of bikes; let i = index" [class.active]="i === activeIndex">
-			</span>
-		</div> -->
 	</div>
 </div>
-
-
-<!-- login modal -->
-
-<!-- <div class="login-modal" *ngIf="loginShowModal">
-	<div class="login-box">
-		<span class="close-btn" (click)="closeLoginModal()">×</span>
-		<img src="assets/images/logo.png" class="logo" />
-
-		<p class="tagline">Our energy is working for you</p>
-		<p class="sub-text">Quick · Affordable · Trusted</p>
-
-		<div *ngIf="!showOtpScreen">
-			<input class="inputClass" type="text" placeholder="Your Phone Number" [(ngModel)]="phone" maxlength="10"
-				(keypress)="checkInput($event)" />
-
-			<button (click)="continue()">CONTINUE</button>
-		</div>
-		
-		<div *ngIf="showOtpScreen">
-			<input class="inputClass" type="text" placeholder="Enter Your OTP" formControlName="otp">
-			<button (click)="loginWithOtp()">CONTINUE</button>
-			<div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
-					<p class="resend">
-						Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>
-					</p>
-			</div>
-		</div>
-	</div>
-
-	
-	<div class="error-overlay" *ngIf="showError">
-		<div class="error-box">
-			<div class="error-header">Message</div>
-			<div class="error-body">
-				10 digit Phone number is required
-			</div>
-			<button (click)="closeError()">OK</button>
-		</div>
-	</div> -->
 
 
 	<!-- BIKE CATEGORY -->
@@ -160,35 +114,28 @@
 	<app-brands></app-brands>
 
 	<!-- Overlay -->
-	<div class="modal-overlay" *ngIf="quickBookingShowModal" (click)="quickBookingCloseModal()"></div>
-
+	<!-- <div class="modal-overlay" *ngIf="quickBookingShowModal" (click)="quickBookingCloseModal()"></div> -->
 	<div class="modal-overlay" *ngIf="quickBookingShowModal">
 		<div class="modal-box">
-
 			<button class="close-btn" (click)="quickBookingCloseModal()">×</button>
-
 			<h2 class="modal-title">Quick Booking</h2>
-
 			<form [formGroup]="bookingForm" (ngSubmit)="onQuickBookingSubmit()">
-
 				<div class="row">
 					<div class="field">
 						<label>Phone Number:</label>
-						<input type="tel" placeholder="+91" formControlName="phone">
+						<input type="tel" placeholder="+91" formControlName="phone"  maxlength="10"
+				(keypress)="checkInput($event)"/>
 					</div>
-
 					<div class="field">
 						<label>Name:</label>
 						<input type="text" placeholder="Enter name" formControlName="name">
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="field">
 						<label>Email:</label>
 						<input type="email" placeholder="Enter email" formControlName="email">
 					</div>
-
 					<div class="field">
 						<label>City:</label>
 						<select formControlName="city">
@@ -199,7 +146,6 @@
 						</select>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="field">
 						<label>Select Vehicle Type:</label>
@@ -208,7 +154,6 @@
 							<option>Bike/Scooty</option>
 						</select>
 					</div>
-
 					<div class="field">
 						<label>Select CC Details:</label>
 						<select formControlName="ccDetails" (change)="changeBikeCCDetails($event)">
@@ -218,7 +163,6 @@
 						</select>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="field">
 						<label>Select Model:</label>
@@ -226,7 +170,6 @@
 							<option *ngFor="let bike of bikes" value="{{bike.slug}}">{{bike.name}}</option>
 						</select>
 					</div>
-
 					<div class="field">
 						<label>Select Service:</label>
 						<select formControlName="service">
@@ -234,13 +177,11 @@
 						</select>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="field">
 						<label>Select Date:</label>
 						<input type="date" formControlName="date">
 					</div>
-
 					<div class="field">
 						<label>Select Slot:</label>
 						<select formControlName="timeSlot">
@@ -248,16 +189,37 @@
 						</select>
 					</div>
 				</div>
-
 				<div class="field full">
 					<label>Enter Address:</label>
 					<textarea rows="3" placeholder="Enter address" formControlName="address"></textarea>
 				</div>
-
 				<button type="submit" class="submit-btn" [disabled]="bookingForm.invalid">
 					SUBMIT
 				</button>
-
 			</form>
+		</div>
+	</div>
+
+
+
+		<!-- success Popup -->
+	<div class="error-overlay" *ngIf="showSuccess">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+					{{succssMessage}}
+			</div>
+			<button (click)="closeError()">OK</button>
+		</div>
+	</div>
+
+	<!-- Error Popup -->
+	<div class="error-overlay" *ngIf="showError">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+				{{errorMessage}}
+			</div>
+			<button (click)="closeError()">OK</button>
 		</div>
 	</div>

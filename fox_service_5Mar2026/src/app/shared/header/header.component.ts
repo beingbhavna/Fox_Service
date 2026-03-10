@@ -17,11 +17,13 @@ export class HeaderComponent {
   loginForm: FormGroup;
   loginShowModal = false;
   showError = false;
+  showSuccess = false;
   errorMessage = '';
   phone: string = '';
   showModal = true;
   showOtpScreen = false;
   showErrorPopup = false;
+  showLogoutMessage = false;
   message = '';
   timer: number = 30;
   intervalId: any;
@@ -29,7 +31,7 @@ export class HeaderComponent {
   menuOpen = false;
   @Input() cartCount = 0;
   loginFlag: any;
-  profileOpen = false;
+  succssMessage: any;
   constructor(private cartService: CartService, private fb: FormBuilder, private router: Router, private service: ApiService) {
     this.cartService.cart$.subscribe(items => {
       this.cartCount = items.length;
@@ -114,6 +116,8 @@ export class HeaderComponent {
 
   closeError() {
     this.showError = false;
+    this.showSuccess = false;
+    this.showLogoutMessage = false;
   }
 
   sendOtp() {
@@ -167,34 +171,30 @@ export class HeaderComponent {
       phone: '91' + this.phone,
       otp: this.loginForm.value.otp
     };
-
     this.service.login(payload).subscribe({
       next: (data) => {
         const cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug
         console.log('Login successful:', data);
         localStorage.setItem('loginFlag', 'true');
         this.closeLoginModal();
+        this.showSuccess = true;
+        this.succssMessage = data.message;
         this.router.navigate(['/city/', cityName]);
         this.ngOnInit();
       },
       error: (error) => {
         console.error('Login error:', error);
+        this.errorMessage = error.error.message || 'Login failed. Please try again.';
+        this.showError = true;
       }
     });
   }
-
-toggleProfileMenu(event?: any) {
-  if (event) {
-    event.stopPropagation();
-  }
-  this.profileOpen = !this.profileOpen;
-  console.log('Profile menu clicked', this.profileOpen);
-}
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('loginFlag');
     this.loginFlag = false;
+    this.showLogoutMessage = true;
     this.router.navigate(['/']);
   }
 

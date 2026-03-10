@@ -394,6 +394,7 @@ button {
 }
 
 /* ================= QUICK BOOKING MODAL ================= */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -401,24 +402,31 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
   z-index: 9999;
 }
 
+/* Modal Box */
 .modal-box {
   background: #fff;
-  width: 95%;
-  max-width: 30%;
+  width: 100%;
+  max-width: 700px;
   padding: 25px 30px;
-  border-radius: 6px;
+  border-radius: 8px;
   position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
+/* Title */
 .modal-title {
   text-align: center;
   margin-bottom: 20px;
   font-weight: 600;
+  font-size: 20px;
 }
 
+/* Close Button */
 .close-btn {
   position: absolute;
   right: 15px;
@@ -429,37 +437,42 @@ button {
   cursor: pointer;
 }
 
+/* Grid Layout */
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
+/* Field */
 .field {
   display: flex;
   flex-direction: column;
 }
 
 .field.full {
-  width: 100%;
-  margin-top: 10px;
+  grid-column: span 2;
 }
 
+/* Label */
 label {
   font-size: 13px;
   margin-bottom: 4px;
   color: #333;
 }
 
+/* Inputs */
 input,
 select,
 textarea {
   border: none;
   border-bottom: 1px solid #ccc;
-  padding: 6px 5px;
+  padding: 8px 5px;
   outline: none;
   font-size: 14px;
+  width: 100%;
+  background: transparent;
 }
 
 input:focus,
@@ -472,16 +485,18 @@ textarea {
   resize: none;
 }
 
+/* Submit Button */
 .submit-btn {
   margin: 20px auto 0;
   display: block;
   background: #000;
   color: #fff;
-  padding: 10px 30px;
+  padding: 12px 30px;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  width: 20%;
+  width: 200px;
+  border-radius: 4px;
 }
 
 .submit-btn:disabled {
@@ -489,14 +504,50 @@ textarea {
   cursor: not-allowed;
 }
 
-/* Mobile Responsive */
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  .modal-box {
+    max-width: 600px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
+  .modal-box {
+    max-width: 95%;
+    padding: 20px;
+  }
+
   .row {
     grid-template-columns: 1fr;
   }
 
-  .modal-box {
-    padding: 20px;
+  .field.full {
+    grid-column: span 1;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: 18px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
+  }
+
+  .submit-btn {
+    padding: 10px;
   }
 }
 
@@ -604,4 +655,47 @@ textarea {
   cursor: pointer;
   color: black;
   text-align: right;
+}
+
+/* ERROR POPUP */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* higher than modal */
+}
+
+.error-box {
+  background: #fff;
+  width: 350px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  @media(max-width:768px) {
+    width: 90%;
+  }
+}
+
+.error-header {
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.error-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.error-box button {
+  display: block;
+  margin: 10px auto 15px;
+  background: #000;
+  color: #fff;
+  padding: 6px 20px;
+  border: none;
 }

@@ -305,21 +305,21 @@ export class HomeComponent implements OnInit {
 
 onQuickBookingSubmit() {
 
-      const payload = {
-      phone: model.phone,
-      city_id: cityName,
-      email: model.email,
-      name: model.name,
-      address_id :'',
-      category_id :'',
-      date :'',
-      modal_id :'',
-      service_id :'',
-      subcategory_id :'',
-      time_slot_id :'',
-    };
+    //   const payload = {
+    //   phone: model.phone,
+    //   city_id: cityName,
+    //   email: model.email,
+    //   name: model.name,
+    //   address_id :'',
+    //   category_id :'',
+    //   date :'',
+    //   modal_id :'',
+    //   service_id :'',
+    //   subcategory_id :'',
+    //   time_slot_id :'',
+    // };
 
-    
+
   const model = this.bookingForm.value;
   const cityName = this.bookingForm.value.city;
   this.service.onQuickBookingSubmit(model, cityName).subscribe({

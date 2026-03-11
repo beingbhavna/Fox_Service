@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -87,11 +87,21 @@ export class ApiService {
   }
 
   saveAddress(formData: FormData): Observable<any> {
-    return this.http.post<any>('https://www.foxservice.in/admin/api/user/addAddress', formData);
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/user/addAddress', formData, { headers });
   }
 
   payment(formData: FormData): Observable<any> {
-    return this.http.post<any>('https://www.foxservice.in/admin/api/order/checkout', formData);
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/order/checkout', formData, { headers });
   }
 
   getTermsConditionsData(): Observable<any> {
@@ -103,10 +113,29 @@ export class ApiService {
   }
 
   getCartData(): Observable<any> {
-    return this.http.get<any>('https://www.foxservice.in/admin/api/cart/get');
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>('https://www.foxservice.in/admin/api/cart/get', { headers });
   }
 
   getOrderData(): Observable<any> {
-    return this.http.get<any>('https://www.foxservice.in/admin/api/order/get');
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>('https://www.foxservice.in/admin/api/order/get', { headers });
+  }
+
+  userProfile(): Observable<any> {
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>('https://www.foxservice.in/admin/api/user/profile', { headers });
   }
 }

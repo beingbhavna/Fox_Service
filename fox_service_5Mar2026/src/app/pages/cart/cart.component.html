@@ -136,17 +136,17 @@
       <div class="address-type">
         <label>Address Type*</label>
         <div class="type-buttons">
-          <button type="button" [class.active]="addressForm.value.addressType === 'Home'"
+          <button type="button" [class.active]="addressForm.value.type === 'Home'"
             (click)="selectAddressType('Home')">
             Home
           </button>
 
-          <button type="button" [class.active]="addressForm.value.addressType === 'Office'"
+          <button type="button" [class.active]="addressForm.value.type === 'Office'"
             (click)="selectAddressType('Office')">
             Office
           </button>
 
-          <button type="button" [class.active]="addressForm.value.addressType === 'Other'"
+          <button type="button" [class.active]="addressForm.value.type === 'Other'"
             (click)="selectAddressType('Other')">
             Other
           </button>
@@ -203,7 +203,7 @@
         <h4>⏱ Confirm Time Slot</h4>
         <div class="time-slots">
           <button *ngFor="let slot of filteredSlots" [class.active]="selectedSlot === slot" (click)="selectSlot(slot)">
-            <span>{{slot}}</span>
+            <span>{{slot.start_time}} - {{slot.end_time}}</span>
           </button>
         </div>
       </div>
@@ -227,32 +227,30 @@
     <div class="cart-body">
 
       <!-- LEFT SERVICE -->
-      <div class="service-section">
-
-        <div class="service-card">
-          <img src="assets/images/wash.png" class="service-img">
-
-          <div class="service-info" *ngFor="let cart of cartItems">
-            <h4>{{cart.serviceName}}</h4>
-            <p>{{cart.cc}}</p>
-            <span class="model">({{cart.model}})</span>
-          </div>
-
-          <div class="price">
-            ₹ {{cart.price}} /-
-          </div>
-        </div>
-
-        <div class="specification">
-          <h4>Specifications:</h4>
-          <ul>
-            <li *ngFor="let spec of cart.specifications">
-              {{spec}}
-            </li>
-          </ul>
-        </div>
-
+    <div *ngFor="let item of cartItems" class="service-card">
+      <!-- IMAGE -->
+      <div class="service-img">
+        <img [src]="'https://www.foxservice.in/admin/' + item.image">
       </div>
+
+      <!-- SERVICE INFO -->
+      <div class="service-info">
+        <div class="service-title">
+          {{ item.name }}
+          <span>({{ item.model }})</span>
+        </div>
+      </div>
+
+      <div class="service-spec">
+        <b>Specifications:</b>
+        <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+      </div>
+
+      <!-- PRICE -->
+      <div class="service-price">
+        ₹ {{ item.cities[0].pivot.price }}/-
+      </div>
+    </div>
 
 
       <!-- RIGHT DETAILS -->
@@ -260,38 +258,38 @@
 
         <div class="address-box">
           <h4>Home</h4>
-          <p>Area: {{cart.area}}</p>
-          <p>Pincode: {{cart.pincode}}</p>
-          <p>Residence: {{cart.residence}}</p>
-          <p>Landmark: {{cart.landmark}}</p>
-          <p>City: {{cart.city}}</p>
-          <p>{{cart.phone}}</p>
-          <p>{{cart.email}}</p>
+          <p>Area: {{addressForm.value.road_area_colony}}</p>
+          <p>Pincode: {{addressForm.value.pincode}}</p>
+          <p>Residence: {{addressForm.value.house_building_name}}</p>
+          <p>Landmark: {{addressForm.value.landmark}}</p>
+          <p>City: {{addressForm.value.city}}</p>
+          <p>{{addressForm.value.phone}}</p>
+          <p>{{addressForm.value.email}}</p>
         </div>
 
         <div class="booking-info">
           <p>
             <span>Service Date:</span>
-            {{cart.date}}
+            {{selectedDate}} {{monthNames[currentMonth]}} {{currentYear}}
           </p>
 
           <p>
             <span>Service Slot:</span>
-            {{cart.slot}}
+            {{selectedSlot.start_time}}-{{selectedSlot.end_time}}
           </p>
 
           <p>
             <span>Sub Total</span>
-            ₹ {{cart.price}}
+            ₹ {{total}} /-
           </p>
 
           <p class="total">
             <span>Total (GST Included):</span>
-            ₹ {{cart.price}}
+            ₹ {{getTotalWithGST()}}
           </p>
         </div>
 
-        <textarea placeholder="Comment" [(ngModel)]="cart.comment"></textarea>
+        <textarea placeholder="Comment" [(ngModel)]="comment"></textarea>
 
       </div>
 
@@ -306,3 +304,24 @@
 
   </div>
 </div>
+
+	<div class="error-overlay" *ngIf="showSuccess">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+					{{successMessage}}
+			</div>
+			<button (click)="closeError()">OK</button>
+		</div>
+	</div>
+
+  	<!-- Error Popup -->
+	<div class="error-overlay" *ngIf="showError">
+		<div class="error-box">
+			<div class="error-header">Message</div>
+			<div class="error-body">
+				10 digit Phone number is required
+			</div>
+			<button (click)="closeError()">OK</button>
+		</div>
+	</div>

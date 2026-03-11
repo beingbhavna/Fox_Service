@@ -32,6 +32,7 @@ export class HeaderComponent {
   @Input() cartCount = 0;
   loginFlag: any;
   succssMessage: any;
+  currentUrl: any;
   constructor(private cartService: CartService, private fb: FormBuilder, private router: Router, private service: ApiService) {
     this.cartService.cart$.subscribe(items => {
       this.cartCount = items.length;
@@ -44,6 +45,7 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.cartService.openModal$.subscribe(() => {
+      this.currentUrl = this.router.url; // save current page
       this.loginShowModal = true;
     });
     this.loginFlag = localStorage.getItem('loginFlag');
@@ -60,6 +62,7 @@ export class HeaderComponent {
   //login code
 
   openLoginModal() {
+    this.currentUrl = this.router.url; // save current page
     this.menuOpen = false;
     this.loginShowModal = true;
     this.intervalId = setInterval(() => {
@@ -176,10 +179,12 @@ export class HeaderComponent {
         const cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug
         console.log('Login successful:', data);
         localStorage.setItem('loginFlag', 'true');
+        localStorage.setItem('token', data.token);
         this.closeLoginModal();
         this.showSuccess = true;
         this.succssMessage = data.message;
-        this.router.navigate(['/city/', cityName]);
+        // redirect to same page
+        this.router.navigateByUrl(this.currentUrl || '/');
         this.ngOnInit();
       },
       error: (error) => {

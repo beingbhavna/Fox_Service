@@ -26,7 +26,12 @@ export class OrdersComponent implements OnInit {
   filteredSlots: any[] = [];
   selectedSlot: any;
   timeSlots: any;
+  daysName = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
+  monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -193,6 +198,10 @@ export class OrdersComponent implements OnInit {
         this.showSuccess = false;
       }
     });
+  }
+
+  close() {
+    this.showSlotPopup = false;
   }
 }
 

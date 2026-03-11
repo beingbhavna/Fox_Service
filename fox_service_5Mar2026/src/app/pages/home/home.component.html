@@ -193,7 +193,7 @@
 					<label>Enter Address:</label>
 					<textarea rows="3" placeholder="Enter address" formControlName="address"></textarea>
 				</div>
-				<button type="submit" class="submit-btn" [disabled]="bookingForm.invalid">
+				<button type="submit" class="submit-btn" [disabled]="bookingForm.invalid" (click)="onQuickBookingSubmit()">
 					SUBMIT
 				</button>
 			</form>

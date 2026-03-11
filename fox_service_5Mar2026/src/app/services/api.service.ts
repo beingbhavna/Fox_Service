@@ -63,7 +63,14 @@ export class ApiService {
       phone: model.phone,
       city_id: cityName,
       email: model.email,
-      name: model.name
+      name: model.name,
+      address_id :'',
+      category_id :'',
+      date :'',
+      modal_id :'',
+      service_id :'',
+      subcategory_id :'',
+      time_slot_id :'',
     };
 
     return this.http.post<any>(

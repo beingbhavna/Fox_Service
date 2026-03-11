@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
@@ -14,16 +15,69 @@ export class ProfileComponent implements OnInit {
   pageHtml = '';
   cityName: any;
   activeTab: string = 'editProfile';
+  profileData: any;
+  Addressddata: any;
+  cityList: any;
+  timeSlots: any;
+  orderData: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.http.get('assets/templates/profile.html', { responseType: 'text' })
-      .subscribe(html => this.pageHtml = html);
+    this.getProfileData();
   }
-
 
   setTab(tab: string) {
     this.activeTab = tab;
+  }
+
+  getProfileData() {
+    this.apiService.getOrderData().subscribe({
+      next: (data) => {
+        console.log('orders:', data);
+        this.profileData = data.user || [];
+        this.getAddress();
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
+
+  getAddress() {
+    this.apiService.getAddress().subscribe({
+      next: (data) => {
+        console.log('orders:', data);
+        this.Addressddata = data.addresses || [];
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
+
+  getCityList() {
+    this.apiService.getCityData().subscribe({
+      next: (data) => {
+        console.log('City data:', data);
+        this.cityList = data.cities || [];
+        this.getOrderData();
+      },
+      error: (error) => {
+        console.error('Error fetching city data:', error);
+      }
+    });
+  }
+
+  getOrderData() {
+    this.apiService.getTimeslotData().subscribe({
+      next: (data) => {
+        console.log('Timeslots data:', data);
+        this.orderData = data.orders || [];
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
   }
 }

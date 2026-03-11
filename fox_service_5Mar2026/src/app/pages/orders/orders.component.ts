@@ -6,20 +6,49 @@ import { ApiService } from '../../services/api.service';
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  pageHtml = '';
-  constructor(private http: HttpClient, private apiService: ApiService) { }
-  ordersData: any;
+  ordersData: any[] = [];
+  expandedIndex: number | null = null;
+  successMessage: any;
+  showSuccess: boolean = false;
+  showError: boolean = false;
+  errorMessage: any;
+  showSlotPopup: boolean = false;
+  selectedDate: any;
+  currentDate = new Date();
+  currentMonth!: number;
+  currentYear!: number;
+  calendarDays: number[] = [];
+  filteredSlots: any[] = [];
+  selectedSlot: any;
+  timeSlots: any;
 
-  ngOnInit(): void {
-    this.http.get('assets/templates/orders.html', { responseType: 'text' })
-      .subscribe(html => this.pageHtml = html);
+  constructor(private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.getOrderData();
+    this.currentMonth = new Date().getMonth();
+    this.currentYear = new Date().getFullYear();
+    this.selectedDate = new Date().getDate();
   }
 
+  toggleOrder(i: number) {
+    this.expandedIndex = this.expandedIndex === i ? null : i;
+  }
+
+  getStatusStep(status: string) {
+    switch (status) {
+      case 'Processing': return 1;
+      case 'Accepted': return 2;
+      case 'In Progress': return 3;
+      case 'Completed': return 4;
+      default: return 1;
+    }
+  }
   openWhatsApp() {
     window.open('https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about', '_blank');
   }
@@ -32,6 +61,136 @@ export class OrdersComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
+
+  rescheduleOrder(order: any) {
+    this.showSlotPopup = true;
+  }
+
+  cancelOrder(order: any) {
+    console.log("Cancel Order:", order.order.id);
+    if (confirm("Are you sure you want to cancel this order?")) {
+      // call cancel API
+    }
+  }
+
+  closeError() {
+    this.showSuccess = false;
+    this.showError = false;
+  }
+
+
+  // timeslot code
+
+  getTimeslotData() {
+    this.apiService.getTimeslotData().subscribe({
+      next: (data) => {
+        console.log('Timeslots data:', data);
+        this.timeSlots = data.slots || [];
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
+  confirmSlot() {
+    const payload = {
+      date: this.selectedDate,
+      slot: this.selectedSlot
+    };
+    console.log("Slot Payload:", payload);
+  }
+
+  generateCalendar() {
+    this.getTimeslotData();
+    const days = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+    this.calendarDays = [];
+    for (let i = 1; i <= days; i++) {
+      this.calendarDays.push(i);
+    }
+    const today = new Date();
+    if (this.selectedDate === today.getDate() && this.currentMonth === today.getMonth() && this.currentYear === today.getFullYear()) {
+      this.filterSlots();
+      // this.getCartData();
+    } else {
+      this.filteredSlots = this.timeSlots;
+    }
+  }
+
+  prevMonth() {
+    this.currentMonth--;
+    if (this.currentMonth < 0) {
+      this.currentMonth = 11;
+      this.currentYear--;
+    }
+    this.generateCalendar();
+  }
+
+  nextMonth() {
+    this.currentMonth++;
+    if (this.currentMonth > 11) {
+      this.currentMonth = 0;
+      this.currentYear++;
+    }
+    this.generateCalendar();
+  }
+
+  selectDate(day: number) {
+    this.selectedDate = day;
+    const today = new Date();
+    if (day === today.getDate()) {
+      this.filterSlots();
+    } else {
+      this.filteredSlots = this.timeSlots;
+    }
+  }
+
+  selectSlot(slot: any) {
+    this.selectedSlot = slot;
+
+    console.log("Selected Slot ID:", slot.id);
+    console.log("Selected Slot:", slot);
+  }
+
+  isPastDate(day: number) {
+    const date = new Date(this.currentYear, this.currentMonth, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
+  }
+
+  filterSlots() {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    this.filteredSlots = this.timeSlots.filter((slot: any) => {
+      const [hour, minute] = slot.start_time.split(':').map(Number);
+      const slotMinutes = hour * 60 + minute;
+      return slotMinutes > currentMinutes;
+    });
+  }
+
+  submit() {
+    const payload = {
+      "id": 7947,
+      "date": "2026-03-12",
+      "time_slot_id": 7
+    }
+    this.apiService.reschedule(payload).subscribe({
+      next: (data) => {
+        console.log('orders:', data);
+        this.successMessage = data.message || 'Your order has been placed successfully';
+        // Your order has been placed successfully
+        this.showSuccess = true;
+        this.showError = false;
+        this.getOrderData();
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+        this.errorMessage = error?.error?.message || "Something went wrong";
+        this.showError = true;
+        this.showSuccess = false;
       }
     });
   }

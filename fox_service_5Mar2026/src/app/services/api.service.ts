@@ -138,4 +138,22 @@ export class ApiService {
     });
     return this.http.get<any>('https://www.foxservice.in/admin/api/user/profile', { headers });
   }
+
+  getAddress(): Observable<any> {
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>('https://www.foxservice.in/admin/api/user/getAddresses', { headers });
+  }
+
+  reschedule(payload:any): Observable<any> {
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/order/reschedule', payload, { headers });
+  }
 }

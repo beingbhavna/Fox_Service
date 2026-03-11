@@ -26,9 +26,12 @@ export class HomeComponent implements OnInit {
   bikeData: any;
   cityName: any;
   settingsData: any;
-  showSuccess: boolean=false;
+  showSuccess: boolean = false;
   succssMessage: any;
-  constructor(private router: Router, private fb: FormBuilder, private service: ApiService,private cd: ChangeDetectorRef) {
+  categoryId: any;
+  selectedModelId: any;
+
+  constructor(private router: Router, private fb: FormBuilder, private service: ApiService, private cd: ChangeDetectorRef) {
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     });
@@ -271,6 +274,7 @@ export class HomeComponent implements OnInit {
       next: (data) => {
         console.log('Subcategories data:', data);
         this.subcategoriesList = data.city.categories[0].subcategories || [];
+        this.categoryId = data.city.categories[0].pivot.category_id;
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
@@ -303,42 +307,44 @@ export class HomeComponent implements OnInit {
     });
   }
 
-onQuickBookingSubmit() {
-
-    //   const payload = {
-    //   phone: model.phone,
-    //   city_id: cityName,
-    //   email: model.email,
-    //   name: model.name,
-    //   address_id :'',
-    //   category_id :'',
-    //   date :'',
-    //   modal_id :'',
-    //   service_id :'',
-    //   subcategory_id :'',
-    //   time_slot_id :'',
-    // };
-
-
-  const model = this.bookingForm.value;
-  const cityName = this.bookingForm.value.city;
-  this.service.onQuickBookingSubmit(model, cityName).subscribe({
-    next: (res: any) => {
-      console.log(res);
-      this.succssMessage = res.message || "Booking submitted successfully";
-      this.showSuccess = true;
-      this.cd.detectChanges();
-      this.showError = false;
-    },
-    error: (err) => {
-      console.log(err);
-      this.errorMessage = err?.error?.message || "Something went wrong";
-      this.showError = true;
-      this.cd.detectChanges();
-      this.showSuccess = false;
+  onQuickBookingSubmit() {
+    const selectedCategory = this.subcategoriesList.find(
+      (res: any) => res.slug === this.model
+    );
+    if (selectedCategory) {
+      var subCategoryId = selectedCategory.id;
     }
-  });
-}
+    const payload = {
+      phone: this.bookingForm.value.phone,
+      city_id: this.bookingForm.value.city,
+      email: this.bookingForm.value.email,
+      name: this.bookingForm.value.name,
+      address_id: this.bookingForm.value.address,
+      category_id: this.categoryId,
+      date: this.bookingForm.value.date,
+      modal_id: this.selectedModelId,
+      service_id: this.bookingForm.value.service,
+      subcategory_id: subCategoryId,
+      time_slot_id: this.bookingForm.value.timeSlot,
+    };
+    this.service.onQuickBookingSubmit(payload).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.succssMessage = res.message || "Booking submitted successfully";
+        this.quickBookingShowModal = false;
+        this.showSuccess = true;
+        this.cd.detectChanges();
+        this.showError = false;
+      },
+      error: (err) => {
+        console.log(err);
+        this.errorMessage = err?.error?.message || "Something went wrong";
+        this.showError = true;
+        this.cd.detectChanges();
+        this.showSuccess = false;
+      }
+    });
+  }
 
   onCityChange(event: any) {
     this.cityName = event.target.value;
@@ -360,6 +366,12 @@ onQuickBookingSubmit() {
 
   changeBikeModel(event: any) {
     this.model = event.target.value;
+    const selectedModel = this.bikes.find(
+      (res: any) => res.slug === this.model
+    );
+    if (selectedModel) {
+      this.selectedModelId = selectedModel.id;
+    }
     this.getBikeData();
   }
 
@@ -370,17 +382,16 @@ onQuickBookingSubmit() {
     });
   }
 
-  loginWithOtp() {
-    const model = this.bookingForm.value;
-    const cityName = this.bookingForm.value.city; // or selected city id
-    this.service.onQuickBookingSubmit(model, cityName).subscribe({
-      next: (res) => {
-        console.log('Success:', res);
-      },
-      error: (err) => {
-        console.error('Error:', err);
-        alert('Something went wrong');
-      }
-    });
-  }
+  // loginWithOtp() {
+  //   const model = this.bookingForm.value;
+  //   this.service.onQuickBookingSubmit(model).subscribe({
+  //     next: (res) => {
+  //       console.log('Success:', res);
+  //     },
+  //     error: (err) => {
+  //       console.error('Error:', err);
+  //       alert('Something went wrong');
+  //     }
+  //   });
+  // }
 }

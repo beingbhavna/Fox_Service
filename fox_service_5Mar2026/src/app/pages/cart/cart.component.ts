@@ -86,6 +86,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     this.currentMonth = new Date().getMonth();
     this.currentYear = new Date().getFullYear();
     this.selectedDate = new Date().getDate();
+    this.getCartData();
   }
 
   removeItem(id: number) {
@@ -101,6 +102,8 @@ export class CartComponent implements OnInit, AfterViewInit {
   continue() {
     if (localStorage.getItem('loginFlag')) {
       this.showAddressPopup = true;
+      this.ngOnInit();
+      this.addItemsToCart();  
       this.getCartData()
     } else {
       // open login modal at second time
@@ -207,6 +210,8 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.showAddressForm = false;
         this.showSlotPopup = true;
         this.generateCalendar();
+        this.addItemsToCart();
+        this.getCartData();
       },
       error: (err) => {
         console.log('Error saving address', err);
@@ -303,6 +308,8 @@ export class CartComponent implements OnInit, AfterViewInit {
     console.log("Payload:", payload);
     this.showSlotPopup = false;
     this.showCartModal = true;
+    this.addItemsToCart();
+    this.getCartData();
   }
 
   close() {
@@ -332,10 +339,27 @@ export class CartComponent implements OnInit, AfterViewInit {
     });
   }
 
+  addItemsToCart() {
+    const payload = {
+      category_id: this.cartItems[0].category_id,
+      city_id: this.cartItems[0].cities[0].pivot.city_id,
+      price: this.cartItems[0].cities[0].pivot.price,
+      service_id: this.cartItems[0].cities[0].pivot.service_id
+    }
+    this.apiService.addItemsToCart(payload).subscribe({
+      next: (data) => {
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
+
   payLater() {
+    console.log(this.cartItems)
     const payload = {
       address_id: this.addressResponse.id,
-      cart_id: 11116, // number not string
+      cart_id: this.cartItems[0].id, // number not string
       comment: this.comment || '',
       date: `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(this.selectedDate).padStart(2, '0')}`,
       time_slot_id: this.selectedSlot?.id,

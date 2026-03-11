@@ -240,8 +240,7 @@ export class ProfessionalRegisterComponent {
 
    loginWithOtp(){
     const model = this.loginForm.value;
-    const cityName = this.loginForm.value.city; // or selected city id
-    this.service.onQuickBookingSubmit(model, cityName).subscribe({
+    this.service.onQuickBookingSubmit(model).subscribe({
       next: (res) => {
         console.log('Success:', res);
       },

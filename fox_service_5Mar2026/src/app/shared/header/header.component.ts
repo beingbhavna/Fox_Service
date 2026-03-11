@@ -181,16 +181,16 @@ export class HeaderComponent {
         localStorage.setItem('loginFlag', 'true');
         localStorage.setItem('token', data.token);
         this.closeLoginModal();
-        this.showSuccess = true;
-        this.succssMessage = data.message;
+        // this.showSuccess = true;
+        // this.succssMessage = data.message;
         // redirect to same page
         this.router.navigateByUrl(this.currentUrl || '/');
         this.ngOnInit();
       },
       error: (error) => {
         console.error('Login error:', error);
-        this.errorMessage = error.error.message || 'Login failed. Please try again.';
-        this.showError = true;
+        // this.errorMessage = error.error.message || 'Login failed. Please try again.';
+        // this.showError = true;
       }
     });
   }

@@ -57,25 +57,11 @@ export class ApiService {
     return this.http.get<any>('https://www.foxservice.in/admin/api/getSubCategoriesByCategory?category_slug=' + model + '&city_slug=' + cityName);
   }
 
-  onQuickBookingSubmit(model: any, cityName: any): Observable<any> {
-
-    const payload = {
-      phone: model.phone,
-      city_id: cityName,
-      email: model.email,
-      name: model.name,
-      address_id :'',
-      category_id :'',
-      date :'',
-      modal_id :'',
-      service_id :'',
-      subcategory_id :'',
-      time_slot_id :'',
-    };
+  onQuickBookingSubmit(model: any): Observable<any> {
 
     return this.http.post<any>(
       'https://www.foxservice.in/admin/api/order/quick-booking',
-      payload
+      model
     );
   }
 
@@ -162,5 +148,14 @@ export class ApiService {
       'Content-Type': 'application/json'
     });
     return this.http.post<any>('https://www.foxservice.in/admin/api/order/reschedule', payload, { headers });
+  }
+
+  addItemsToCart(payload:any): Observable<any> {
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/cart/addItemToCart', payload, { headers });
   }
 }

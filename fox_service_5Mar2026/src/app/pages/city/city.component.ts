@@ -297,7 +297,7 @@ export class CityComponent {
     const model = this.bookingForm.value;
     const cityName = this.bookingForm.value.city; // or selected city id
 
-    this.service.onQuickBookingSubmit(model, cityName).subscribe({
+    this.service.onQuickBookingSubmit(model).subscribe({
       next: (res) => {
         console.log('Success:', res);
         // alert('Booking submitted successfully');
@@ -340,8 +340,7 @@ export class CityComponent {
 
   loginWithOtp(){
     const model = this.bookingForm.value;
-    const cityName = this.bookingForm.value.city; // or selected city id
-    this.service.onQuickBookingSubmit(model, cityName).subscribe({
+    this.service.onQuickBookingSubmit(model).subscribe({
       next: (res) => {
         console.log('Success:', res);
       },

@@ -173,7 +173,7 @@
 					<div class="field">
 						<label>Select Service:</label>
 						<select formControlName="service">
-							<option *ngFor="let service of bikeData" value="{{service.slug}}">{{service.name}}</option>
+							<option *ngFor="let service of bikeData" value="{{service.id}}">{{service.name}}</option>
 						</select>
 					</div>
 				</div>
@@ -185,7 +185,7 @@
 					<div class="field">
 						<label>Select Slot:</label>
 						<select formControlName="timeSlot">
-							<option *ngFor="let slot of timeSlotsList">{{slot.start_time}} to {{slot.end_time}}</option>
+							<option *ngFor="let slot of timeSlotsList" value="{{slot.id}}">{{slot.start_time}} to {{slot.end_time}}</option>
 						</select>
 					</div>
 				</div>

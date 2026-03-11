@@ -1,64 +1,52 @@
 <div class="orders-page">
-
   <div class="orders-title">
     <span class="icon"></span>
     <h2>My Orders</h2>
   </div>
-
   <a class="whatsapp" (click)="openWhatsApp()">
     <img src="assets/images/waicongreen.png">
   </a>
   <!-- Order Card -->
-  <div class="order-card">
-
-    <div class="order-top">
-
-      <div class="order-id">
-        Order Id: <b>#OD4747844340</b>
+  <div *ngFor="let order of ordersData">
+    <div class="order-card">
+      <div class="order-top">
+        <div class="order-id">
+          Order Id: <b>#{{order.order.order_ref}}</b>
+        </div>
+        <div class="order-otp">
+          OTP: <span>{{order.order.otp}}</span>
+        </div>
+        <div class="order-status">
+          {{order.order.status}}
+        </div>
       </div>
-
-      <div class="order-otp">
-        OTP: <span>96040</span>
+      <!-- Progress -->
+      <div class="order-progress">
+        <div class="progress-line">
+          <div class="progress-step active">
+            <span></span>
+            <p>Processing</p>
+          </div>
+          <div class="progress-step">
+            <span></span>
+            <p>Accepted</p>
+          </div>
+          <div class="progress-step">
+            <span></span>
+            <p>In Progress</p>
+          </div>
+          <div class="progress-step">
+            <span></span>
+            <p>Completed</p>
+          </div>
+        </div>
       </div>
-
-      <div class="order-status">
-        Processing
-      </div>
-
-    </div>
-
-    <!-- Progress -->
-    <div class="order-progress">
-
-      <div class="progress-line">
-
-        <div class="progress-step active">
-          <span></span>
-          <p>Processing</p>
-        </div>
-
-        <div class="progress-step">
-          <span></span>
-          <p>Accepted</p>
-        </div>
-
-        <div class="progress-step">
-          <span></span>
-          <p>In Progress</p>
-        </div>
-
-        <div class="progress-step">
-          <span></span>
-          <p>Completed</p>
-        </div>
+      <div class="order-footer">
+        <span class="expand">+</span>
       </div>
     </div>
-    <div class="order-footer">
-      <span class="expand">+</span>
-    </div>
+    <span class="order-date">
+      {{order.order.ordered_on}}
+    </span>
   </div>
-  <span class="order-date">
-        08/03/26 01:15 AM
-      </span>
-
 </div>

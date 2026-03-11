@@ -351,6 +351,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.showSuccess = true;
         this.showError = false;
         this.showCartModal = false;
+        this.router.navigateByUrl("/orders")
       },
       error: (err) => {
         console.log(err);

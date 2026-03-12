@@ -30,7 +30,7 @@
       <h3>Our Services</h3>
       <!-- <p *ngFor="let footerService of footerData.Our Services">{{ footerService.heading }}</p> -->
     <ul>
-      <li *ngFor="let footerService of footerData.Our Services">
+      <li *ngFor="let footerService of footerDataService">
         <a routerLink="/{{ footerService.url }}">{{ footerService.name }}</a>
       </li>
     </ul>
@@ -39,7 +39,7 @@
     <div class="footer-col">
       <h4>Popular Brands</h4>
       <ul>
-        <li *ngFor="let footerBrand of footerData.Popular Brands">
+        <li *ngFor="let footerBrand of footerDataBrand">
           <a routerLink="/{{ footerBrand.url }}">{{ footerBrand.name }}</a>
         </li>
       </ul>

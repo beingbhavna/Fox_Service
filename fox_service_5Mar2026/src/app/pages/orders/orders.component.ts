@@ -72,6 +72,7 @@ export class OrdersComponent implements OnInit {
 
   rescheduleOrder(order: any) {
     this.showSlotPopup = true;
+    this.generateCalendar();
   }
 
   cancelOrder(order: any) {

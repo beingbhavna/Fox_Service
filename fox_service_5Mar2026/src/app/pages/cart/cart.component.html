@@ -76,12 +76,12 @@
     <button class="add-btn" (click)="openAddressForm()">
       📍 ADD NEW ADDRESS
     </button>
-    <div class="divider">
+    <div class="divider" *ngIf="addressList.length>0">
       <span>OR</span>
     </div>
-    <h3>Choose your address.</h3>
+    <h3 *ngIf="addressList.length>0">Choose your address.</h3>
     <!-- Address List -->
-    <div class="address-list">
+    <div class="address-list" *ngIf="addressList.length>0">
       <div class="address-card" *ngFor="let address of addressList"
         [class.selected]="selectedAddress?.id === address.id" (click)="selectAddress(address)">
         <div class="edit-icon" (click)="editAddress(address); $event.stopPropagation()">
@@ -97,7 +97,7 @@
       </div>
     </div>
     <!-- Continue Button -->
-    <button class="continue-btn" [disabled]="!selectedAddress" (click)="continueToSlots()">
+    <button class="continue-btn" [disabled]="!selectedAddress" (click)="continueToSlots()" *ngIf="addressList.length>0">
       CONTINUE
     </button>
   </div>

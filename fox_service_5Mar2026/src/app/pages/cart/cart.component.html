@@ -138,7 +138,8 @@
         <!-- Mobile -->
         <div class="form-group">
           <label>Your mobile number*</label>
-          <input type="text" formControlName="phone" placeholder="Mobile Number">
+          <input type="text" formControlName="phone" placeholder="Mobile Number"  maxlength="10"
+				(keypress)="checkInput($event)"/>
         </div>
 
         <!-- City -->
@@ -249,10 +250,10 @@
 
     <div class="cart-header">
       <h2>Your Cart Details</h2>
-      <span class="close" (click)="closeCart()">×</span>
+      <span class="close-btn" (click)="closeCart()">×</span>
     </div>
 
-    <div class="cart-body">
+    <!-- <div class="cart-body"> -->
 
       <!-- LEFT SERVICE -->
       <div *ngFor="let item of cartItems" class="service-card">
@@ -284,15 +285,15 @@
       <!-- RIGHT DETAILS -->
       <div class="details-section">
 
-        <div class="address-box">
+        <div class="address-box" *ngFor="let address of addressList">
           <h4>Home</h4>
-          <p>Area: {{addressForm.value.road_area_colony}}</p>
-          <p>Pincode: {{addressForm.value.pincode}}</p>
-          <p>Residence: {{addressForm.value.house_building_name}}</p>
-          <p>Landmark: {{addressForm.value.landmark}}</p>
-          <p>City: {{addressForm.value.city}}</p>
-          <p>{{addressForm.value.phone}}</p>
-          <p>{{addressForm.value.email}}</p>
+          <p>Area: {{address.road_area_colony}}</p>
+          <p>Pincode: {{address.pincode}}</p>
+          <p>Residence: {{address.house_building_name}}</p>
+          <p>Landmark: {{address.landmark}}</p>
+          <p>City: {{address.city}}</p>
+          <p>{{address.phone}}</p>
+          <p>{{address.email}}</p>
         </div>
 
         <div class="booking-info">
@@ -300,7 +301,7 @@
             <span>Service Date:</span>
             {{selectedDate}} {{monthNames[currentMonth]}} {{currentYear}}
           </p>
-
+<hr>
           <p>
             <span>Service Slot:</span>
             {{selectedSlot.start_time}}-{{selectedSlot.end_time}}
@@ -310,7 +311,7 @@
             <span>Sub Total</span>
             ₹ {{total}} /-
           </p>
-
+<hr>
           <p class="total">
             <span>Total (GST Included):</span>
             ₹ {{getTotalWithGST()}}
@@ -321,10 +322,10 @@
 
       </div>
 
-    </div>
+    <!-- </div> -->
 
     <div class="cart-footer">
-      <button (click)="payLater()">PAY LATER</button>
+      <button class="pay-btn" (click)="payLater()">PAY LATER</button>
       <p class="note">
         Due to Covid-19, we encourage use of digital payment after service.
       </p>

@@ -427,4 +427,22 @@ export class CartComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+    public checkInput(event: any) {
+    var ctrlCode = (event.ctrlKey) ? event.ctrlKey : event.metaKey;  // get key cross-browser
+    var charCode = (event.which) ? event.which : event.keyCode;      // get key cross-browser
+    if ( // Allow: home, end, left, right, down, up
+      (charCode >= 35 && charCode <= 40)
+      // Allow: Ctrl+A,Ctrl+C,Ctrl+V, Command+A
+      || (charCode == 65 || charCode == 86 || charCode == 67) && (ctrlCode === true)) {
+      return true;
+    }
+    if (charCode > 31
+      && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    else {
+      return true
+    }
+  }
 }

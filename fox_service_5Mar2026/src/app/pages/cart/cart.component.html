@@ -40,10 +40,10 @@
   <div class="cart-summary">
     <h3>Summary</h3>
     <div class="summary-row" *ngFor="let item of cartItems">
-      <span>{{ item.name }}</span>
-      <span [title]="item.model" style="color:red;">
+      <span>{{ item.name }} <span [title]="item.model" style="color:red;"> ({{ item.model.length > 10 ? (item.model | slice:0:10) + '...' : item.model }})</span></span>
+      <!-- <span [title]="item.model" style="color:red;">
         ({{ item.model.length > 10 ? (item.model | slice:0:10) + '...' : item.model }})
-      </span>
+      </span> -->
       <span>₹ {{ item.cities[0].pivot.price }}/-</span>
       <!-- <hr> -->
     </div>
@@ -64,16 +64,41 @@
   </div>
 </div>
 
-<!-- First Popup (Add New Address) -->
 <div class="overlay" *ngIf="showAddressPopup">
   <div class="address-modal">
     <span class="close" (click)="closeAddressPopup()">✕</span>
     <h2>Add new address</h2>
+    <!-- Add Address Button -->
     <button class="add-btn" (click)="openAddressForm()">
       📍 ADD NEW ADDRESS
     </button>
+    <div class="divider">
+      <span>OR</span>
+    </div>
+    <h3>Choose your address.</h3>
+    <!-- Address List -->
+    <div class="address-list">
+      <div class="address-card" *ngFor="let address of addressList"
+        [class.selected]="selectedAddress?.id === address.id" (click)="selectAddress(address)">
+        <div class="edit-icon" (click)="editAddress(address); $event.stopPropagation()">
+          ✏️
+        </div>
+        <h4>Area : {{address.road_area_colony}}</h4>
+        <p>Pincode : {{address?.pincode}}</p>
+        <p>Residence : {{address.house_building_name}}</p>
+        <p>Phone : {{address.phone}}</p>
+        <p>Landmark : {{address.landmark}}</p>
+        <p>City : {{address.city.name}}</p>
+        <p>Email : {{address.email}}</p>
+      </div>
+    </div>
+    <!-- Continue Button -->
+    <button class="continue-btn" [disabled]="!selectedAddress" (click)="continueToSlots()">
+      CONTINUE
+    </button>
   </div>
 </div>
+
 
 <!-- Second Popup (Address Form) -->
 <div class="overlay" *ngIf="showAddressForm">
@@ -136,8 +161,7 @@
       <div class="address-type">
         <label>Address Type*</label>
         <div class="type-buttons">
-          <button type="button" [class.active]="addressForm.value.type === 'Home'"
-            (click)="selectAddressType('Home')">
+          <button type="button" [class.active]="addressForm.value.type === 'Home'" (click)="selectAddressType('Home')">
             Home
           </button>
 
@@ -172,7 +196,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <h2>Select you Date & Time</h2>
-      <span class="close" (click)="close()">✕</span>
+       <span class="close" (click)="closeAddressPopup()">✕</span>
     </div>
 
     <div class="modal-body">
@@ -210,7 +234,7 @@
     </div>
 
     <div class="modal-footer">
-      <button class="continue-btn" (click)="submit()">CONTINUE</button>
+      <button class="continue-btn" (click)="submitSlot()">CONTINUE</button>
     </div>
   </div>
 </div>
@@ -227,30 +251,30 @@
     <div class="cart-body">
 
       <!-- LEFT SERVICE -->
-    <div *ngFor="let item of cartItems" class="service-card">
-      <!-- IMAGE -->
-      <div class="service-img">
-        <img [src]="'https://www.foxservice.in/admin/' + item.image">
-      </div>
+      <div *ngFor="let item of cartItems" class="service-card">
+        <!-- IMAGE -->
+        <div class="service-img">
+          <img [src]="'https://www.foxservice.in/admin/' + item.image">
+        </div>
 
-      <!-- SERVICE INFO -->
-      <div class="service-info">
-        <div class="service-title">
-          {{ item.name }}
-          <span>({{ item.model }})</span>
+        <!-- SERVICE INFO -->
+        <div class="service-info">
+          <div class="service-title">
+            {{ item.name }}
+            <span>({{ item.model }})</span>
+          </div>
+        </div>
+
+        <div class="service-spec">
+          <b>Specifications:</b>
+          <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+        </div>
+
+        <!-- PRICE -->
+        <div class="service-price">
+          ₹ {{ item.cities[0].pivot.price }}/-
         </div>
       </div>
-
-      <div class="service-spec">
-        <b>Specifications:</b>
-        <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
-      </div>
-
-      <!-- PRICE -->
-      <div class="service-price">
-        ₹ {{ item.cities[0].pivot.price }}/-
-      </div>
-    </div>
 
 
       <!-- RIGHT DETAILS -->
@@ -305,23 +329,23 @@
   </div>
 </div>
 
-	<div class="error-overlay" *ngIf="showSuccess">
-		<div class="error-box">
-			<div class="error-header">Message</div>
-			<div class="error-body">
-					{{successMessage}}
-			</div>
-			<button (click)="closeError()">OK</button>
-		</div>
-	</div>
+<div class="error-overlay" *ngIf="showSuccess">
+  <div class="error-box">
+    <div class="error-header">Message</div>
+    <div class="error-body">
+      {{successMessage}}
+    </div>
+    <button (click)="closeError()">OK</button>
+  </div>
+</div>
 
-  	<!-- Error Popup -->
-	<div class="error-overlay" *ngIf="showError">
-		<div class="error-box">
-			<div class="error-header">Message</div>
-			<div class="error-body">
-				10 digit Phone number is required
-			</div>
-			<button (click)="closeError()">OK</button>
-		</div>
-	</div>
+<!-- Error Popup -->
+<div class="error-overlay" *ngIf="showError">
+  <div class="error-box">
+    <div class="error-header">Message</div>
+    <div class="error-body">
+      10 digit Phone number is required
+    </div>
+    <button (click)="closeError()">OK</button>
+  </div>
+</div>

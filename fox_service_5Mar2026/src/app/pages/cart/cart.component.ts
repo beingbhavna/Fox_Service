@@ -33,6 +33,8 @@ export class CartComponent implements OnInit, AfterViewInit {
   filteredSlots: any[] = [];
   showCartModal = false;
   comment: any;
+  addressList: any[] = [];
+  selectedAddress: any = null;
   daysName = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
   monthNames = [
@@ -100,11 +102,11 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   continue() {
+    this.ngOnInit();
     if (localStorage.getItem('loginFlag')) {
       this.showAddressPopup = true;
-      this.ngOnInit();
-      this.addItemsToCart();  
       this.getCartData()
+      this.getAddress();
     } else {
       // open login modal at second time
       this.cartService.openModal();
@@ -138,11 +140,16 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   closeAddressPopup() {
     this.showAddressPopup = false;
+    this.showSlotPopup = false;
   }
 
-  openAddressForm() {
+  openAddressForm(address?: any) {
     this.showAddressPopup = false;
     this.showAddressForm = true;
+    this.showAddressForm = true;
+    if (address) {
+      this.addressForm.patchValue(address);
+    }
   }
 
   backToPopup() {
@@ -298,7 +305,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     });
   }
 
-  submit() {
+  submitSlot() {
     const payload = {
       date: this.selectedDate,
       month: this.currentMonth + 1,
@@ -308,7 +315,6 @@ export class CartComponent implements OnInit, AfterViewInit {
     console.log("Payload:", payload);
     this.showSlotPopup = false;
     this.showCartModal = true;
-    this.addItemsToCart();
     this.getCartData();
   }
 
@@ -376,6 +382,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.showError = false;
         this.showCartModal = false;
         this.router.navigateByUrl("/orders")
+        this.getAddress();
       },
       error: (err) => {
         console.log(err);
@@ -385,17 +392,38 @@ export class CartComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
   closeError() {
     this.showSuccess = false;
     this.showError = false;
   }
+
+  selectAddress(address: any) {
+    this.selectedAddress = address;
+    this.getAddress();
+  }
+
+  editAddress(address: any) {
+    console.log("Edit address", address);
+    this.openAddressForm(address); // open modal with prefilled data
+  }
+
+  continueToSlots() {
+    console.log("Selected address:", this.selectedAddress);
+    this.showAddressPopup = false;
+    this.generateCalendar();
+    this.showSlotPopup = true; // open slot modal
+  }
+
+  getAddress() {
+    this.apiService.getAddress().subscribe({
+      next: (data) => {
+        console.log('orders:', data);
+        this.addressList = data.addresses || [];
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
 }
-
-
-// address_id: 7152
-// cart_id: 11116
-// comment: ""
-// date: "2026-03-12"
-// time_slot_id: 21
-// total_price: "70.00"
-// type: "COD"

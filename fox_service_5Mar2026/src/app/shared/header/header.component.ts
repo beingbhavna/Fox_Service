@@ -33,9 +33,12 @@ export class HeaderComponent {
   loginFlag: any;
   succssMessage: any;
   currentUrl: any;
+  cartItems: any[] = [];
+
   constructor(private cartService: CartService, private fb: FormBuilder, private router: Router, private service: ApiService) {
     this.cartService.cart$.subscribe(items => {
       this.cartCount = items.length;
+      this.cartItems = items;
     });
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
@@ -180,6 +183,7 @@ export class HeaderComponent {
         console.log('Login successful:', data);
         localStorage.setItem('loginFlag', 'true');
         localStorage.setItem('token', data.token);
+        this.addItemsToCart();
         this.closeLoginModal();
         // this.showSuccess = true;
         // this.succssMessage = data.message;
@@ -209,4 +213,21 @@ export class HeaderComponent {
   //     this.profileOpen = false;
   //   }
   // }
+
+  addItemsToCart() {
+    const payload = {
+      category_id: this.cartItems[0].category_id,
+      city_id: this.cartItems[0].cities[0].pivot.city_id,
+      price: this.cartItems[0].cities[0].pivot.price,
+      service_id: this.cartItems[0].cities[0].pivot.service_id
+    }
+    this.service.addItemsToCart(payload).subscribe({
+      next: (data) => {
+      },
+      error: (error) => {
+        console.error('Error fetching subcategories data:', error);
+      }
+    });
+  }
+
 }

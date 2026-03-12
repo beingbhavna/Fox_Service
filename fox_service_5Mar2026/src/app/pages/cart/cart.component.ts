@@ -213,7 +213,7 @@ export class CartComponent implements OnInit, AfterViewInit {
       next: (response: any) => {
         console.log('Address saved successfully', response);
         this.addressResponse = response.address;
-        localStorage.setItem('addressId',this.addressResponse.id);
+        localStorage.setItem('addressId', this.addressResponse.id);
         this.successMessage = response.message;
         this.showAddressForm = false;
         this.showSlotPopup = true;
@@ -383,6 +383,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.showError = false;
         this.showCartModal = false;
         this.router.navigateByUrl("/orders")
+        this.cartService.clearCart();
         this.getAddress();
       },
       error: (err) => {
@@ -428,7 +429,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     });
   }
 
-    public checkInput(event: any) {
+  public checkInput(event: any) {
     var ctrlCode = (event.ctrlKey) ? event.ctrlKey : event.metaKey;  // get key cross-browser
     var charCode = (event.which) ? event.which : event.keyCode;      // get key cross-browser
     if ( // Allow: home, end, left, right, down, up
@@ -445,4 +446,12 @@ export class CartComponent implements OnInit, AfterViewInit {
       return true
     }
   }
+
+  // getBikeData() {
+  //   let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
+  //   this.apiService.getBikeData(this.model, cityName).subscribe((response: any) => {
+  //     this.apiService = response.services;
+  //     localStorage.setItem('categoryId',response.category.id)
+  //   });
+  // }
 }

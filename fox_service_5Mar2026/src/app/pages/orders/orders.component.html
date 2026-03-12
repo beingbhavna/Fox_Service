@@ -6,7 +6,7 @@
   <a class="whatsapp" (click)="openWhatsApp()">
     <img src="assets/images/waicongreen.png">
   </a>
-  <div *ngFor="let order of ordersData; let i = index">
+   <div *ngFor="let order of ordersData; let i = index">
     <div class="order-card">
       <!-- Top -->
       <div class="order-top">
@@ -31,7 +31,7 @@
 
           <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 2">
             <span></span>
-            <p>Accepted</p>
+            <p>Rescheduled</p>
           </div>
 
           <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 3">
@@ -53,59 +53,83 @@
       </div>
       <!-- Expanded Content -->
       <div class="order-details" *ngIf="expandedIndex === i">
-        <div class="order-left">
-          <img [src]="'https://www.foxservice.in/admin/' + order.items[0].service.image" class="service-img">
-          <div class="service-info">
-            <h3>{{order.items[0].service.display_name}}</h3>
-            <p class="category">
-              Category: {{order.category.name}}
-            </p>
-            <p class="city">
-              City: {{order.city.name}}
-            </p>
-            <div class="specs" [innerHTML]="order.items[0].service.specifications">
+        <div class="cart-wrapper">
+          <!-- LEFT SIDE -->
+          <div class="cart-left">
+            <div class="service-card">
+              <!-- IMAGE -->
+              <div class="service-img">
+                <img [src]="'https://www.foxservice.in/admin/' + order.items[0].service.image" class="service-img">
+              </div>
+
+              <!-- SERVICE INFO -->
+              <div class="service-info">
+                <div class="service-title">
+                  Category : {{order.items[0].service.display_name}}
+                  <span>({{order.category.name}})</span>City: {{order.city.name}}
+                </div>
+              </div>
+
+              <div class="service-spec">
+                <b>Specifications:</b>
+                <div [innerHTML]="getThreeSpecs(order.items[0].service.specifications)"></div>
+              </div>
+
+              <!-- PRICE -->
+              <div class="service-price">
+                ₹{{order.order.total_price}} /-
+              </div>
             </div>
           </div>
-          <div class="price">
-            ₹{{order.order.total_price}} /-
+          <!-- RIGHT SIDE SUMMARY -->
+          <div class="cart-summary">
+
+            <div class="address-box">
+              <h4>Home</h4>
+              <p>Area : {{order.order.address.road_area_colony}}</p>
+              <p>Pincode : {{order?.order.address?.pincode}}</p>
+              <p>Residence : {{order.order.address.house_building_name}}</p>
+              <p>Landmark : {{order.order.address.landmark}}</p>
+              <p>City : {{order.city.name}}</p>
+              <p>Phone : {{order.order.address.phone}}</p>
+              <p>Email : {{order.order.address.email}}</p>
+            </div>
+            <div class="booking-info">
+              <p>
+                <span>Service Date:</span>
+                {{order.order.date}}
+              </p>
+              <hr>
+              <p>
+                <span>Service Time:</span>
+                {{order.order.time}}
+              </p>
+
+              <p>
+                <span>Sub Total</span>
+                ₹ {{order.order.price}}/-
+              </p>
+              <hr>
+              <p class="total">
+                <span>Total (GST Included):</span>
+                ₹ {{order.order.price}}/-
+              </p>
+              <p class="total">
+                <span>Transaction:</span>
+                {{order.order.transactions[0].status}}
+              </p>
+            </div>
+            <div class="order-actions">
+              <button class="reschedule-btn" *ngIf="order.order.reschedulable" (click)="rescheduleOrder(order)">
+                RESCHEDULE
+              </button>
+              <button class="cancel-btn" *ngIf="order.order.cancellable" (click)="cancelOrder(order)">
+                CANCEL ORDER
+              </button>
+            </div>
           </div>
         </div>
-        <!-- Address -->
-        <div class="order-right">
-          <h3>{{order.order.address.type}}</h3>
-          <p>{{order.order.address.road_area_colony}}</p>
-          <p>{{order.city.name}}</p>
-          <p>{{order.order.address.phone}}</p>
-          <p>{{order.order.address.email}}</p>
-          <div class="service-meta">
-            <p>
-              <b>Service Date:</b>
-              {{order.order.date | date:'dd-MMM-yyyy'}}
-            </p>
-            <p>
-              <b>Service Time:</b>
-              {{order.order.time}}
-            </p>
-            <p>
-              <b>Price:</b> ₹{{order.order.total_price}} /-
-            </p>
-            <p>
-              <b>Total Price:</b> ₹{{order.order.total_price}} /-
-            </p>
-            <p>
-              <b>Transaction:</b>
-              {{order.order.transactions[0]?.status}}
-            </p>
-          </div>
-        </div>
-        <div class="order-actions">
-          <button class="reschedule-btn" *ngIf="order.order.reschedulable" (click)="rescheduleOrder(order)">
-            RESCHEDULE
-          </button>
-          <button class="cancel-btn" *ngIf="order.order.cancellable" (click)="cancelOrder(order)">
-            CANCEL ORDER
-          </button>
-        </div>
+
       </div>
     </div>
     <span class="order-date">
@@ -179,7 +203,7 @@
   <div class="error-box">
     <div class="error-header">Message</div>
     <div class="error-body">
-      10 digit Phone number is required
+      {{errorMessage}}
     </div>
     <button (click)="closeError()">OK</button>
   </div>

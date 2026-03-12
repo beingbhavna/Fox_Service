@@ -93,4 +93,9 @@ export class CartService {
 
   // OBSERVABLE CART
   cart$ = this.cartSubject.asObservable();
+
+  clearCart() {
+    this.cartSubject.next([]);   // empty cart
+    this.save([]);               // update local storage if you are saving
+  }
 }

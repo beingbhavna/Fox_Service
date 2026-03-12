@@ -48,7 +48,7 @@ export class OrdersComponent implements OnInit {
   getStatusStep(status: string) {
     switch (status) {
       case 'Processing': return 1;
-      case 'Accepted': return 2;
+      case 'Rescheduled': return 2;
       case 'In Progress': return 3;
       case 'Completed': return 4;
       default: return 1;
@@ -179,15 +179,16 @@ export class OrdersComponent implements OnInit {
 
   submit() {
     const payload = {
-      "id": 7947,
-      "date": "2026-03-12",
-      "time_slot_id": 7
+      "id": this.ordersData[0].order.id,
+      "date": `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(this.selectedDate).padStart(2, '0')}`,
+      "time_slot_id": this.selectedSlot.id
     }
     this.apiService.reschedule(payload).subscribe({
       next: (data) => {
         console.log('orders:', data);
         this.successMessage = data.message || 'Your order has been placed successfully';
         // Your order has been placed successfully
+        this.showSlotPopup = false;
         this.showSuccess = true;
         this.showError = false;
         this.getOrderData();
@@ -203,6 +204,10 @@ export class OrdersComponent implements OnInit {
 
   close() {
     this.showSlotPopup = false;
+  }
+  
+    getThreeSpecs(specHtml: string): string {
+    return specHtml.split('</p>').slice(0, 3).join('</p>');
   }
 }
 

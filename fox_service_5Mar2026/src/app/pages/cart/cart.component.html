@@ -65,7 +65,7 @@
   </div>
 
 
-  
+
 </div>
 
 <div class="overlay" *ngIf="showAddressPopup">
@@ -138,8 +138,8 @@
         <!-- Mobile -->
         <div class="form-group">
           <label>Your mobile number*</label>
-          <input type="text" formControlName="phone" placeholder="Mobile Number"  maxlength="10"
-				(keypress)="checkInput($event)"/>
+          <input type="text" formControlName="phone" placeholder="Mobile Number" maxlength="10"
+            (keypress)="checkInput($event)" />
         </div>
 
         <!-- City -->
@@ -255,72 +255,72 @@
 
     <!-- <div class="cart-body"> -->
 
-      <!-- LEFT SERVICE -->
-      <div *ngFor="let item of cartItems" class="service-card">
-        <!-- IMAGE -->
-        <div class="service-img">
-          <img [src]="'https://www.foxservice.in/admin/' + item.image">
-        </div>
+    <!-- LEFT SERVICE -->
+    <div *ngFor="let item of cartItems" class="service-card">
+      <!-- IMAGE -->
+      <div class="service-img">
+        <img [src]="'https://www.foxservice.in/admin/' + item.image">
+      </div>
 
-        <!-- SERVICE INFO -->
-        <div class="service-info">
-          <div class="service-title">
-            {{ item.name }}
-            <span>({{ item.model }})</span>
-          </div>
-        </div>
-
-        <div class="service-spec">
-          <b>Specifications:</b>
-          <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
-        </div>
-
-        <!-- PRICE -->
-        <div class="service-price">
-          ₹ {{ item.cities[0].pivot.price }}/-
+      <!-- SERVICE INFO -->
+      <div class="service-info">
+        <div class="service-title">
+          {{ item.name }}
+          <span>({{ item.model }})</span>
         </div>
       </div>
 
-
-      <!-- RIGHT DETAILS -->
-      <div class="details-section">
-
-        <div class="address-box" *ngFor="let address of addressList">
-          <h4>Home</h4>
-          <p>Area: {{address.road_area_colony}}</p>
-          <p>Pincode: {{address.pincode}}</p>
-          <p>Residence: {{address.house_building_name}}</p>
-          <p>Landmark: {{address.landmark}}</p>
-          <p>City: {{address.city}}</p>
-          <p>{{address.phone}}</p>
-          <p>{{address.email}}</p>
-        </div>
-
-        <div class="booking-info">
-          <p>
-            <span>Service Date:</span>
-            {{selectedDate}} {{monthNames[currentMonth]}} {{currentYear}}
-          </p>
-<hr>
-          <p>
-            <span>Service Slot:</span>
-            {{selectedSlot.start_time}}-{{selectedSlot.end_time}}
-          </p>
-
-          <p>
-            <span>Sub Total</span>
-            ₹ {{total}} /-
-          </p>
-<hr>
-          <p class="total">
-            <span>Total (GST Included):</span>
-            ₹ {{getTotalWithGST()}}
-          </p>
-        </div>
-
-        <textarea placeholder="Comment" [(ngModel)]="comment"></textarea>
-
+      <div class="service-spec">
+        <b>Specifications:</b>
+        <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
       </div>
+
+      <!-- PRICE -->
+      <div class="service-price">
+        ₹ {{ item.cities[0].pivot.price }}/-
+      </div>
+    </div>
+
+
+    <!-- RIGHT DETAILS -->
+    <div class="details-section">
+
+      <div class="address-box" *ngFor="let address of addressList">
+        <h4>Home</h4>
+        <p>Area: {{address.road_area_colony}}</p>
+        <p>Pincode: {{address.pincode}}</p>
+        <p>Residence: {{address.house_building_name}}</p>
+        <p>Landmark: {{address.landmark}}</p>
+        <p>City: {{address.city}}</p>
+        <p>{{address.phone}}</p>
+        <p>{{address.email}}</p>
+      </div>
+
+      <div class="booking-info">
+        <p>
+          <span>Service Date:</span>
+          {{selectedDate}} {{monthNames[currentMonth]}} {{currentYear}}
+        </p>
+        <hr>
+        <p>
+          <span>Service Slot:</span>
+          {{selectedSlot.start_time}}-{{selectedSlot.end_time}}
+        </p>
+
+        <p>
+          <span>Sub Total</span>
+          ₹ {{total}} /-
+        </p>
+        <hr>
+        <p class="total">
+          <span>Total (GST Included):</span>
+          ₹ {{getTotalWithGST()}}
+        </p>
+      </div>
+
+      <textarea placeholder="Comment" [(ngModel)]="comment"></textarea>
+
+    </div>
 
     <!-- </div> -->
 

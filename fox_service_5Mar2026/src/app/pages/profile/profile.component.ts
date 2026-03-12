@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
@@ -32,7 +31,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfileData() {
-    this.apiService.getOrderData().subscribe({
+    this.apiService.userProfile().subscribe({
       next: (data) => {
         console.log('orders:', data);
         this.profileData = data.user || [];

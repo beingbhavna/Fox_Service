@@ -219,6 +219,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.generateCalendar();
         this.addItemsToCart();
         this.getCartData();
+        localStorage.setItem('addressId',this.addressResponse.id);
       },
       error: (err) => {
         console.log('Error saving address', err);
@@ -328,7 +329,7 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   getCartData() {
     this.apiService.getCartData().subscribe((response: any) => {
-      this.CartData = response.services;
+      this.CartData = response.cart;
     });
   }
 
@@ -362,10 +363,10 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   payLater() {
-    console.log(this.cartItems)
+    const addressId = localStorage.getItem('addressId');
     const payload = {
-      address_id: this.addressResponse.id,
-      cart_id: this.cartItems[0].id, // number not string
+      address_id: addressId,
+      cart_id: this.CartData.id, // number not string
       comment: this.comment || '',
       date: `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(this.selectedDate).padStart(2, '0')}`,
       time_slot_id: this.selectedSlot?.id,

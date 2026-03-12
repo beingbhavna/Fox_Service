@@ -59,6 +59,7 @@ export class BikeDetailComponent {
     this.service.getBikeData(this.model, cityName).subscribe((response: any) => {
       this.bikeData = response.category;
       this.services = response.services;
+      localStorage.setItem('categoryId',response.category.id)
     });
   }
 

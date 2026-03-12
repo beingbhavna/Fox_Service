@@ -20,7 +20,7 @@
 
       <div class="profile-details">
         <h3>Mr.</h3>
-        <!-- <p>{{getProfileData?.phone}}</p> -->
+        <p>{{profileData?.phone}}</p>
       </div>
 
     </div>
@@ -108,17 +108,17 @@ LOGOUT
 
         <div class="field">
           <label>Your name</label>
-          <!-- <p>Mr.{{getProfileData?.name}}</p> -->
+          <p>Mr.{{profileData?.name}}</p>
         </div>
 
         <div class="field">
           <label>Email Address</label>
-          <!-- <p>{{getProfileData?.email}}</p> -->
+          <p>{{profileData?.email}}</p>
         </div>
 
         <div class="field">
           <label>Phone Number</label>
-          <!-- <p>{{getProfileData?.phone}}</p> -->
+          <p>{{profileData?.phone}}</p>
         </div>
 
       </div>
@@ -129,11 +129,11 @@ LOGOUT
   <div class="profile-wrapper" *ngIf="activeTab === 'editProfile'">
 
   <!-- Tabs -->
-  <div class="profile-tabs">
+  <!-- <div class="profile-tabs">
     <button>Profile</button>
     <button class="active">Edit Profile</button>
     <button>Manage Address</button>
-  </div>
+  </div> -->
 
   <!-- Content Card -->
   <div class="profile-card">

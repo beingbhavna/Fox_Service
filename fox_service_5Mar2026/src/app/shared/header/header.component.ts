@@ -215,8 +215,9 @@ export class HeaderComponent {
   // }
 
   addItemsToCart() {
+    const categoryId = localStorage.getItem('categoryId');
     const payload = {
-      category_id: this.cartItems[0].category_id,
+      category_id: categoryId,
       city_id: this.cartItems[0].cities[0].pivot.city_id,
       price: this.cartItems[0].cities[0].pivot.price,
       service_id: this.cartItems[0].cities[0].pivot.service_id

@@ -37,10 +37,11 @@
     </div>
   </div>
   <!-- RIGHT SIDE SUMMARY -->
-  <div class="cart-summary">
+  <div class="cart-summary" *ngIf="cartItems.length>0">
     <h3>Summary</h3>
     <div class="summary-row" *ngFor="let item of cartItems">
-      <span>{{ item.name }} <span [title]="item.model" style="color:red;"> ({{ item.model.length > 10 ? (item.model | slice:0:10) + '...' : item.model }})</span></span>
+      <span>{{ item.name }} <span [title]="item.model" style="color:red;"> ({{ item.model.length > 10 ? (item.model |
+          slice:0:10) + '...' : item.model }})</span></span>
       <!-- <span [title]="item.model" style="color:red;">
         ({{ item.model.length > 10 ? (item.model | slice:0:10) + '...' : item.model }})
       </span> -->
@@ -62,6 +63,9 @@
       CONTINUE
     </button>
   </div>
+
+
+  
 </div>
 
 <div class="overlay" *ngIf="showAddressPopup">
@@ -196,7 +200,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <h2>Select you Date & Time</h2>
-       <span class="close" (click)="closeAddressPopup()">✕</span>
+      <span class="close" (click)="closeAddressPopup()">✕</span>
     </div>
 
     <div class="modal-body">

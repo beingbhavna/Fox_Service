@@ -9,42 +9,55 @@
   <div *ngFor="let order of ordersData; let i = index">
     <div class="order-card">
       <!-- Top -->
-      <div class="order-top">
-        <div class="order-id">
-          Order Id: <b>#{{order.order.order_ref}}</b>
-        </div>
-        <div class="order-otp">
-          OTP: <span>{{order.order.otp}}</span>
-        </div>
-        <div class="order-status">
-          {{order.order.status}}
-        </div>
-      </div>
+<div class="order-top">
+  <div class="order-id">
+    Order Id: <b>#{{order.order.order_ref}}</b>
+  </div>
 
-      <!-- Progress -->
-      <div class="order-progress">
-        <div class="progress-line">
-          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 1">
-            <span></span>
-            <p>Processing</p>
-          </div>
+  <div class="order-otp">
+    OTP: <span>{{order.order.otp}}</span>
+  </div>
 
-          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 2">
-            <span></span>
-            <p>Rescheduled</p>
-          </div>
+  <div class="order-status">
+    {{order.order.status}}
+  </div>
+</div>
 
-          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 3">
-            <span></span>
-            <p>In Progress</p>
-          </div>
 
-          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 4">
-            <span></span>
-            <p>Completed</p>
-          </div>
-        </div>
-      </div>
+<!-- IF ORDER CANCELLED -->
+<div class="order-cancelled" *ngIf="order.order.status === 'Cancelled'">
+  CANCELLED
+</div>
+
+
+<!-- Progress (Only show if NOT cancelled) -->
+<div class="order-progress" *ngIf="order.order.status !== 'Cancelled'">
+
+  <div class="progress-line">
+
+    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 1">
+      <span></span>
+      <p>Processing</p>
+    </div>
+
+    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 2">
+      <span></span>
+      <p>Rescheduled</p>
+    </div>
+
+    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 3">
+      <span></span>
+      <p>In Progress</p>
+    </div>
+
+    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 4">
+      <span></span>
+      <p>Completed</p>
+    </div>
+
+  </div>
+
+</div>
       <!-- Expand Button -->
       <div class="order-footer">
         <span class="expand" (click)="toggleOrder(i)">
@@ -124,7 +137,7 @@
               <button class="reschedule-btn" *ngIf="order.order.reschedulable" (click)="rescheduleOrder(order)">
                 RESCHEDULE
               </button>
-              <button class="cancel-btn" *ngIf="!order.order.cancellable" (click)="cancelOrder(order)">
+              <button class="cancel-btn" *ngIf="order.order.cancellable" (click)="cancelOrder(order)">
                 CANCEL ORDER
               </button>
             </div>

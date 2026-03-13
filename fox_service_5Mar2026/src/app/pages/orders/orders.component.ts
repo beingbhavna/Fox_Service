@@ -224,6 +224,7 @@ export class OrdersComponent implements OnInit {
     };
     this.apiService.cancelOrder(payload).subscribe({
       next: (res) => {
+        this.getOrderData();
         this.successMessage = res.message;
         this.showSuccess = true;
       }, error: (err) => {

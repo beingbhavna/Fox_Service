@@ -213,6 +213,7 @@ export class CartComponent implements OnInit, AfterViewInit {
       next: (response: any) => {
         console.log('Address saved successfully', response);
         this.addressResponse = response.address;
+        this.addressList = response.address;
         localStorage.setItem('addressId', this.addressResponse.id);
         this.successMessage = response.message;
         this.showAddressForm = false;

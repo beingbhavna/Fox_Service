@@ -124,6 +124,53 @@
   color: #555;
 }
 
+/* CANCELLED STATUS */
+
+.order-cancelled{
+text-align:center;
+font-size:18px;
+color:#ff4d4d;
+font-weight:600;
+padding:15px 0;
+border-top:1px solid #ddd;
+border-bottom:1px solid #ddd;
+letter-spacing:1px;
+}
+
+/* RESPONSIVE FIX */
+
+@media(max-width:768px){
+
+.order-top{
+flex-direction:column;
+align-items:flex-start;
+gap:5px;
+}
+
+.order-status{
+align-self:flex-end;
+}
+
+}
+
+@media(max-width:480px){
+
+.orders-page{
+padding:20px 10px;
+}
+
+.order-id,
+.order-otp,
+.order-status{
+font-size:13px;
+}
+
+.order-cancelled{
+font-size:16px;
+}
+
+}
+
 /* FOOTER */
 
 .order-footer {

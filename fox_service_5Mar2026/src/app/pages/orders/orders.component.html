@@ -124,7 +124,7 @@
               <button class="reschedule-btn" *ngIf="order.order.reschedulable" (click)="rescheduleOrder(order)">
                 RESCHEDULE
               </button>
-              <button class="cancel-btn" *ngIf="order.order.cancellable" (click)="cancelOrder(order)">
+              <button class="cancel-btn" *ngIf="!order.order.cancellable" (click)="cancelOrder(order)">
                 CANCEL ORDER
               </button>
             </div>
@@ -207,4 +207,32 @@
     </div>
     <button (click)="closeError()">OK</button>
   </div>
+</div>
+
+<!-- Cancel Order Modal -->
+<div class="cancel-overlay" *ngIf="showCancelModal">
+
+  <div class="cancel-modal">
+
+    <h3>Are you sure you want to cancel this order?</h3>
+
+    <textarea
+      placeholder="Enter your cancellation reason"
+      [(ngModel)]="cancelReason">
+    </textarea>
+
+    <div class="cancel-actions">
+
+      <button class="yes-btn" (click)="confirmCancel()">
+        YES
+      </button>
+
+      <button class="no-btn" (click)="closeCancelModal()">
+        NO
+      </button>
+
+    </div>
+
+  </div>
+
 </div>

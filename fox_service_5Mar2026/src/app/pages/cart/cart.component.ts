@@ -422,6 +422,8 @@ export class CartComponent implements OnInit, AfterViewInit {
       next: (data) => {
         console.log('orders:', data);
         this.addressList = data.addresses || [];
+        const addressId = this.addressList.find(res => res.id == this.selectedAddress.id);
+        localStorage.setItem('addressId',addressId.id);
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);

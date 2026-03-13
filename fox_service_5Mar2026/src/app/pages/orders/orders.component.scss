@@ -632,3 +632,125 @@
     font-size: 11px;
   }
 }
+/* cancel OVERLAY */
+
+.cancel-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+padding:20px;
+}
+
+/* MODAL */
+
+.cancel-modal{
+background:#fff;
+width:100%;
+max-width:520px;
+padding:30px;
+border-radius:6px;
+text-align:center;
+box-shadow:0 5px 25px rgba(0,0,0,0.2);
+}
+
+/* TITLE */
+
+.cancel-modal h3{
+font-size:18px;
+font-weight:500;
+margin-bottom:20px;
+color:#555;
+}
+
+/* TEXTAREA */
+
+.cancel-modal textarea{
+width:100%;
+height:80px;
+border:1px solid #ddd;
+border-radius:4px;
+padding:10px;
+font-size:14px;
+resize:none;
+margin-bottom:20px;
+}
+
+/* BUTTONS */
+
+.cancel-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+}
+
+/* YES BUTTON */
+
+.yes-btn{
+background:#ff1a1a;
+color:white;
+border:none;
+padding:12px;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* NO BUTTON */
+
+.no-btn{
+background:white;
+border:2px solid #ff1a1a;
+color:#333;
+padding:12px;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* ======================= */
+/* TABLET */
+/* ======================= */
+
+@media(max-width:768px){
+
+.cancel-modal{
+padding:25px;
+}
+
+.cancel-modal h3{
+font-size:16px;
+}
+
+}
+
+/* ======================= */
+/* MOBILE */
+/* ======================= */
+
+@media(max-width:480px){
+
+.cancel-modal{
+padding:20px;
+}
+
+.cancel-actions{
+grid-template-columns:1fr;
+gap:10px;
+}
+
+.yes-btn,
+.no-btn{
+width:100%;
+}
+
+.cancel-modal textarea{
+height:70px;
+}
+
+}

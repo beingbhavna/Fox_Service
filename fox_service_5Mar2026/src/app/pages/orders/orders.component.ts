@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
@@ -26,6 +27,10 @@ export class OrdersComponent implements OnInit {
   filteredSlots: any[] = [];
   selectedSlot: any;
   timeSlots: any;
+  showCancelModal = false;
+  cancelReason = '';
+  selectedOrder: any;
+
   daysName = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
   monthNames = [
@@ -73,13 +78,6 @@ export class OrdersComponent implements OnInit {
   rescheduleOrder(order: any) {
     this.showSlotPopup = true;
     this.generateCalendar();
-  }
-
-  cancelOrder(order: any) {
-    console.log("Cancel Order:", order.order.id);
-    if (confirm("Are you sure you want to cancel this order?")) {
-      // call cancel API
-    }
   }
 
   closeError() {
@@ -205,9 +203,38 @@ export class OrdersComponent implements OnInit {
   close() {
     this.showSlotPopup = false;
   }
-  
-    getThreeSpecs(specHtml: string): string {
+
+  getThreeSpecs(specHtml: string): string {
     return specHtml.split('</p>').slice(0, 3).join('</p>');
+  }
+
+  cancelOrder(order: any) {
+    this.selectedOrder = order;
+    this.showCancelModal = true;
+  }
+
+  closeCancelModal() {
+    this.showCancelModal = false;
+  }
+
+  confirmCancel() {
+    const payload = {
+      id: this.selectedOrder.order.id,
+      reason: this.cancelReason
+    };
+    this.apiService.cancelOrder(payload).subscribe({
+      next: (res) => {
+        this.successMessage = res.message;
+        this.showSuccess = true;
+      }, error: (err) => {
+        this.errorMessage = err.message;
+        this.showCancelModal = true;
+      }
+    })
+    console.log(payload);
+
+    this.showCancelModal = false;
+
   }
 }
 

@@ -150,6 +150,15 @@ export class ApiService {
     return this.http.post<any>('https://www.foxservice.in/admin/api/order/reschedule', payload, { headers });
   }
 
+  cancelOrder(payload:any): Observable<any> {
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/order/cancel', payload, { headers });
+  }
+
   addItemsToCart(payload:any): Observable<any> {
     const token = localStorage.getItem('token'); // get token
     const headers = new HttpHeaders({

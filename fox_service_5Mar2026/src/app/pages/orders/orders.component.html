@@ -6,7 +6,7 @@
   <a class="whatsapp" (click)="openWhatsApp()">
     <img src="assets/images/waicongreen.png">
   </a>
-   <div *ngFor="let order of ordersData; let i = index">
+  <div *ngFor="let order of ordersData; let i = index">
     <div class="order-card">
       <!-- Top -->
       <div class="order-top">
@@ -51,6 +51,7 @@
           {{expandedIndex === i ? '-' : '+'}}
         </span>
       </div>
+
       <!-- Expanded Content -->
       <div class="order-details" *ngIf="expandedIndex === i">
         <div class="cart-wrapper">
@@ -107,12 +108,12 @@
 
               <p>
                 <span>Sub Total</span>
-                ₹ {{order.order.price}}/-
+                ₹ {{order.order.total_price}}/-
               </p>
               <hr>
               <p class="total">
                 <span>Total (GST Included):</span>
-                ₹ {{order.order.price}}/-
+                ₹ {{order.order.total_price}}/-
               </p>
               <p class="total">
                 <span>Transaction:</span>
@@ -129,7 +130,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <span class="order-date">

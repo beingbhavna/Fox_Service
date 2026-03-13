@@ -246,82 +246,83 @@
 
 <!-- show cart modal pay later-->
 <div class="cart-overlay" *ngIf="showCartModal">
+
   <div class="cart-modal">
 
+    <!-- HEADER -->
     <div class="cart-header">
       <h2>Your Cart Details</h2>
-      <span class="close-btn" (click)="closeCart()">×</span>
+      <span class="close-btn" (click)="closeCart()">✕</span>
     </div>
 
-      <!-- LEFT SERVICE -->
-      <div *ngFor="let item of cartItems" class="service-card">
-        <!-- IMAGE -->
-        <div class="service-img">
-          <img [src]="'https://www.foxservice.in/admin/' + item.image">
+    <div class="cart-body">
+
+      <!-- LEFT SERVICES -->
+      <div class="services-section">
+
+        <div *ngFor="let item of cartItems" class="service-card2">
+
+          <div class="service-img">
+            <img [src]="'https://www.foxservice.in/admin/' + item.image">
+          </div>
+
+          <div class="service-info">
+            <div class="service-title">
+              {{ item.name }}
+              <span>({{ item.model }})</span>
+            </div>
+          </div>
+
+          <div class="service-spec">
+            <b>Specifications:</b>
+            <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
+          </div>
+
+          <div class="service-price">
+            ₹ {{ item.cities[0].pivot.price }}/-
+          </div>
+
         </div>
 
-      <!-- SERVICE INFO -->
-      <div class="service-info">
-        <div class="service-title">
-          {{ item.name }}
-          <span>({{ item.model }})</span>
+      </div>
+
+
+      <!-- RIGHT SUMMARY -->
+      <div class="summary-section">
+        <div class="address-box" *ngFor="let address of addressList">
+          <h4>Home</h4>
+          <p>Area: {{address.road_area_colony}}</p>
+          <p>Pincode: {{address.pincode}}</p>
+          <p>Residence: {{address.house_building_name}}</p>
+          <p>Landmark: {{address.landmark}}</p>
+          <p>City: {{address.city}}</p>
+          <p>{{address.phone}}</p>
+          <p>{{address.email}}</p>
         </div>
-      </div>
-
-      <div class="service-spec">
-        <b>Specifications:</b>
-        <div [innerHTML]="getThreeSpecs(item.specifications)"></div>
-      </div>
-
-      <!-- PRICE -->
-      <div class="service-price">
-        ₹ {{ item.cities[0].pivot.price }}/-
+        <div class="booking-info">
+          <p>
+            <span>Service Date:</span>
+            {{selectedDate}} {{monthNames[currentMonth]}} {{currentYear}}
+          </p>
+          <hr>
+          <p>
+            <span>Service Slot:</span>
+            {{selectedSlot.start_time}} - {{selectedSlot.end_time}}
+          </p>
+          <p>
+            <span>Sub Total</span>
+            ₹ {{total}} /-
+          </p>
+          <hr>
+          <p class="total">
+            <span>Total (GST Included):</span>
+            ₹ {{getTotalWithGST()}}
+          </p>
+        </div>
+        <textarea placeholder="Comment" [(ngModel)]="comment"></textarea>
       </div>
     </div>
-
-
-    <!-- RIGHT DETAILS -->
-    <div class="details-section">
-
-      <div class="address-box" *ngFor="let address of addressList">
-        <h4>Home</h4>
-        <p>Area: {{address.road_area_colony}}</p>
-        <p>Pincode: {{address.pincode}}</p>
-        <p>Residence: {{address.house_building_name}}</p>
-        <p>Landmark: {{address.landmark}}</p>
-        <p>City: {{address.city}}</p>
-        <p>{{address.phone}}</p>
-        <p>{{address.email}}</p>
-      </div>
-
-      <div class="booking-info">
-        <p>
-          <span>Service Date:</span>
-          {{selectedDate}} {{monthNames[currentMonth]}} {{currentYear}}
-        </p>
-        <hr>
-        <p>
-          <span>Service Slot:</span>
-          {{selectedSlot.start_time}}-{{selectedSlot.end_time}}
-        </p>
-
-        <p>
-          <span>Sub Total</span>
-          ₹ {{total}} /-
-        </p>
-        <hr>
-        <p class="total">
-          <span>Total (GST Included):</span>
-          ₹ {{getTotalWithGST()}}
-        </p>
-      </div>
-
-      <textarea placeholder="Comment" [(ngModel)]="comment"></textarea>
-
-    </div>
-
-    <!-- </div> -->
-
+    <!-- FOOTER -->
     <div class="cart-footer">
       <button class="pay-btn" (click)="payLater()">PAY LATER</button>
     </div>

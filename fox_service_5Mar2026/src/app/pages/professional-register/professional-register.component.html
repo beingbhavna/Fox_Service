@@ -30,21 +30,12 @@
     <span></span>
     <span></span>
   </div>
-
-  <!-- <div class="mobile-menu" [class.open]="menuOpen">
-    <a routerLink="/register-as-a-professional">Register as a Professional</a>
-    <a routerLink="/login">Login / Sign Up</a>
-  </div> -->
-
-
   <a class="whatsapp" (click)="openWhatsApp()">
     <img src="assets/images/waicongreen.png">
   </a>
   <!-- Form Card -->
   <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
-
     <div class="form-grid">
-
       <div class="form-group">
         <label>First Name*</label>
         <input type="text" formControlName="firstName" placeholder="First Name" />
@@ -62,7 +53,8 @@
 
       <div class="form-group">
         <label>Phone number*</label>
-        <input type="tel" formControlName="phone" placeholder="+91 Mobile Number" />
+        <input type="tel" formControlName="phone" placeholder="+91 Mobile Number" maxlength="10"
+          (keypress)="checkInput($event)" />
       </div>
 
       <div class="form-group">
@@ -90,14 +82,26 @@
     <div class="submit-row">
       <button type="submit">SUBMIT</button>
     </div>
-
   </form>
-  <div class="error-popup" *ngIf="showErrorPopup">
-    <div class="popup-box">
-      <h3>Message</h3>
-      <p>{{ errorMessage }}</p>
-      <button (click)="closePopup()">OK</button>
+</div>
+
+<!-- success Popup -->
+<div class="error-overlay" *ngIf="showSuccess">
+  <div class="error-box">
+    <div class="error-header">Message</div>
+    <div class="error-body">
+      {{succssMessage}}
     </div>
+    <button (click)="closeError()">OK</button>
   </div>
 </div>
 
+<div class="error-overlay" *ngIf="showErrorPopup">
+  <div class="error-box">
+    <div class="error-header">Message</div>
+    <div class="error-body">
+      {{ errorMessage }}
+    </div>
+    <button (click)="closeError()">OK</button>
+  </div>
+</div>

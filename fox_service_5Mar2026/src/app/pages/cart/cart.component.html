@@ -253,14 +253,12 @@
       <span class="close-btn" (click)="closeCart()">×</span>
     </div>
 
-    <!-- <div class="cart-body"> -->
-
-    <!-- LEFT SERVICE -->
-    <div *ngFor="let item of cartItems" class="service-card">
-      <!-- IMAGE -->
-      <div class="service-img">
-        <img [src]="'https://www.foxservice.in/admin/' + item.image">
-      </div>
+      <!-- LEFT SERVICE -->
+      <div *ngFor="let item of cartItems" class="service-card">
+        <!-- IMAGE -->
+        <div class="service-img">
+          <img [src]="'https://www.foxservice.in/admin/' + item.image">
+        </div>
 
       <!-- SERVICE INFO -->
       <div class="service-info">
@@ -326,11 +324,7 @@
 
     <div class="cart-footer">
       <button class="pay-btn" (click)="payLater()">PAY LATER</button>
-      <!-- <p class="note">
-        Due to Covid-19, we encourage use of digital payment after service.
-      </p> -->
     </div>
-
   </div>
 </div>
 

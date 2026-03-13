@@ -8,7 +8,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
 @Component({
   selector: 'app-professional-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,HeaderComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './professional-register.component.html',
   styleUrl: './professional-register.component.scss'
 })
@@ -22,8 +22,8 @@ export class ProfessionalRegisterComponent {
   showErrorPopup = false;
   errorMessage = '';
   isSticky = false;
-  loginShowModal=false;
-  showError: boolean=false;
+  loginShowModal = false;
+  showError: boolean = false;
   phone: string = '';
   showModal = true;
   showOtpScreen = false;
@@ -31,15 +31,17 @@ export class ProfessionalRegisterComponent {
   timer: number = 30;
   intervalId: any;
   loginForm: any;
+  showSuccess: boolean = false;
+  succssMessage: any;
 
 
 
-  constructor(private service: ApiService, private fb: FormBuilder,private router:Router) { 
-     this.loginForm = this.fb.group({
+  constructor(private service: ApiService, private fb: FormBuilder, private router: Router) {
+    this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     });
   }
-  
+
   ngOnInit() {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -88,52 +90,44 @@ export class ProfessionalRegisterComponent {
 
   submitForm() {
     if (this.registerForm.invalid) return;
-
     const formData = new FormData();
-
     formData.append('first_name', this.registerForm.value.firstName);
     formData.append('last_name', this.registerForm.value.lastName);
     formData.append('email', this.registerForm.value.email);
-
     const phone = '91' + this.registerForm.value.phone;
     formData.append('phone', phone);
-
     formData.append('city_id', this.registerForm.value.city);
-
     if (this.selectedPhoto) {
       formData.append('photo', this.selectedPhoto);
       formData.append('upload_file', 'true');
     }
-
     if (this.selectedAadhaar) {
       formData.append('aadhar', this.selectedAadhaar);
       formData.append('upload_file', 'true');
     }
-
-    // console.log(Array.from(formData.entries()));
-
     this.service.onRegister(formData).subscribe({
-      next: res => console.log('Success', res),
+      next: res => {
+        console.log('Success', res),
+          this.succssMessage = res.message;
+        this.showSuccess = true;
+        this.showError = false;
+      },
       error: err => {
         console.error('Error', err)
         // backend message
         this.errorMessage = err.error?.error[0] || 'Something went wrong';
-
         // show popup
         this.showErrorPopup = true;
+        this.showSuccess = false;
       }
     });
   }
-
-  closePopup() {
-    this.showErrorPopup = false;
-  }
-
+  
   goToHome() {
     this.router.navigate(['/']);
   }
 
-    //login code
+  //login code
 
   openLoginModal() {
     this.loginShowModal = true;
@@ -191,9 +185,11 @@ export class ProfessionalRegisterComponent {
 
   closeError() {
     this.showError = false;
+    this.showErrorPopup = false;
+    this.showSuccess = false;
   }
 
-    sendOtp() {
+  sendOtp() {
     const model = this.phone
     this.service.sendOtp(model).subscribe({
       next: (data) => {
@@ -238,7 +234,7 @@ export class ProfessionalRegisterComponent {
     }
   }
 
-   loginWithOtp(){
+  loginWithOtp() {
     const model = this.loginForm.value;
     this.service.onQuickBookingSubmit(model).subscribe({
       next: (res) => {
@@ -250,7 +246,7 @@ export class ProfessionalRegisterComponent {
       }
     });
   }
-      openWhatsApp() {
+  openWhatsApp() {
     window.open('https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about', '_blank');
   }
 }

@@ -254,7 +254,23 @@
   gap: 20px;
 }
 
+.service-card2 {
+  display: grid;
+  grid-template-columns: 90px 160px 1fr 120px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  gap: 20px;
+  width: 60%
+}
+
 /* IMAGE */
+.details-section {
+  width: 25%;
+}
 
 .service-img {
   width: 80px;
@@ -372,9 +388,13 @@
     grid-template-columns: 80px 1fr 1fr;
   }
 
+  .service-card2 {
+    grid-template-columns: 80px 1fr 1fr;
+  }
+
   .service-price {
     grid-column: 1/4;
-    text-align: left;
+    text-align: end;
   }
 
 }
@@ -388,16 +408,15 @@
     text-align: center;
     padding: 15px 10px;
     border-radius: 20px;
-    // background: #fff;
-    //     display: flow-root;
-    //     margin: 10px auto;
-    //     border: 1px solid #d9d9d9;
-    //     width: calc(100% - 50px);
-    //     border-radius: 12px;
-    //     padding: 10px;
-    //     border-top-left-radius: 12px !important;
-    //     border-bottom-left-radius: 12px !important;
-    //     height: auto;
+  }
+
+  .service-card2 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center;
+    padding: 15px 10px;
+    border-radius: 20px;
   }
 
   .service-img {
@@ -583,6 +602,7 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 @media (max-width: 768px) {
 
   .address-modal {
@@ -619,6 +639,7 @@
   }
 
 }
+
 /* FIRST MODAL */
 
 .address-modal {
@@ -1017,10 +1038,18 @@ input {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  display: flex;
+  // display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
+
+      display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    // background: #f3f3f3;
+    margin: auto;
+    padding: 15px;
+    max-width: 100%;
 }
 
 .cart-modal {
@@ -1067,16 +1096,6 @@ input {
 .service-section {
   flex: 1.2;
 }
-
-// .service-card {
-//   display: flex;
-//   align-items: center;
-//   border: 1px solid #ddd;
-//   border-radius: 6px;
-//   padding: 10px;
-//   gap: 10px;
-//   height: 100px;
-// }
 
 .service-img {
   width: 60px;
@@ -1181,21 +1200,16 @@ textarea {
   border: none;
   font-weight: 600;
   cursor: pointer;
-    //   width: auto !important;
-    // position: relative !important;
-    // padding: 8px 30px !important;
-    // font-size: 18px !important;
-    // background: black;
-    // color: white;
-    border-radius: 10px;
+  //   width: auto !important;
+  // position: relative !important;
+  // padding: 8px 30px !important;
+  // font-size: 18px !important;
+  // background: black;
+  // color: white;
+  border-radius: 10px;
 
 }
 
-.note {
-  color: red;
-  font-size: 12px;
-  margin-top: 10px;
-}
 
 /* ERROR POPUP */
 .error-overlay {

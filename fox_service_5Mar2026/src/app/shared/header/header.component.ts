@@ -183,7 +183,9 @@ export class HeaderComponent {
         console.log('Login successful:', data);
         localStorage.setItem('loginFlag', 'true');
         localStorage.setItem('token', data.token);
-        this.addItemsToCart();
+        if(this.cartItems.length){
+          this.addItemsToCart();
+        }
         this.closeLoginModal();
         // this.showSuccess = true;
         // this.succssMessage = data.message;

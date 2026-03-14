@@ -89,6 +89,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     this.currentYear = new Date().getFullYear();
     this.selectedDate = new Date().getDate();
     this.getCartData();
+    this.getCityList();
   }
 
   removeItem(id: number) {
@@ -448,6 +449,21 @@ export class CartComponent implements OnInit, AfterViewInit {
     else {
       return true
     }
+  }
+
+    getCityList() {
+    this.apiService.show();
+    this.apiService.getCityData().subscribe({
+      next: (data) => {
+        const cityData = localStorage.getItem('cityId');
+        if (!cityData) {
+          localStorage.setItem('cityId', JSON.stringify(data.cities[0]));
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching city data:', error);
+      }
+    });
   }
 
   // getBikeData() {

@@ -16,7 +16,7 @@ interface BikeModel {
 @Component({
   selector: 'app-bike-list',
   standalone: true,
-  imports: [CommonModule, FormsModule,HeaderComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent],
   templateUrl: './bike-list.component.html',
   styleUrl: './bike-list.component.scss'
 })
@@ -64,10 +64,34 @@ export class BikeListComponent {
 
   ngOnInit() {
     this.getBikeData();
+    this.getCityList();
   }
 
   openWhatsApp() {
     window.open('https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about', '_blank');
+  }
+
+  getCityList() {
+    this.service.show();
+    this.service.getCityData().subscribe({
+      next: (data) => {
+        // this.cityList = data.cities || [];
+        // if (this.cityName) {
+        //   this.selectedCity = this.cityName;
+        //   const selectedCityObj = this.cityList.find((city: any) => city.name.toLowerCase() === this.cityName.toLowerCase());
+        const cityData = localStorage.getItem('cityId');
+        if (!cityData) {
+          localStorage.setItem('cityId', JSON.stringify(data.cities[0]));
+        }
+        // } else {
+        //   this.selectedCity = this.cityList.length > 0 ? this.cityList[0].name : null;
+        //   localStorage.setItem('cityId', JSON.stringify(this.cityList[0])); // default to first city if available
+        // }
+      },
+      error: (error) => {
+        console.error('Error fetching city data:', error);
+      }
+    });
   }
 
   get filteredBikes(): BikeModel[] {

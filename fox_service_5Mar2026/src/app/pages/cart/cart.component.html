@@ -246,26 +246,19 @@
 
 <!-- show cart modal pay later-->
 <div class="cart-overlay" *ngIf="showCartModal">
-
   <div class="cart-modal">
-
     <!-- HEADER -->
     <div class="cart-header">
       <h2>Your Cart Details</h2>
       <span class="close-btn" (click)="closeCart()">✕</span>
     </div>
-
     <div class="cart-body">
-
       <!-- LEFT SERVICES -->
       <div class="services-section">
-
         <div *ngFor="let item of cartItems" class="service-card2">
-
           <div class="service-img">
             <img [src]="'https://www.foxservice.in/admin/' + item.image">
           </div>
-
           <div class="service-info">
             <div class="service-title">
               {{ item.name }}

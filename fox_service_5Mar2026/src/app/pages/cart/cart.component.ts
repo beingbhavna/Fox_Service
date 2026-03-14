@@ -381,9 +381,9 @@ export class CartComponent implements OnInit, AfterViewInit {
         console.log('Payment successful', response);
         this.successMessage = response.message || 'Your order has been placed successfully';
         // Your order has been placed successfully
+        this.showCartModal = false;
         this.showSuccess = true;
         this.showError = false;
-        this.showCartModal = false;
         this.router.navigateByUrl("/orders")
         this.cartService.clearCart();
         this.getAddress();

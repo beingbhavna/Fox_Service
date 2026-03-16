@@ -54,11 +54,11 @@
       <b>₹ {{ total }}/-</b>
     </div>
     <hr>
-    <div class="summary-total">
+    <!-- <div class="summary-total">
       <span>Total <small>(GST Included)</small></span>
       <span>₹ {{ getTotalWithGST() | number:'1.0-2' }}/-</span>
     </div>
-    <hr>
+    <hr> -->
     <button class="continue-button" (click)="continue()">
       CONTINUE
     </button>
@@ -313,11 +313,11 @@
             <span>Sub Total</span>
             ₹ {{total}} /-
           </p>
-          <hr>
+          <!-- <hr>
           <p class="total">
             <span>Total (GST Included):</span>
             ₹ {{getTotalWithGST()}}
-          </p>
+          </p> -->
         </div>
         <textarea placeholder="Comment" [(ngModel)]="comment"></textarea>
       </div>

@@ -385,7 +385,9 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.showSuccess = true;
         this.showError = false;
         this.cartService.clearCart();
-        this.router.navigateByUrl("/orders");
+        setTimeout(() => {
+          this.router.navigateByUrl("/orders");          
+        }, 5000);
         this.getAddress();
       },
       error: (err) => {

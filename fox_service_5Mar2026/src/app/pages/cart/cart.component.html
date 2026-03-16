@@ -288,7 +288,7 @@
           <p>Pincode: {{address.pincode}}</p>
           <p>Residence: {{address.house_building_name}}</p>
           <p>Landmark: {{address.landmark}}</p>
-          <p>City: {{address.city}}</p>
+          <p>City: {{address.city.name}}</p>
           <p>Phone : {{address.phone}}</p>
           <p>Email : {{address.email}}</p>
         </div>
@@ -344,4 +344,4 @@
 </div>
 
 
-<div class="container"><h2>Your cart is currently empty!</h2></div>
+<div class="container" *ngIf="!cartItems.length"><h2>Your cart is currently empty!</h2></div>

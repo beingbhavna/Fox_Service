@@ -13,12 +13,15 @@ import { ApiService } from '../../services/api.service';
 export class ProfileComponent implements OnInit {
   pageHtml = '';
   cityName: any;
-  activeTab: string = 'editProfile';
+  activeTab: string = 'profile';
   profileData: any;
   Addressddata: any;
   cityList: any;
   timeSlots: any;
   orderData: any;
+  title: string = 'Mr';
+  addressEdit = false;
+
 
   constructor(private apiService: ApiService) { }
 
@@ -28,6 +31,11 @@ export class ProfileComponent implements OnInit {
 
   setTab(tab: string) {
     this.activeTab = tab;
+  }
+
+
+  selectTitle(val: string) {
+    this.title = val;
   }
 
   getProfileData() {
@@ -48,6 +56,7 @@ export class ProfileComponent implements OnInit {
       next: (data) => {
         console.log('orders:', data);
         this.Addressddata = data.addresses || [];
+        this.getCityList();
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
@@ -69,14 +78,18 @@ export class ProfileComponent implements OnInit {
   }
 
   getOrderData() {
-    this.apiService.getTimeslotData().subscribe({
+    this.apiService.getOrderData().subscribe({
       next: (data) => {
-        console.log('Timeslots data:', data);
+        console.log('getOrderData data:', data);
         this.orderData = data.orders || [];
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
       }
     });
+  }
+
+  editAddress() {
+    this.addressEdit = true;
   }
 }

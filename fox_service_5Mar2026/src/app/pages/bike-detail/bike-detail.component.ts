@@ -28,6 +28,7 @@ export class BikeDetailComponent {
 
   ngOnInit() {
     this.getBikeData();
+    this.getCityList();
   }
   openPopup(service: any) {
     this.selectedService = service;
@@ -54,19 +55,35 @@ export class BikeDetailComponent {
     }
   }
 
+  getCityList() {
+    this.service.show();
+    this.service.getCityData().subscribe({
+      next: (data) => {
+        const cityData = localStorage.getItem('cityId');
+        if (!cityData) {
+          localStorage.setItem('cityId', JSON.stringify(data.cities[0]));
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching city data:', error);
+      }
+    });
+  }
+  
+
   getBikeData() {
     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
     this.service.getBikeData(this.model, cityName).subscribe((response: any) => {
       this.bikeData = response.category;
       this.services = response.services;
-      localStorage.setItem('categoryId',response.category.id)
+      localStorage.setItem('categoryId', response.category.id)
     });
   }
 
   getSafeDescription(desc: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(desc);
   }
-  
+
   openWhatsApp() {
     window.open('https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about', '_blank');
   }

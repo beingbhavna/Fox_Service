@@ -89,6 +89,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     this.currentYear = new Date().getFullYear();
     this.selectedDate = new Date().getDate();
     this.getCartData();
+    this.getCityList();
   }
 
   removeItem(id: number) {
@@ -213,6 +214,7 @@ export class CartComponent implements OnInit, AfterViewInit {
       next: (response: any) => {
         console.log('Address saved successfully', response);
         this.addressResponse = response.address;
+        this.addressList = response.address;
         localStorage.setItem('addressId', this.addressResponse.id);
         this.successMessage = response.message;
         this.showAddressForm = false;
@@ -379,9 +381,9 @@ export class CartComponent implements OnInit, AfterViewInit {
         console.log('Payment successful', response);
         this.successMessage = response.message || 'Your order has been placed successfully';
         // Your order has been placed successfully
+        this.showCartModal = false;
         this.showSuccess = true;
         this.showError = false;
-        this.showCartModal = false;
         this.router.navigateByUrl("/orders")
         this.cartService.clearCart();
         this.getAddress();
@@ -447,6 +449,21 @@ export class CartComponent implements OnInit, AfterViewInit {
     else {
       return true
     }
+  }
+
+    getCityList() {
+    this.apiService.show();
+    this.apiService.getCityData().subscribe({
+      next: (data) => {
+        const cityData = localStorage.getItem('cityId');
+        if (!cityData) {
+          localStorage.setItem('cityId', JSON.stringify(data.cities[0]));
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching city data:', error);
+      }
+    });
   }
 
   // getBikeData() {

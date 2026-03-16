@@ -214,7 +214,7 @@ export class CartComponent implements OnInit, AfterViewInit {
       next: (response: any) => {
         console.log('Address saved successfully', response);
         this.addressResponse = response.address;
-        this.addressList = response.address;
+        this.addressList[0] = response.address;
         localStorage.setItem('addressId', this.addressResponse.id);
         this.successMessage = response.message;
         this.showAddressForm = false;
@@ -384,7 +384,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.showCartModal = false;
         this.showSuccess = true;
         this.showError = false;
-        this.router.navigateByUrl("/orders")
+        // this.router.navigateByUrl("/orders");
         this.cartService.clearCart();
         this.getAddress();
       },

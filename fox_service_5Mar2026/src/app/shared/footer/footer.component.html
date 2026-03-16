@@ -1,54 +1,57 @@
-<!-- <footer class="app-footer">
-	<div class="footer-top">
-		<a class="footer-logo" routerLink="/">
-			<img src="assets/images/footer-logo.png" alt="Footer Logo" />
-		</a>
-		<div class="footer-links">
-			<a routerLink="/about">About</a> ·
-			<a routerLink="/faq">FAQ</a> ·
-			<a routerLink="/terms">Terms</a> ·
-			<a routerLink="/contact">Contact</a>
-		</div>
-	</div>
-	<div class="footer-bottom">Copyright © 2021 Fox Service | All Rights Reserved.</div>
-</footer> -->
-
 <footer class="site-footer">
-  <div class="footer-content container">
+  <div class="footer-container">
+
+    <!-- Column 1 -->
     <div class="footer-col">
-      <h4>About Fox Service</h4>
+      <h3>ABOUT FOX SERVICE</h3>
       <ul>
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/about">About Us</a></li>
-        <li><a routerLink="/faq">FAQ's</a></li>
-        <li><a routerLink="/terms">Terms & Conditions</a></li>
-        <li><a routerLink="/contact">Address: E-5 Shatabdi Vihar Scetor 52 Noida (U.P) India E-Mail: contactus&#64;foxservice.in</a></li>
+        <li><a routerLink="/about">ABOUT US</a></li>
+        <li><a routerLink="/faq">FAQ'S</a></li>
+        <li><a routerLink="/terms">TERMS AND CONDITIONS</a></li>
       </ul>
     </div>
 
- <div class="footer-col">
-      <h3>Our Services</h3>
-      <!-- <p *ngFor="let footerService of footerData.Our Services">{{ footerService.heading }}</p> -->
-    <ul>
-      <li *ngFor="let footerService of footerDataService">
-        <a routerLink="/{{ footerService.url }}">{{ footerService.name }}</a>
-      </li>
-    </ul>
-    </div>
-
+    <!-- Column 2 -->
     <div class="footer-col">
-      <h4>Popular Brands</h4>
+      <h3>ADDITIONAL LINKS</h3>
       <ul>
-        <li *ngFor="let footerBrand of footerDataBrand">
-          <a routerLink="/{{ footerBrand.url }}">{{ footerBrand.name }}</a>
+        <li *ngFor="let footerService of footerDataService">
+          <a routerLink="/{{ footerService.url }}">
+            {{ footerService.name }}
+          </a>
         </li>
       </ul>
-      <!-- <p>888-999-83-82</p>
-      <p>contactus&#64;foxservice.in</p> -->
     </div>
+
+    <!-- Column 3 -->
+    <div class="footer-col">
+      <h3>ADDRESS</h3>
+
+      <p>
+        E-5 Shatabdi Vihar Sector 52 <br>
+        Noida (U.P) India
+      </p>
+
+      <p>
+        E-Mail: contactus&#64;foxservice.in
+      </p>
+
+      <p>
+        Phone: 888-999-83-82
+      </p>
+
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="https://www.facebook.com/foxserviceindia?rdid=vqEKMwFrTk4V3G94&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DrJiG2ZKy%2F#" target="_blank"><i class="fab fa-facebook-f" target="_blank"></i></a>
+        <a href="https://www.instagram.com/foxservice.in?utm_source=qr&igsh=a2tqaHd5bHRqZmJi" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://api.whatsapp.com/send/?phone=+918889998382&text=Hi+I+am+interested&type=phone_number&app_absent=0" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQGPxADGxIyzxAAAAZz3sMyI5nHBO5xZWq3A-USBQskcS4QpkkqnpSZrjfb9tYsqmQaqp2zR_SV155D0li5O1y0qOufNo_Y4mIctvc9cc3n5Bw84LAXD0sgN_D6Dcc-zdf6Gaz8=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ffox-service-6285661a5%3Futm_source%3Dshare%26utm_campaign%3Dshare_via%26utm_content%3Dprofile%26utm_medium%3Dandroid_app" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 Fox Service. All Rights Reserved.</p>
+    COPYRIGHT © 2025 FOX SERVICE | ALL RIGHTS RESERVED.
   </div>
 </footer>

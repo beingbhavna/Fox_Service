@@ -20,10 +20,15 @@ export class ProfileComponent implements OnInit {
   cityList: any;
   timeSlots: any;
   orderData: any;
-  title: string = 'Mr';
+  title: string = '1';
   addressEdit = false;
   addressForm!: FormGroup;
+  profileForm!: FormGroup;
   selectedAddress: any;
+  showSuccess = false;
+  showError = false;
+  successMessage: any;
+  errorMessage: any;
 
 
 
@@ -38,6 +43,11 @@ export class ProfileComponent implements OnInit {
       pincode: [''],
       landmark: ['']
     });
+    this.profileForm = this.fb.group({
+      name: [''],
+      email: [''],
+      phone: ['']
+    })
     this.getProfileData();
   }
 
@@ -117,22 +127,43 @@ export class ProfileComponent implements OnInit {
 
   updateAddress() {
     const payload = {
-      id: this.selectedAddress.id,
+      ...this.selectedAddress,
+      address_id: this.selectedAddress.id,
       ...this.addressForm.value
     };
     this.apiService.updateAddress(payload).subscribe({
       next: (data) => {
         this.addressEdit = false;
+        this.successMessage = data.message;
+        this.showSuccess = true;
         this.getProfileData();
+      }, error: (err) => {
+        this.errorMessage = err.message;
+        this.showError = true;
       }
-    })
+    });
   }
 
   editUserProfile() {
-    this.apiService.updateUserProfile('payload').subscribe({
+    const payload = {
+      gender: this.title,
+      ...this.profileForm.value
+    }
+    this.apiService.updateUserProfile(payload).subscribe({
       next: (data) => {
+        this.successMessage = data.message;
+        this.showSuccess = true;
         this.getProfileData();
+      }, error: (err) => {
+        this.errorMessage = err.message;
+        this.showError = true;
       }
-    })
+    });
+  }
+
+  closeError() {
+    this.showSuccess = false;
+    this.showError = false;
+
   }
 }

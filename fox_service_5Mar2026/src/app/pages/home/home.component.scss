@@ -166,7 +166,7 @@ button {
 .quick-booking {
   position: fixed;
   left: 15px;
-  top: 45%;
+  top: 40%;
   background: red;
   color: #fff;
   padding: 10px 15px;
@@ -179,12 +179,22 @@ button {
 .whatsapp {
   position: fixed;
   left: 15px;
+  top: 45%;
+  z-index: 1000;
+
+  img {
+    width: 80px;
+  }
+}
+.calling {
+  position: fixed;
+  left: 15px;
   top: 55%;
   z-index: 1000;
 
   img {
-    width: 45px;
-  }
+    width: 66px;
+    border-radius: 40px;  }
 }
 
 /* ================= HERO ================= */
@@ -211,7 +221,6 @@ button {
 
   .hero-content {
     position: absolute;
-    // top: 30%;
     width: 100%;
     padding: 62px 20px;
     text-align: center;
@@ -234,7 +243,9 @@ button {
       display: flex;
       align-items: center;
       width: 260px;
-      margin-left: 24%;
+
+      /* CENTER ALIGN */
+      margin: 0 auto;
 
       select {
         border: none;

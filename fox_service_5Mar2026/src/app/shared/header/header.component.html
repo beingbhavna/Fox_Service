@@ -8,8 +8,9 @@
         <a href="/register-as-a-professional" class="register-link">Register as a Professional</a>
       </div>
       <div class="top-right">
+		<a class="" href="tel:+918889998382">
         <img src="assets/images/waicon.png" class="weblock" style="height: 16px; margin-right: 5px;">
-        <span class="phone">(888) 999-83-82 </span>
+        <span class="phone">(888) 999-83-82 </span></a>
         <a *ngIf="!loginFlag" class="login-btn" (click)=" openLoginModal()"> Login / Sign Up</a>
       </div>
       <div class="cart" routerLink="/cart" *ngIf="cartCount > 0">

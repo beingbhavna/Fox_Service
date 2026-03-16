@@ -118,28 +118,28 @@ LOGOUT
         </div>
 
         <!-- Form -->
-        <div class="form-section">
+        <div class="form-section" [formGroup]="profileForm">
           <div class="form-group">
             <label>Your Name</label>
             <div class="name-input">
 
-              <span class="prefix" [class.active]="title === 'Mr'" (click)="selectTitle('Mr')">Mr</span>
-              <span class="prefix" [class.active]="title === 'Ms'" (click)="selectTitle('Ms')">Ms</span>
-              <input type="text" [value]="profileData?.name" placeholder="Your Name">
+              <span class="prefix" [class.active]="title === '0'" (click)="selectTitle('0')">Mr</span>
+              <span class="prefix" [class.active]="title === '1'" (click)="selectTitle('1')">Ms</span>
+              <input type="text" [value]="profileData?.name" placeholder="Your Name" formControlName="name">
             </div>
           </div>
 
           <div class="form-group">
             <label>Email Address *</label>
-            <input type="email" placeholder="Your Email">
+            <input type="email" placeholder="Your Email" formControlName="email">
           </div>
 
           <div class="form-group">
             <label>Contact Number *</label>
-            <input type="text" value="">
+            <input type="text" value="" formControlName="phone">
           </div>
 
-          <button class="update-btn">
+          <button class="update-btn" (click)="editUserProfile()">
             UPDATE MY INFO
           </button>
         </div>
@@ -208,5 +208,26 @@ LOGOUT
       </div>
       <button class="add-btn" (click)="updateAddress()">Save Address</button>
     </div>
+  </div>
+</div>
+
+<div class="error-overlay" *ngIf="showSuccess">
+  <div class="error-box">
+    <div class="error-header">Message</div>
+    <div class="error-body">
+      {{successMessage}}
+    </div>
+    <button (click)="closeError()">OK</button>
+  </div>
+</div>
+
+<!-- Error Popup -->
+<div class="error-overlay" *ngIf="showError">
+  <div class="error-box">
+    <div class="error-header">Message</div>
+    <div class="error-body">
+    {{errorMessage}}
+    </div>
+    <button (click)="closeError()">OK</button>
   </div>
 </div>

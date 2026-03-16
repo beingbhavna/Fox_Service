@@ -281,7 +281,7 @@
 
 
       <!-- RIGHT SUMMARY -->
-      <div class="summary-section">
+      <div class="summary-section">{{addressList|json}}
         <div class="address-box" *ngFor="let address of addressList">
           <h4>Home</h4>
           <p>Area: {{address.road_area_colony}}</p>

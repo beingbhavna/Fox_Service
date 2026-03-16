@@ -11,9 +11,7 @@
 
   <!-- Profile Card -->
   <div class="profile-card">
-
     <div class="profile-info">
-
       <div class="profile-image">
         <span>FS</span>
       </div>
@@ -22,14 +20,12 @@
         <h3>Mr. {{profileData?.name}}</h3>
         <p>{{profileData?.phone}}</p>
       </div>
-
     </div>
 
     <div class="order-box">
       <h2>{{orderData?.length || 0}}</h2>
       <span>TOTAL ORDERS</span>
     </div>
-
   </div>
 
   <!-- Navigation Tabs -->
@@ -47,28 +43,22 @@
 
 
   <!-- Tabs -->
-
   <div class="profile-tabs">
     <a routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
       PROFILE
     </a>
-
     <a routerLink="/about" routerLinkActive="active">
       ABOUT FOX SERVICE
     </a>
-
     <a routerLink="/contact" routerLinkActive="active">
       SUPPORT
     </a>
-
     <a routerLink="/faq" routerLinkActive="active">
       FAQ
     </a>
-
     <a routerLink="/orders" routerLinkActive="active">
       MY ORDERS
     </a>
-
     <a routerLink="/" routerLinkActive="active">
       BOOK NOW
     </a>
@@ -76,29 +66,24 @@
     <!-- <a (click)="logout()">
 LOGOUT
 </a> -->
-
   </div>
 
   <!-- Sub Tabs -->
   <div class="sub-tabs">
-
     <!-- <div class="active">Profile</div> -->
     <div [class.active]="activeTab === 'profile'" (click)="setTab('profile')">Profile</div>
     <div [class.active]="activeTab === 'editProfile'" (click)="setTab('editProfile')">Edit Profile</div>
     <div [class.active]="activeTab === 'manageAddress'" (click)="setTab('manageAddress')">Manage Address</div>
-
   </div>
 
   <!-- Profile Section -->
   <div class="profile-section" *ngIf="activeTab == 'profile'">
-
     <h3>Manage Your Profile Details.</h3>
     <p class="subtitle">
       Below are the name and email addresses on file for your account.
     </p>
 
     <div class="profile-form">
-
       <div class="photo-box">
         <span>FS</span>
       </div>
@@ -115,52 +100,33 @@ LOGOUT
           <label>Phone Number</label>
           <p>{{profileData?.phone}}</p>
         </div>
-
       </div>
-
     </div>
-
   </div>
   <div class="profile-wrapper" *ngIf="activeTab == 'editProfile'">
     <!-- Content Card -->
     <div class="profile-card">
-
       <div class="profile-header">
         <h3>Manage Your Security Settings</h3>
         <p>Manage Your Account</p>
       </div>
 
       <div class="profile-body">
-
         <!-- Avatar -->
         <div class="avatar-section">
-
-          <div class="avatar-box">
-            FS
-          </div>
-
+          <div class="avatar-box">FS</div>
         </div>
 
         <!-- Form -->
         <div class="form-section">
-
           <div class="form-group">
             <label>Your Name</label>
-
             <div class="name-input">
 
-              <span class="prefix" [class.active]="title === 'Mr'" (click)="selectTitle('Mr')">
-                Mr
-              </span>
-
-              <span class="prefix" [class.active]="title === 'Ms'" (click)="selectTitle('Ms')">
-                Ms
-              </span>
-
+              <span class="prefix" [class.active]="title === 'Mr'" (click)="selectTitle('Mr')">Mr</span>
+              <span class="prefix" [class.active]="title === 'Ms'" (click)="selectTitle('Ms')">Ms</span>
               <input type="text" [value]="profileData?.name" placeholder="Your Name">
-
             </div>
-
           </div>
 
           <div class="form-group">
@@ -176,18 +142,12 @@ LOGOUT
           <button class="update-btn">
             UPDATE MY INFO
           </button>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
 
-
   <div class="manage-address" *ngIf="activeTab === 'manageAddress'">
-
     <h3>Manage Address</h3>
     <p class="subtitle">Add or update your service address.</p>
     <div *ngIf="!addressEdit">
@@ -203,48 +163,50 @@ LOGOUT
           <p>Landmark: {{address.landmark}}</p>
           <p>City : {{address.city.name}}</p>
         </div>
+
         <div class="address-right">
-          <button class="edit-btn" (click)="editAddress()">Edit</button>
+          <button class="edit-btn" (click)="editAddress(address)">Edit</button>
           <button class="delete-btn">Delete</button>
         </div>
       </div>
     </div>
 
-    <!-- Add Address Form -->
-    <div class="address-form" *ngIf="addressEdit">
-      <h4>Add New Address</h4>
+    <!-- EDIT FORM -->
+
+    <div class="address-form" *ngIf="addressEdit" [formGroup]="addressForm">
+      <h4>Edit Address</h4>
       <div class="form-grid">
         <div class="form-row">
           <label>Full Name</label>
-          <input type="text">
+          <input type="text" formControlName="name">
         </div>
 
         <div class="form-row">
           <label>Phone Number</label>
-          <input type="text">
+          <input type="text" formControlName="phone">
         </div>
 
         <div class="form-row full">
           <label>Address</label>
-          <textarea></textarea>
+          <textarea formControlName="road_area_colony"></textarea>
         </div>
 
         <div class="form-row">
           <label>City</label>
-          <input type="text">
-        </div>
-
-        <div class="form-row">
-          <label>State</label>
-          <input type="text">
+          <input type="text" formControlName="city">
         </div>
 
         <div class="form-row">
           <label>Pincode</label>
-          <input type="text">
+          <input type="text" formControlName="pincode">
+        </div>
+
+        <div class="form-row">
+          <label>Landmark</label>
+          <input type="text" formControlName="landmark">
         </div>
       </div>
-      <button class="add-btn">Save Address</button>
+      <button class="add-btn" (click)="updateAddress()">Save Address</button>
     </div>
   </div>
 </div>

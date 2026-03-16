@@ -378,14 +378,14 @@ export class CartComponent implements OnInit, AfterViewInit {
     console.log("Pay Later Payload:", payload);
     this.apiService.payment(payload as any).subscribe({
       next: (response: any) => {
+        this.showCartModal = false;
         console.log('Payment successful', response);
         this.successMessage = response.message || 'Your order has been placed successfully';
         // Your order has been placed successfully
-        this.showCartModal = false;
         this.showSuccess = true;
         this.showError = false;
-        // this.router.navigateByUrl("/orders");
         this.cartService.clearCart();
+        this.router.navigateByUrl("/orders");
         this.getAddress();
       },
       error: (err) => {

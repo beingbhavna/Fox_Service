@@ -91,5 +91,19 @@ export class ProfileComponent implements OnInit {
 
   editAddress() {
     this.addressEdit = true;
+    this.apiService.updateAddress('payload').subscribe({
+      next:(data)=>{
+        this.getProfileData();
+      }
+    })
+  }
+
+  editUserProfile() {
+    this.addressEdit = true;
+    this.apiService.updateUserProfile('payload').subscribe({
+      next:(data)=>{
+        this.getProfileData();
+      }
+    })
   }
 }

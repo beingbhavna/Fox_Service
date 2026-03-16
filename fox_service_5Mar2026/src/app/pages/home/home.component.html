@@ -1,7 +1,12 @@
 <a class="quick-booking" (click)="quickBookingOpenModal()">Quick Booking</a>
 <a class="whatsapp" (click)="openWhatsApp()">
-  <img src="assets/images/waicongreen.png">
+  <img src="assets/images/whatsapp.jpg">
 </a>
+<a class="whatsapp" (click)="oepnCalling()" href="tel:+918889998382">(888) 999-83-82>
+  <img src="assets/images/calling.jpg">
+</a>
+
+
 <section class="hero-slider">
 	<div class="hero">
 		<div class="slide" *ngFor="let slide of settingsData; let i = index" [class.active]="i === currentIndex"

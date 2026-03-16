@@ -141,7 +141,7 @@ export class ApiService {
     return this.http.get<any>('https://www.foxservice.in/admin/api/user/getAddresses', { headers });
   }
 
-  reschedule(payload:any): Observable<any> {
+  reschedule(payload: any): Observable<any> {
     const token = localStorage.getItem('token'); // get token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
@@ -150,7 +150,7 @@ export class ApiService {
     return this.http.post<any>('https://www.foxservice.in/admin/api/order/reschedule', payload, { headers });
   }
 
-  cancelOrder(payload:any): Observable<any> {
+  cancelOrder(payload: any): Observable<any> {
     const token = localStorage.getItem('token'); // get token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
@@ -159,12 +159,65 @@ export class ApiService {
     return this.http.post<any>('https://www.foxservice.in/admin/api/order/cancel', payload, { headers });
   }
 
-  addItemsToCart(payload:any): Observable<any> {
+  addItemsToCart(payload: any): Observable<any> {
     const token = localStorage.getItem('token'); // get token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
     return this.http.post<any>('https://www.foxservice.in/admin/api/cart/addItemToCart', payload, { headers });
+  }
+
+  updateUserProfile(payload: any): Observable<any> {
+    //     gender:1,
+    // email:test@gmail.com,
+    // id:9139
+    // name:bhavna
+    // phone:917686786786
+    // status:Active
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/user/update', payload, { headers });
+  }
+
+  updateAddress(payload: any): Observable<any> {
+    //     {
+    //     "id": 7217,
+    //     "user_id": 9139,
+    //     "type": "Home",
+    //     "pincode": "201301",
+    //     "house_building_name": "noida",
+    //     "road_area_colony": "Noida, Uttar Pradesh, India",
+    //     "city_id": 1,
+    //     "landmark": "uyu",
+    //     "lat": "28.5355161",
+    //     "lng": "77.3910265",
+    //     "name": "vendor_admin",
+    //     "phone": "917686786786",
+    //     "email": "bhavnasharma52134@gmail.com",
+    //     "created_at": "2026-03-16 17:05:38",
+    //     "updated_at": "2026-03-16 17:05:38",
+    //     "city": {
+    //         "id": 1,
+    //         "slug": "noida",
+    //         "name": "Noida",
+    //         "image": "uploads/cities/GuYzxLDNPWXeTK4K.png",
+    //         "lat": "28.4595000",
+    //         "lng": "77.0266000",
+    //         "created_at": "2020-01-28 18:29:51",
+    //         "updated_at": "2020-08-26 04:32:43",
+    //         "deleted_at": null
+    //     },
+    //     "address_id": 7217
+    // }
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/user/updateAddress', payload, { headers });
   }
 }

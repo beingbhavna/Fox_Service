@@ -16,7 +16,7 @@ export class QuickBookingComponent {
   timeslotList: any;
   cityList: any;
 
-  constructor(private fb: FormBuilder, private router: Router,private service: ApiService) { }
+  constructor(private fb: FormBuilder, private router: Router, private service: ApiService) { }
   ngOnInit() {
     this.bookingForm = this.fb.group({
       name: ['', Validators.required],
@@ -29,11 +29,11 @@ export class QuickBookingComponent {
     this.getCityList();
   }
 
-   getTimeslotList() {
+  getTimeslotList() {
     this.service.getTimeslotData().subscribe({
       next: (data) => {
-        console.log('Timeslot data:', data);
         this.timeslotList = data.timeslots || [];
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching timeslot data:', error);
@@ -41,11 +41,11 @@ export class QuickBookingComponent {
     });
   }
 
-  getCityList(){
+  getCityList() {
     this.service.getCityData().subscribe({
       next: (data) => {
-        console.log('City data:', data);
         this.cityList = data.cities || [];
+        this.service.hide();
         // this.selectedCity = this.cityList.length > 0 ? this.cityList[0].id : null; // default to first city if available
       },
       error: (error) => {

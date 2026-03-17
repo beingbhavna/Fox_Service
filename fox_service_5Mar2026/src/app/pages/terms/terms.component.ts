@@ -23,6 +23,7 @@ export class TermsComponent implements OnInit {
     this.service.getTermsConditionsData().subscribe({
       next: (data) => {
         this.termsConditions = data.terms_and_conditions || [];
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching terms and conditions data:', error);

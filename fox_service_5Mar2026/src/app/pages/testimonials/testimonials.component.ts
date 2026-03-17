@@ -59,8 +59,8 @@ export class TestimonialsComponent implements OnInit {
     const cityId = localStorage.getItem('cityId') || '1'; // default to 1 if not set
     this.service.getTestimonialData((JSON.parse(cityId)).id).subscribe({
       next: (data) => {
-        console.log('Testimonials data:', data);
         this.testimonials = data.testimonials.data || [];
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching testimonials data:', error);

@@ -455,7 +455,7 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
     getCityList() {
-    this.apiService.show();
+    // this.apiService.show();s
     this.apiService.getCityData().subscribe({
       next: (data) => {
         const cityData = localStorage.getItem('cityId');

@@ -130,7 +130,7 @@ export class HeaderComponent {
     const model = this.phone
     this.service.sendOtp(model).subscribe({
       next: (data) => {
-        console.log('Timeslots data:', data);
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
@@ -179,14 +179,13 @@ export class HeaderComponent {
     };
     this.service.login(payload).subscribe({
       next: (data) => {
-        const cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug
-        console.log('Login successful:', data);
         localStorage.setItem('loginFlag', 'true');
         localStorage.setItem('token', data.token);
-        if(this.cartItems.length){
+        if (this.cartItems.length) {
           this.addItemsToCart();
         }
         this.closeLoginModal();
+        this.service.hide();
         // this.showSuccess = true;
         // this.succssMessage = data.message;
         // redirect to same page
@@ -226,6 +225,7 @@ export class HeaderComponent {
     }
     this.service.addItemsToCart(payload).subscribe({
       next: (data) => {
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);

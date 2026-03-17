@@ -63,6 +63,7 @@ export class BikeDetailComponent {
         if (!cityData) {
           localStorage.setItem('cityId', JSON.stringify(data.cities[0]));
         }
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching city data:', error);
@@ -77,6 +78,7 @@ export class BikeDetailComponent {
       this.bikeData = response.category;
       this.services = response.services;
       localStorage.setItem('categoryId', response.category.id)
+      this.service.hide();
     });
   }
 

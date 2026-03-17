@@ -75,18 +75,11 @@ export class BikeListComponent {
     this.service.show();
     this.service.getCityData().subscribe({
       next: (data) => {
-        // this.cityList = data.cities || [];
-        // if (this.cityName) {
-        //   this.selectedCity = this.cityName;
-        //   const selectedCityObj = this.cityList.find((city: any) => city.name.toLowerCase() === this.cityName.toLowerCase());
         const cityData = localStorage.getItem('cityId');
         if (!cityData) {
           localStorage.setItem('cityId', JSON.stringify(data.cities[0]));
         }
-        // } else {
-        //   this.selectedCity = this.cityList.length > 0 ? this.cityList[0].name : null;
-        //   localStorage.setItem('cityId', JSON.stringify(this.cityList[0])); // default to first city if available
-        // }
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching city data:', error);
@@ -116,18 +109,18 @@ export class BikeListComponent {
 
   getBikeData() {
     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
-
     this.service.getBikeData(this.model, cityName).subscribe((response: any) => {
       this.bikeData = response.category;
+      this.service.hide();
       this.getBikeCategoriesList();
     });
   }
 
   getBikeCategoriesList() {
     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
-
     this.service.getSubcategoriesBikeData(this.model, cityName).subscribe((response: any) => {
       this.bikes = response.subcategories.data;
+      this.service.hide();
     });
   }
 

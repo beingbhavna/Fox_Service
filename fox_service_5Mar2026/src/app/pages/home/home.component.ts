@@ -236,7 +236,7 @@ export class HomeComponent implements OnInit {
     this.service.show();
     this.service.getCityData().subscribe({
       next: (data) => {
-        console.log('City data:', data);
+        this.service.hide();
         this.cityList = data.cities || [];
         if (this.cityName) {
           this.selectedCity = this.cityName;
@@ -259,6 +259,7 @@ export class HomeComponent implements OnInit {
     let cityId = localStorage.getItem('cityId') || '1'; // default to 1 if not set
     this.service.getSettingsData((JSON.parse(cityId)).id).subscribe({
       next: (data) => {
+        this.service.hide();
         this.settingsData = data.banners || {};
         this.getTimeslotData();
       },
@@ -272,7 +273,7 @@ export class HomeComponent implements OnInit {
     let cityId = localStorage.getItem('cityId') || '1'; // default to 1 if not set
     this.service.getSubcategoriesData((JSON.parse(cityId)).id).subscribe({
       next: (data) => {
-        console.log('Subcategories data:', data);
+        this.service.hide();
         this.subcategoriesList = data.city.categories[0].subcategories || [];
         this.categoryId = data.city.categories[0].pivot.category_id;
       },
@@ -285,8 +286,8 @@ export class HomeComponent implements OnInit {
   getTimeslotData() {
     this.service.getTimeslotData().subscribe({
       next: (data) => {
-        console.log('Timeslots data:', data);
         this.timeSlotsList = data.slots || [];
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
@@ -298,7 +299,7 @@ export class HomeComponent implements OnInit {
     const model = this.phone
     this.service.sendOtp(model).subscribe({
       next: (data) => {
-        console.log('Timeslots data:', data);
+        this.service.hide();
         // this.timeSlotsList = data.slots || [];
       },
       error: (error) => {
@@ -329,9 +330,9 @@ export class HomeComponent implements OnInit {
     };
     this.service.onQuickBookingSubmit(payload).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.succssMessage = res.message || "Booking submitted successfully";
         this.quickBookingShowModal = false;
+        this.service.hide();
         this.showSuccess = true;
         this.cd.detectChanges();
         this.showError = false;
@@ -361,6 +362,7 @@ export class HomeComponent implements OnInit {
     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
     this.service.getSubcategoriesBikeData(this.model, cityName).subscribe((response: any) => {
       this.bikes = response.subcategories.data;
+      this.service.hide();
     });
   }
 
@@ -379,6 +381,7 @@ export class HomeComponent implements OnInit {
     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
     this.service.getBikeData(this.model, cityName).subscribe((response: any) => {
       this.bikeData = response.services;
+      this.service.hide();
     });
   }
 

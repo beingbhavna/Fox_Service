@@ -66,8 +66,8 @@ export class OrdersComponent implements OnInit {
   getOrderData() {
     this.apiService.getOrderData().subscribe({
       next: (data) => {
-        console.log('orders:', data);
         this.ordersData = data.orders || [];
+        this.apiService.hide();
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
@@ -91,8 +91,8 @@ export class OrdersComponent implements OnInit {
   getTimeslotData() {
     this.apiService.getTimeslotData().subscribe({
       next: (data) => {
-        console.log('Timeslots data:', data);
         this.timeSlots = data.slots || [];
+        this.apiService.hide();
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
@@ -187,6 +187,7 @@ export class OrdersComponent implements OnInit {
         this.successMessage = data.message || 'Your order has been placed successfully';
         // Your order has been placed successfully
         this.showSlotPopup = false;
+        this.apiService.hide();
         this.showSuccess = true;
         this.showError = false;
         this.getOrderData();
@@ -226,6 +227,7 @@ export class OrdersComponent implements OnInit {
       next: (res) => {
         this.getOrderData();
         this.successMessage = res.message;
+        this.apiService.hide();
         this.showSuccess = true;
       }, error: (err) => {
         this.errorMessage = err.message;

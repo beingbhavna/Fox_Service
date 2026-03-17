@@ -60,10 +60,10 @@ export class ProfessionalRegisterComponent {
   getCityList() {
     this.service.getCityData().subscribe({
       next: (data) => {
-        console.log('City data:', data);
         this.cityList = data.cities || [];
         this.selectedCity = this.cityList.length > 0 ? this.cityList[0].id : null;
         localStorage.setItem('cityId', JSON.stringify(this.cityList[0])); // default to first city if available
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching city data:', error);
@@ -107,8 +107,8 @@ export class ProfessionalRegisterComponent {
     }
     this.service.onRegister(formData).subscribe({
       next: res => {
-        console.log('Success', res),
-          this.succssMessage = res.message;
+        this.succssMessage = res.message;
+        this.service.hide();
         this.showSuccess = true;
         this.showError = false;
       },
@@ -122,7 +122,7 @@ export class ProfessionalRegisterComponent {
       }
     });
   }
-  
+
   goToHome() {
     this.router.navigate(['/']);
   }
@@ -154,19 +154,6 @@ export class ProfessionalRegisterComponent {
     return this.loginForm.controls;
   }
 
-  continue() {
-    // DO NOT submit form
-    if (!this.phone || this.phone.length !== 10) {
-      this.showError = true;
-      return;
-    }
-    this.sendOtp();
-    this.showOtpScreen = true;
-    this.startTimer();
-    // success logic here (OTP API etc)
-    console.log('Valid phone');
-  }
-
   startTimer() {
     this.timer = 30;
 
@@ -189,24 +176,6 @@ export class ProfessionalRegisterComponent {
     this.showSuccess = false;
   }
 
-  sendOtp() {
-    const model = this.phone
-    this.service.sendOtp(model).subscribe({
-      next: (data) => {
-        console.log('Timeslots data:', data);
-      },
-      error: (error) => {
-        console.error('Error fetching subcategories data:', error);
-      }
-    });
-  }
-
-  resendOtp() {
-    this.startTimer();
-    this.sendOtp();
-    console.log('OTP resent');
-  }
-
   closeLoginModal() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
@@ -215,6 +184,7 @@ export class ProfessionalRegisterComponent {
     this.loginShowModal = false;
     clearInterval(this.intervalId);
   }
+
   // allow only numbers
   public checkInput(event: any) {
     var ctrlCode = (event.ctrlKey) ? event.ctrlKey : event.metaKey;  // get key cross-browser
@@ -234,18 +204,6 @@ export class ProfessionalRegisterComponent {
     }
   }
 
-  loginWithOtp() {
-    const model = this.loginForm.value;
-    this.service.onQuickBookingSubmit(model).subscribe({
-      next: (res) => {
-        console.log('Success:', res);
-      },
-      error: (err) => {
-        console.error('Error:', err);
-        alert('Something went wrong');
-      }
-    });
-  }
   openWhatsApp() {
     window.open('https://api.whatsapp.com/send?phone=918889998382&text=Hello,%20I%20have%20a%20question%20about', '_blank');
   }

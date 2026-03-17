@@ -13,8 +13,8 @@ import { ApiService } from '../../services/api.service';
 })
 export class FooterComponent {
   footerData: any;
-  footerDataService:any;
-  footerDataBrand:any;
+  footerDataService: any;
+  footerDataBrand: any;
   constructor(private service: ApiService) { }
   ngOnInit(): void {
     this.getFooterData();
@@ -23,12 +23,10 @@ export class FooterComponent {
   getFooterData() {
     const cityId = localStorage.getItem('cityId') || '1'; // default to 1 if not set
     this.service.getFooterData((JSON.parse(cityId)).id).subscribe((res) => {
-      console.log(res);
       this.footerData = res.footer;
       this.footerDataService = res.footer['Our Services'];
       this.footerDataBrand = res.footer['Popular Brands'];
-
-
+      this.service.hide();
     });
   }
 }

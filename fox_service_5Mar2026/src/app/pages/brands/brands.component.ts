@@ -42,6 +42,7 @@ export class BrandsComponent implements OnInit {
       next: (data) => {
         this.brandsList = data.brands || [];
         this.splitBrandsIntoSlides();   // 👈 split equally
+        this.service.hide();
       },
       error: (error) => {
         console.error('Error fetching brands data:', error);

@@ -13,11 +13,11 @@ export class ApiService {
   loading$ = this.loading.asObservable();
 
   show() {
-    this.loading.next(true);
+    setTimeout(() => this.loading.next(true), 0);
   }
 
   hide() {
-    this.loading.next(false);
+    setTimeout(() => this.loading.next(false), 0);
   }
 
   getCityData(): Observable<any> {

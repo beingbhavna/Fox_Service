@@ -179,13 +179,26 @@ button {
 .whatsapp {
   position: fixed;
   left: 15px;
+  top: 45%;
+  z-index: 1000;
+
+  img {
+    width: 80px;
+  }
+}
+
+.calling {
+  position: fixed;
+  left: 15px;
   top: 55%;
   z-index: 1000;
 
   img {
-    width: 45px;
+    width: 66px;
+    border-radius: 40px;
   }
 }
+
 
 /* ================= HERO ================= */
 .hero-slider {

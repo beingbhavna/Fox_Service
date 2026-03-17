@@ -186,6 +186,7 @@ button {
     width: 80px;
   }
 }
+
 .calling {
   position: fixed;
   left: 15px;
@@ -194,7 +195,21 @@ button {
 
   img {
     width: 66px;
-    border-radius: 40px;  }
+    border-radius: 40px;
+  }
+}
+
+
+.calling {
+  position: fixed;
+  left: 15px;
+  top: 55%;
+  z-index: 1000;
+
+  img {
+    width: 66px;
+    border-radius: 40px;
+  }
 }
 
 /* ================= HERO ================= */
@@ -672,11 +687,12 @@ textarea {
 .error-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10000; /* higher than modal */
+  z-index: 10000;
+  /* higher than modal */
 }
 
 .error-box {

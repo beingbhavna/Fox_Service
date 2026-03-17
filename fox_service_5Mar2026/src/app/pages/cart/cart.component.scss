@@ -191,11 +191,23 @@
 .whatsapp {
   position: fixed;
   left: 15px;
+  top: 45%;
+  z-index: 1000;
+
+  img {
+    width: 80px;
+  }
+}
+
+.calling {
+  position: fixed;
+  left: 15px;
   top: 55%;
   z-index: 1000;
 
   img {
-    width: 45px;
+    width: 66px;
+    border-radius: 40px;
   }
 }
 
@@ -607,7 +619,7 @@
 
   .address-modal {
     padding: 20px;
-    max-width: 95%;
+    max-width: 65%;
   }
 
   .address-list {
@@ -676,88 +688,156 @@
 
 /* SECOND MODAL */
 
+/* OVERLAY */
+.overlay-address {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  padding: 10px;
+}
+
+/* MODAL */
 .form-modal {
   display: flex;
   background: #fff;
-  width: 900px;
-  border-radius: 6px;
+  width: 100%;
+  max-width: 750px;
+  /* reduced width */
+  max-height: 90vh;
+  /* important */
+  border-radius: 8px;
   overflow: hidden;
 }
 
+/* SIDEBAR */
 .side-bar {
-  width: 70px;
+  width: 60px;
+  min-width: 60px;
   background: #3e3a39;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 22px;
   cursor: pointer;
 }
 
+/* FORM CONTAINER */
 .form-container {
-  padding: 40px;
+  padding: 20px;
+  /* reduced padding */
   flex: 1;
+  overflow-y: auto;
+  /* scroll inside modal */
 }
 
+/* HEADING */
 .form-container h2 {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+  font-size: 20px;
 }
 
+/* GRID */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0px;
+  gap: 10px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
+/* FULL WIDTH */
 .form-group.full {
   grid-column: 1/3;
 }
 
+/* INPUT */
 input,
 textarea {
   border: none;
   border-bottom: 1px solid #ccc;
-  padding: 8px 0;
+  padding: 8px;
   outline: none;
+  width: 100%;
 }
 
+/* ADDRESS TYPE */
 .address-type {
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
+/* BUTTON */
 .save-btn {
-  margin-top: 30px;
+  margin-top: 20px;
   background: #000;
   color: #fff;
-  padding: 12px 28px;
+  padding: 10px 20px;
   border: none;
   border-radius: 6px;
   float: right;
 }
 
-/* MOBILE */
+/* LOCATION INPUT */
+.location-input {
+  position: relative;
+}
 
-@media(max-width:768px) {
+.location-input input {
+  padding: 10px 45px 10px 10px;
+}
 
-  .address-modal {
-    width: 90%;
-    padding: 30px;
-  }
+.locate-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* TYPE BUTTONS */
+.type-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.type-buttons button {
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.type-buttons button.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
 
   .form-modal {
     flex-direction: column;
-    width: 95%;
+    max-width: 95%;
+    max-height: 95vh;
   }
 
   .side-bar {
     width: 100%;
-    height: 50px;
+    height: 45px;
+    font-size: 20px;
+  }
+
+  .form-container {
+    padding: 15px;
   }
 
   .form-grid {
@@ -770,66 +850,26 @@ textarea {
 
   .save-btn {
     width: 100%;
+    float: none;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+
+  .form-container h2 {
+    font-size: 18px;
   }
 
-}
+  input,
+  textarea {
+    font-size: 14px;
+  }
 
-.location-input {
-  position: relative;
-}
-
-.location-input input {
-  width: 100%;
-  padding: 12px 45px 12px 10px;
-  border: none;
-  border-bottom: 1px solid #ccc;
-}
-
-.locate-btn {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.type-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.type-buttons button {
-
-  padding: 10px 18px;
-  border: 1px solid #ddd;
-  background: #fff;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.type-buttons button.active {
-
-  background: #000;
-  color: #fff;
-  border-color: #000;
-
-}
-
-.form-group {
-  margin-top: 8px;
-}
-
-input {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  padding: 8px;
-  outline: none;
+  .type-buttons button {
+    flex: 1;
+    text-align: center;
+  }
 }
 
 // add address and time slot modal css

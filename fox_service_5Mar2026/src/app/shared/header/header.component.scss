@@ -251,14 +251,27 @@
 
 .whatsapp {
   position: fixed;
-  left: 0px;
-  top: 32%;
+  left: 15px;
+  top: 45%;
   z-index: 1000;
 
   img {
-    width: 45px;
+    width: 80px;
   }
 }
+
+.calling {
+  position: fixed;
+  left: 15px;
+  top: 55%;
+  z-index: 1000;
+
+  img {
+    width: 66px;
+    border-radius: 40px;
+  }
+}
+
 
 .logo img {
   height: 45px
@@ -465,6 +478,7 @@ button {
   cursor: pointer;
   font-size: 18px;
 }
-.timer{
-  padding-top:2px;
+
+.timer {
+  padding-top: 2px;
 }

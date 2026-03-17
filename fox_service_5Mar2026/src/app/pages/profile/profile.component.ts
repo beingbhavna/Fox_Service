@@ -161,9 +161,24 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  deleteAddress() {
+    const payload = {
+      address_id: this.selectedAddress.id,
+    }
+    this.apiService.deleteAddress(payload).subscribe({
+      next: (res) => {
+        this.successMessage = res.message;
+        this.getProfileData();
+        this.showSuccess = true;
+      }, error: (err) => {
+        this.successMessage = err.message;
+        this.showError = true;
+      }
+    });
+  }
+
   closeError() {
     this.showSuccess = false;
     this.showError = false;
-
   }
 }

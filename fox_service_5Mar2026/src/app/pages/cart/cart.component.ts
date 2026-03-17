@@ -218,6 +218,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         localStorage.setItem('addressId', this.addressResponse.id);
         this.successMessage = response.message;
         this.showAddressForm = false;
+        // this.showSuccess = true;
         this.showSlotPopup = true;
         this.generateCalendar();
         this.addItemsToCart();
@@ -225,7 +226,7 @@ export class CartComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         console.log('Error saving address', err);
-        this.errorMessage = err?.error?.message || "Something went wrong";
+        this.errorMessage = err?.message || "Something went wrong";
         this.showError = true;
         this.showSuccess = false;
       }

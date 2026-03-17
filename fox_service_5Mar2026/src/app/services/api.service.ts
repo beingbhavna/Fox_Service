@@ -185,4 +185,13 @@ export class ApiService {
     });
     return this.http.post<any>('https://www.foxservice.in/admin/api/user/updateAddress', payload, { headers });
   }
+
+  deleteAddress(payload: any): Observable<any> {
+    const token = localStorage.getItem('token'); // get token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('https://www.foxservice.in/admin/api/user/deleteAddress', payload, { headers });
+  }
 }

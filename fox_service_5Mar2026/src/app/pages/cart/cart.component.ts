@@ -150,6 +150,8 @@ export class CartComponent implements OnInit, AfterViewInit {
     this.showAddressForm = true;
     if (address) {
       this.addressForm.patchValue(address);
+      this.addressForm.controls['city'].patchValue(address.city.name);
+
     }
   }
 

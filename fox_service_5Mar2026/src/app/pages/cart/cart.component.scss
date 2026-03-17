@@ -488,8 +488,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
-  padding: 15px;
+  z-index: 1001;
+  padding: 6px;
 }
 
 .address-modal {
@@ -500,7 +500,7 @@
   border-radius: 6px;
   position: relative;
   text-align: center;
-  max-height: 90vh;
+  max-height: 60vh;
   overflow-y: auto;
 }
 
@@ -1002,7 +1002,7 @@ input {
 .continue-btn {
   background: #ff2d2d;
   color: #fff;
-  padding: 12px 35px;
+  padding: 12px 27px;
   border: none;
   border-radius: 25px;
   font-weight: 600;

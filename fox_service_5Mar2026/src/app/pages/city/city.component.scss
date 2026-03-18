@@ -163,10 +163,18 @@ button {
 }
 
 /* Floating Buttons */
-.quick-booking {
+
+.floating-buttons {
   position: fixed;
   left: 15px;
-  top: 45%;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* ? controls vertical spacing */
+  z-index: 1000;
+}
+
+.quick-booking {
   background: red;
   color: #fff;
   padding: 10px 15px;
@@ -176,27 +184,18 @@ button {
   z-index: 1000;
 }
 
-.whatsapp {
-  position: fixed;
-  left: 15px;
-  top: 45%;
-  z-index: 1000;
+.whatsapp img{
 
-  img {
+ 
     width: 80px;
-  }
+  
 }
 
-.calling {
-  position: fixed;
-  left: 15px;
-  top: 55%;
-  z-index: 1000;
-
-  img {
+.calling img{
+ 
     width: 66px;
     border-radius: 40px;
-  }
+
 }
 
 

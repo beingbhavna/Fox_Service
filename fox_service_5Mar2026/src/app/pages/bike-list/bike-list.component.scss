@@ -310,27 +310,25 @@ h2 {
   cursor: pointer;
 }
 
-.whatsapp {
+/* Floating Buttons */
+.floating-buttons {
   position: fixed;
   left: 15px;
-  top: 45%;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* ? controls vertical spacing */
   z-index: 1000;
-
-  img {
-    width: 80px;
-  }
 }
 
-.calling {
-  position: fixed;
-  left: 15px;
-  top: 55%;
-  z-index: 1000;
+.whatsapp img {
+  width: 80px;
+}
 
-  img {
-    width: 66px;
-    border-radius: 40px;
-  }
+.calling img {
+  width: 66px;
+  border-radius: 40px;
 }
 
 /* Hamburger Icon */

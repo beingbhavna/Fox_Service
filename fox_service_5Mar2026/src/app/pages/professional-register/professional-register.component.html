@@ -30,12 +30,19 @@
     <span></span>
     <span></span>
   </div>
-  <a class="whatsapp" (click)="openWhatsApp()">
-    <img src="assets/images/waicongreen.png">
-  </a>
-  <a class="calling" href="tel:+918889998382">
-  <img src="assets/images/calling.jpg">
-</a>
+  <div class="floating-buttons">
+    <!-- <a class="quick-booking" (click)="quickBookingOpenModal()">
+    Quick Booking
+  </a> -->
+
+    <a class="whatsapp" (click)="openWhatsApp()">
+      <img src="assets/images/waicongreen.png" alt="WhatsApp">
+    </a>
+
+    <a class="calling" href="tel:+918889998382">
+      <img src="assets/images/calling.jpg" alt="Call">
+    </a>
+  </div>
 
   <!-- Form Card -->
   <form [formGroup]="registerForm" (ngSubmit)="submitForm()">

@@ -484,59 +484,80 @@
 
 /* ERROR POPUP */
 .error-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 11000;   // higher than cart modal
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11000; // higher than cart modal
 }
 
 .error-box {
-  background: #fff;
-  width: 350px;
-  border-radius: 4px;
-  overflow: hidden;
+    background: #fff;
+    width: 350px;
+    border-radius: 4px;
+    overflow: hidden;
 
-  @media(max-width:768px) {
-    width: 90%;
-  }
+    @media(max-width:768px) {
+        width: 90%;
+    }
 }
 
 .error-box {
-  background: #fff;
-  width: 320px;
-  border-radius: 6px;
+    background: #fff;
+    width: 320px;
+    border-radius: 6px;
 }
 
 .error-header {
-  background: #000;
-  color: #fff;
-  padding: 8px;
-  font-size: 13px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    font-size: 13px;
 }
 
 .error-body {
-  padding: 15px;
-  text-align: center;
-  font-size: 14px;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
 }
 
 .error-box button {
-  display: block;
-  margin: 10px auto 15px;
-  background: #000;
-  color: #fff;
-  padding: 6px 20px;
-  border: none;
+    display: block;
+    margin: 10px auto 15px;
+    background: #000;
+    color: #fff;
+    padding: 6px 20px;
+    border: none;
 }
 
 /* Close Button */
 .close-btn {
-  position: relative;
-  font-size: 35px;
-  background: none;
-  border: none;
-  cursor: pointer;
+    position: relative;
+    font-size: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Floating Buttons */
+.floating-buttons {
+    position: fixed;
+    left: 15px;
+    top: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* ? controls vertical spacing */
+    z-index: 1000;
+}
+
+.whatsapp img {
+    width: 80px;
+}
+
+.calling img {
+    width: 66px;
+    border-radius: 40px;
 }

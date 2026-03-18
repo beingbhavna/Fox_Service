@@ -1,5 +1,17 @@
-<div class="profile-page">
+<div class="floating-buttons">
+  <!-- <a class="quick-booking" (click)="quickBookingOpenModal()">
+    Quick Booking
+  </a> -->
 
+  <a class="whatsapp" (click)="openWhatsApp()">
+    <img src="assets/images/waicongreen.png" alt="WhatsApp">
+  </a>
+
+  <a class="calling" href="tel:+918889998382">
+    <img src="assets/images/calling.jpg" alt="Call">
+  </a>
+</div>
+<div class="profile-page">
   <!-- Breadcrumb -->
   <div class="breadcrumb">
     <span>Home Page</span>
@@ -226,7 +238,7 @@ LOGOUT
   <div class="error-box">
     <div class="error-header">Message</div>
     <div class="error-body">
-    {{errorMessage}}
+      {{errorMessage}}
     </div>
     <button (click)="closeError()">OK</button>
   </div>

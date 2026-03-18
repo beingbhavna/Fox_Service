@@ -1,81 +1,74 @@
-<div class="floating-buttons">
-  <!-- <a class="quick-booking" (click)="quickBookingOpenModal()">
-    Quick Booking
-  </a> -->
-
-  <a class="whatsapp" (click)="openWhatsApp()">
-    <img src="assets/images/waicongreen.png" alt="WhatsApp">
-  </a>
-
-  <a class="calling" href="tel:+918889998382">
-    <img src="assets/images/calling.jpg" alt="Call">
-  </a>
-</div>
-
 <div class="orders-page">
   <div class="orders-title">
     <span class="icon"></span>
     <h2>My Orders</h2>
   </div>
-  <a class="whatsapp" (click)="openWhatsApp()">
-    <img src="assets/images/waicongreen.png">
-  </a>
-  <a class="calling" href="tel:+918889998382">
-  <img src="assets/images/calling.jpg">
-</a>
+  <div class="floating-buttons">
+    <!-- <a class="quick-booking" (click)="quickBookingOpenModal()">
+    Quick Booking
+  </a> -->
+
+    <a class="whatsapp" (click)="openWhatsApp()">
+      <img src="assets/images/waicongreen.png" alt="WhatsApp">
+    </a>
+
+    <a class="calling" href="tel:+918889998382">
+      <img src="assets/images/calling.jpg" alt="Call">
+    </a>
+  </div>
 
   <div *ngFor="let order of ordersData; let i = index">
     <div class="order-card">
       <!-- Top -->
-<div class="order-top">
-  <div class="order-id">
-    Order Id: <b>#{{order.order.order_ref}}</b>
-  </div>
+      <div class="order-top">
+        <div class="order-id">
+          Order Id: <b>#{{order.order.order_ref}}</b>
+        </div>
 
-  <div class="order-otp">
-    OTP: <span>{{order.order.otp}}</span>
-  </div>
+        <div class="order-otp">
+          OTP: <span>{{order.order.otp}}</span>
+        </div>
 
-  <div class="order-status">
-    {{order.order.status}}
-  </div>
-</div>
-
-
-<!-- IF ORDER CANCELLED -->
-<div class="order-cancelled" *ngIf="order.order.status === 'Cancelled'">
-  CANCELLED
-</div>
+        <div class="order-status">
+          {{order.order.status}}
+        </div>
+      </div>
 
 
-<!-- Progress (Only show if NOT cancelled) -->
-<div class="order-progress" *ngIf="order.order.status !== 'Cancelled'">
+      <!-- IF ORDER CANCELLED -->
+      <div class="order-cancelled" *ngIf="order.order.status === 'Cancelled'">
+        CANCELLED
+      </div>
 
-  <div class="progress-line">
 
-    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 1">
-      <span></span>
-      <p>Processing</p>
-    </div>
+      <!-- Progress (Only show if NOT cancelled) -->
+      <div class="order-progress" *ngIf="order.order.status !== 'Cancelled'">
 
-    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 2">
-      <span></span>
-      <p>Rescheduled</p>
-    </div>
+        <div class="progress-line">
 
-    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 3">
-      <span></span>
-      <p>In Progress</p>
-    </div>
+          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 1">
+            <span></span>
+            <p>Processing</p>
+          </div>
 
-    <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 4">
-      <span></span>
-      <p>Completed</p>
-    </div>
+          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 2">
+            <span></span>
+            <p>Rescheduled</p>
+          </div>
 
-  </div>
+          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 3">
+            <span></span>
+            <p>In Progress</p>
+          </div>
 
-</div>
+          <div class="progress-step" [class.active]="getStatusStep(order.order.status) >= 4">
+            <span></span>
+            <p>Completed</p>
+          </div>
+
+        </div>
+
+      </div>
       <!-- Expand Button -->
       <div class="order-footer">
         <span class="expand" (click)="toggleOrder(i)">
@@ -247,9 +240,7 @@
 
     <h3>Are you sure you want to cancel this order?</h3>
 
-    <textarea
-      placeholder="Enter your cancellation reason"
-      [(ngModel)]="cancelReason">
+    <textarea placeholder="Enter your cancellation reason" [(ngModel)]="cancelReason">
     </textarea>
 
     <div class="cancel-actions">

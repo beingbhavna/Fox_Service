@@ -20,7 +20,7 @@ export class TestimonialsComponent implements OnInit {
       initial: 'P',
       title: 'Best Bike Service',
       message: 'Fox Service is the best bike service and repairing centre in this designated area. They do the job in a very short span of time. Amazing service and good communication between customers.',
-      name: 'Prateek Agrawal'
+      name: 'Gaurav Kumar'
     },
     {
       initial: 'A',

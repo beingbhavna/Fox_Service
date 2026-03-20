@@ -63,6 +63,7 @@ export class CartComponent implements OnInit, AfterViewInit {
   showSuccess: boolean = false;
   errorMessage: any;
   showError: boolean = false;
+  phone: any;
 
   constructor(private cartService: CartService,
     private router: Router,
@@ -145,13 +146,18 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   openAddressForm(address?: any) {
+    const phone = localStorage.getItem('phone');
+    if (phone) {
+      this.addressForm.controls['phone'].patchValue(phone);
+      this.addressForm.controls['phone'].disable();
+    }
+    this.addressForm.controls['city'].patchValue(JSON.parse(localStorage.getItem('cityId') || '{}').name);
+    this.phone = localStorage.getItem('phone');
     this.showAddressPopup = false;
-    this.showAddressForm = true;
     this.showAddressForm = true;
     if (address) {
       this.addressForm.patchValue(address);
       this.addressForm.controls['city'].patchValue(address.city.name);
-
     }
   }
 
@@ -389,7 +395,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         this.showError = false;
         this.cartService.clearCart();
         setTimeout(() => {
-          this.router.navigateByUrl("/orders");          
+          this.router.navigateByUrl("/orders");
         }, 5000);
         this.getAddress();
       },
@@ -430,7 +436,7 @@ export class CartComponent implements OnInit, AfterViewInit {
         console.log('orders:', data);
         this.addressList = data.addresses || [];
         const addressId = this.addressList.find(res => res.id == this.selectedAddress.id);
-        localStorage.setItem('addressId',addressId.id);
+        localStorage.setItem('addressId', addressId.id);
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);
@@ -456,7 +462,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     }
   }
 
-    getCityList() {
+  getCityList() {
     // this.apiService.show();s
     this.apiService.getCityData().subscribe({
       next: (data) => {

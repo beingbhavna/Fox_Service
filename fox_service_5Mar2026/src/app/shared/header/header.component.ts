@@ -92,6 +92,7 @@ export class HeaderComponent {
   }
 
   continue() {
+    localStorage.setItem('phone',this.phone);
     // DO NOT submit form
     if (!this.phone || this.phone.length !== 10) {
       this.showError = true;
@@ -203,6 +204,7 @@ export class HeaderComponent {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('loginFlag');
+    localStorage.removeItem('phone');
     this.loginFlag = false;
     this.showLogoutMessage = true;
     this.router.navigate(['/']);

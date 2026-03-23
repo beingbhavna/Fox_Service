@@ -1358,3 +1358,13 @@ a {
   line-height: 46px;
   text-align: center;
 }
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+input.ng-valid.ng-touched,
+textarea.ng-valid.ng-touched {
+  border: 1px solid #ccc; /* normal border */
+}

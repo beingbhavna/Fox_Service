@@ -13,6 +13,7 @@ import { TermsComponent } from './pages/terms/terms.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { FaqComponent } from './pages/faq/faq.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
 
 // export const routes: Routes = [
 // 	{ path: '', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
@@ -30,7 +31,8 @@ import { FaqComponent } from './pages/faq/faq.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'city/noida', pathMatch: 'full' },
-  { path: 'city/:cityName', component: HomeComponent },
+  // { path: 'city/:cityName', component: HomeComponent },
+  { path: 'city/:cityName', component: MainPageComponent },
   { path: 'service', component: ServiceComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },

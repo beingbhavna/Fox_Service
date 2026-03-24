@@ -1,0 +1,661 @@
+.login-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-box {
+  background: #fff;
+  width: 400px;
+  padding: 30px;
+  border-radius: 6px;
+  text-align: center;
+  position: relative;
+
+  @media(max-width:768px) {
+    width: 90%;
+  }
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.resend {
+  margin-top: 10px;
+  font-size: 13px;
+
+  span {
+    color: red;
+    cursor: pointer;
+  }
+}
+
+/* ERROR POPUP */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.error-box {
+  background: #fff;
+  width: 350px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  @media(max-width:768px) {
+    width: 90%;
+  }
+}
+
+.error-header {
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.error-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.error-box button {
+  display: block;
+  margin: 10px auto 15px;
+  background: #000;
+  color: #fff;
+  padding: 6px 20px;
+  border: none;
+}
+
+.inputClass {
+  width: 50%;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 50%;
+  padding: 12px;
+  background: #000;
+  color: #fff;
+  border-radius: 25px;
+  border: none;
+  font-weight: 600;
+}
+
+.sub-text {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* ================= HEADER ================= */
+
+/* Floating Buttons */
+.floating-buttons {
+  position: fixed;
+  // left: 15px;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* ? controls vertical spacing */
+  z-index: 1000;
+}
+
+.quick-booking {
+  background: red;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.whatsapp img {
+  width: 67px;
+}
+
+.calling img {
+  width: 54px;
+  border-radius: 40px;
+}
+
+
+/* ================= HERO ================= */
+.hero-slider {
+  width: 100%;
+  height: 420px;
+  position: relative;
+  z-index: 1;
+
+  .hero {
+    height: 100%;
+  }
+
+  .slide {
+    height: 420px;
+    background-size: cover;
+    background-position: center;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .hero-content {
+    position: absolute;
+    width: 100%;
+    padding: 62px 20px;
+    text-align: center;
+    color: #fff;
+
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 10px 0 25px;
+    }
+
+    .city-select {
+      background: #fff;
+      border-radius: 30px;
+      padding: 3px 7px;
+      display: flex;
+      align-items: center;
+      width: 260px;
+
+      /* CENTER ALIGN */
+      margin: 0 auto;
+
+      select {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 15px;
+      }
+
+      .icon {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+/* ================= BIKE ICON ================= */
+.bike-icon {
+  text-align: center;
+  margin: 30px auto;
+  cursor: pointer;
+  background-color: #f6f6f6;
+
+  img {
+    width: 50px;
+  }
+
+  p {
+    font-weight: 600;
+    margin-top: 5px;
+  }
+}
+
+/* ================= POPUP ================= */
+.vehicle-btn {
+  text-align: center;
+  cursor: pointer;
+}
+
+.vehicle-btn img {
+  width: 40px;
+}
+
+.vehicle-btn span {
+  display: block;
+  font-weight: 600;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+/* ================= BIKE GRID ================= */
+.bike-section {
+  padding: 40px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .bike-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+
+  .bike-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+/* ================= HOW IT WORKS ================= */
+.how-it-works {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+}
+
+/* Grid layout */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Card */
+.step-card {
+  background: #fff;
+  padding: 25px 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Images */
+.step-card img {
+  width: 70px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* Text */
+.step-card p {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .how-it-works h2 {
+    font-size: 22px;
+  }
+}
+
+/* ================= QUICK BOOKING MODAL ================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+/* Modal Box */
+.modal-box {
+  background: #fff;
+  width: 100%;
+  max-width: 700px;
+  padding: 25px 30px;
+  border-radius: 8px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Title */
+.modal-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Grid Layout */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 14px;
+}
+
+/* Field */
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field.full {
+  grid-column: span 2;
+}
+
+/* Label */
+label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 5px;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+  background: transparent;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-bottom-color: #000;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Submit Button */
+.submit-btn {
+  margin: 20px auto 0;
+  display: block;
+  background: #000;
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  width: 200px;
+  border-radius: 4px;
+}
+
+.submit-btn:disabled {
+  background: #777;
+  cursor: not-allowed;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  .modal-box {
+    max-width: 600px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .modal-box {
+    max-width: 95%;
+    padding: 20px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: span 1;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: 18px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
+  }
+
+  .submit-btn {
+    padding: 10px;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 992px) {
+  .bike-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .hero-content {
+    padding: 80px 20px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .bike-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .vehicle-popup {
+    flex-direction: column;
+  }
+
+  .popup-left,
+  .popup-right {
+    width: 100% !important;
+  }
+}
+
+/* Popup */
+.vehicle-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 600px;
+  display: flex;
+  border-radius: 10px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* Left */
+.popup-left {
+  width: 35%;
+  background: #fff;
+  border-right: 1px solid #eee;
+  text-align: center;
+  padding: 30px;
+}
+
+.popup-left img {
+  width: 50px;
+}
+
+.popup-left p {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Right */
+.popup-right {
+  width: 65%;
+  padding: 15px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: 0.2s;
+}
+
+.item img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.item.active {
+  background: #222;
+  color: #fff;
+}
+
+.item:hover {
+  background: #f2f2f2;
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  font-size: 22px;
+  cursor: pointer;
+  color: black;
+  text-align: right;
+}
+
+/* ERROR POPUP */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  /* higher than modal */
+}
+
+.error-box {
+  background: #fff;
+  width: 350px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  @media(max-width:768px) {
+    width: 90%;
+  }
+}
+
+.error-header {
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.error-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.error-box button {
+  display: block;
+  margin: 10px auto 15px;
+  background: #000;
+  color: #fff;
+  padding: 6px 20px;
+  border: none;
+}
+* {
+  box-sizing: border-box;
+}

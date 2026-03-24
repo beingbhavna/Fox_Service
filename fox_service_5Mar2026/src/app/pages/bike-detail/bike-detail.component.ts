@@ -17,6 +17,8 @@ export class BikeDetailComponent {
   model: any;
   bikeData: any;
   services: any;
+  cityName: any;
+  message: any;
   constructor(public cartService: CartService, private service: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
     this.route.paramMap.subscribe(params => {
       this.model = params.get('model');
@@ -73,8 +75,10 @@ export class BikeDetailComponent {
   
 
   getBikeData() {
-    let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
-    this.service.getBikeData(this.model, cityName).subscribe((response: any) => {
+    let citySlug = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
+   this.cityName = JSON.parse(localStorage.getItem('cityId') || '{}').name;
+    this.service.getBikeData(this.model, citySlug).subscribe((response: any) => {
+      this.message = response.message;
       this.bikeData = response.category;
       this.services = response.services;
       localStorage.setItem('categoryId', response.category.id)

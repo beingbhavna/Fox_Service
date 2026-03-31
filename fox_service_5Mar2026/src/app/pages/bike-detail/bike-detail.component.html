@@ -2,7 +2,7 @@
 <!-- HERO SECTION -->
 <section class="hero" [style.backgroundImage]="'url(https://www.foxservice.in/admin/' + bikeData?.banner + ')'">
     <div class="overlay">
-        <h1>Honda Activa 6G Service in Bangalore</h1>
+        <h1>{{model}} Service in {{cityName}}</h1>
         <p>Get instant access to reliable and affordable services</p>
     </div>
 </section>
@@ -21,7 +21,9 @@
 </div>
 
 <!-- TITLE -->
-<h2 class="section-title">
+<h2 class="section-title" *ngIf="!services.length">{{message}}</h2>
+
+<h2 class="section-title" *ngIf="services.length">
     <img src="assets/images/tag2.png" /> Choose Your Service
 </h2>
 

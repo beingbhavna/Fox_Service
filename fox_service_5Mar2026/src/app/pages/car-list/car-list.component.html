@@ -1,0 +1,110 @@
+<!-- <header class="top-header" [class.sticky]="isSticky">
+  <div class="container nav">
+    <a routerLink="/" class="logo" (click)="goToHome()">
+      <img src="/assets/images/logo.png" />
+    </a>
+    <div class="top-bar">
+      <div class="top-left">
+        <a class="register-link">Register as a Professional</a>
+      </div>
+      <div class="top-right">
+        <span class="phone">(888) 999-83-82 </span>
+        <a class="login-btn" (click)="openLoginModal()"> Login / Sign Up</a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="register-wrapper">
+  <div class="mobile-menu-icon" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="mobile-menu" [class.open]="menuOpen">
+    <a routerLink="/register-as-a-professional">Register as a Professional</a>
+    <a routerLink="/login">Login / Sign Up</a>
+  </div> -->
+<!-- <app-header></app-header> -->
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="slide" [style.backgroundImage]="'url(https://www.foxservice.in/admin/' + carData?.banner + ')'">
+    <div class="hero-content">
+      <img src="assets/images/tag2.png" alt="How It Works" class="how-it-works-image" style="height: 20px;">
+      <a class="breadcrumb-new" (click)="goToHome()">Home / noida / Car</a>
+      <h1>{{ carData?.name }}</h1>
+      <p>{{ carData?.description }}</p>
+    </div>
+    <div class="floating-buttons">
+  <!-- <a class="quick-booking" (click)="quickBookingOpenModal()">
+    Quick Booking
+  </a> -->
+
+  <a class="whatsapp" (click)="openWhatsApp()">
+    <img src="assets/images/waicongreen.png" alt="WhatsApp">
+  </a>
+
+  <a class="calling" href="tel:+918889998382">
+    <img src="assets/images/calling.jpg" alt="Call">
+  </a>
+</div>
+  </div>
+</section>
+<h2 class="mb-3" style="text-align: center;">
+  <img src="assets/images/tag2.png" alt="How It Works" class="how-it-works-image" style="height: 28px;"> Car/SUV
+</h2>
+
+<!-- FILTER BUTTONS -->
+<div class="filter-bar">
+  <button *ngFor="let brand of brands" (click)="filterBrand(brand)" [ngClass]="{'active': activeBrand === brand}">
+    {{ brand }}
+  </button>
+</div>
+
+<!-- BIKE GRID -->
+<div class="bike-grid">
+  <div class="bike-card" *ngFor="let bike of filteredBikes" (click)="goToDetails(bike)">
+    <img [src]="'https://www.foxservice.in/admin/' + bike.image" alt="{{bike.name}}">
+    <h4>{{ bike.name }}</h4>
+  </div>
+</div>
+
+<!-- login modal -->
+
+<div class="login-modal" *ngIf="loginShowModal">
+  <div class="login-box">
+    <span class="close-btn" (click)="close()">×</span>
+    <img src="assets/images/logo.png" class="logo" />
+
+    <p class="tagline">Our energy is working for you</p>
+    <p class="sub-text">Quick · Affordable · Trusted</p>
+
+    <div *ngIf="!showOtpScreen">
+      <input type="text" placeholder="Your Phone Number" [(ngModel)]="phone" maxlength="10"
+        (keypress)="checkInput($event)" />
+
+      <button (click)="continue()">CONTINUE</button>
+    </div>
+    <!-- OTP SCREEN -->
+    <div *ngIf="showOtpScreen">
+      <input type="text" placeholder="Enter Your OTP" formControlName="otp">
+      <button>CONTINUE</button>
+      <div *ngIf="timer != 00" class="timer">00:{{ timer < 10 ? '0' + timer : timer }}</div>
+          <p class="resend">
+            Didn't receive code? <span (click)="resendOtp()">Resend OTP</span>
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Popup -->
+  <div class="error-overlay" *ngIf="showError">
+    <div class="error-box">
+      <div class="error-header">Message</div>
+      <div class="error-body">
+        10 digit Phone number is required
+      </div>
+      <button (click)="closeError()">OK</button>
+    </div>
+  </div>

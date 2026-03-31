@@ -1,0 +1,401 @@
+/* HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+  }
+
+  .logo img {
+    height: 45px;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 14px;
+
+    .phone {
+      font-weight: bold;
+      color: #555;
+
+    }
+
+    .login-btn {
+      cursor: pointer;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .register-link {
+      color: #555;
+    }
+  }
+
+  .container {
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+  }
+
+
+
+  .cart {
+    position: relative;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+}
+
+/* HERO SLIDER */
+.hero {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+}
+
+.hero-content {
+  color: #fff;
+
+  h1 {
+    font-size: 34px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+/* TITLE */
+h2 {
+  margin: 30px 0 20px;
+  font-weight: 700;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  background: #f2f2f2;
+  padding: 15px 10px;
+
+  button {
+    border: none;
+    background: transparent;
+    margin: 0 15px;
+    padding: 8px 5px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .active {
+    border-bottom: 3px solid orange;
+    color: orange;
+  }
+}
+
+/* GRID */
+.bike-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 30px;
+  padding: 40px 60px;
+}
+
+/* CARD */
+.bike-card {
+  background: #fff;
+  padding: 25px 15px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+  transition: all .3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, .15);
+  }
+
+  img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+}
+
+/* HEADER */
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+  }
+
+  .logo img {
+    height: 45px;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 14px;
+
+    .phone {
+      font-weight: bold;
+    }
+
+    .login-btn {
+      cursor: pointer;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .register-link {
+      color: #555;
+    }
+  }
+
+
+  .cart {
+    position: relative;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .nav-links {
+    margin: 10px 0;
+  }
+
+  .hero {
+    height: 220px;
+  }
+
+  .slide {
+    padding-left: 20px;
+  }
+
+  .bike-grid {
+    padding: 20px;
+    gap: 20px;
+  }
+}
+
+/* ================= LOGIN MODAL ================= */
+.login-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+
+  .login-box {
+    background: #fff;
+    padding: 30px;
+    width: 350px;
+    border-radius: 10px;
+    text-align: center;
+
+    // .logo {
+    //   width: 120px;
+    //   margin-bottom: 10px;
+    // }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #000;
+      color: #fff;
+      border-radius: 25px;
+      border: none;
+      font-weight: 600;
+    }
+
+    .timer {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .resend span {
+      color: red;
+      cursor: pointer;
+    }
+  }
+}
+
+.breadcrumb-new a {
+  color: #e5e5e5;
+  font-size: 18px;
+  line-height: 1.75;
+  letter-spacing: normal;
+  font-weight: 500;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+
+/* Floating Buttons */
+.floating-buttons {
+  position: fixed;
+  left: 15px;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* ? controls vertical spacing */
+  z-index: 1000;
+}
+
+.whatsapp img {
+  width: 80px;
+}
+
+.calling img {
+  width: 66px;
+  border-radius: 40px;
+}
+
+/* Hamburger Icon */
+.mobile-menu-icon {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: #fff;
+  z-index: 1001;
+}
+
+.mobile-menu-icon span {
+  width: 18px;
+  height: 2px;
+  background: #000;
+  margin: 3px 0;
+}
+
+/* Menu Box */
+.mobile-menu {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  width: 220px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+
+  transform: translateY(-20px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+/* When Open */
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Links */
+.mobile-menu a {
+  display: block;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu a:hover {
+  background: #f5f5f5;
+}
+
+/* Show only on mobile */
+@media (max-width: 768px) {
+  .mobile-menu-icon {
+    display: flex;
+  }
+}

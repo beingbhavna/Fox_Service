@@ -1,0 +1,33 @@
+faq page
+bottom scroll bar
+profile endpoints
+address modal fields auto filled phone and city
+address on pay later modal at first time
+total gst price decimal limit
+after remove items from cart then blank design
+msg after pay button on popup
+
+{
+    "phone": "7895030785",
+    "city": "3",
+    "name": "rgtrtr",
+    "email": "bhavnasharma52143@gmail.com",
+    "service": "1",
+    "vehicleType": "Bike/Scooty",
+    "ccDetails": "upto-150cc",
+    "model": "tvs-scooty-pep-plus",
+    "timeSlot": "7",
+    "address": "bhhjj",
+    "date": "2026-03-04"
+}
+
+whatsapp icon big
+call icon
+remove gst 
+social media link in footer
+city selection in centre
+user profile
+user booking
+
+
+city selection popup

@@ -202,9 +202,10 @@ export class HeaderComponent {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('loginFlag');
-    localStorage.removeItem('phone');
+    localStorage.clear();
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('loginFlag');
+    // localStorage.removeItem('phone');
     this.loginFlag = false;
     this.showLogoutMessage = true;
     this.router.navigate(['/']);

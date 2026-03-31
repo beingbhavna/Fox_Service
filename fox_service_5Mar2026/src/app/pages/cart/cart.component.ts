@@ -76,15 +76,15 @@ export class CartComponent implements OnInit, AfterViewInit {
     });
     this.selectedCity = this.cartItems.length > 0 ? this.cartItems[0].cities[0].name : '';
     this.addressForm = this.fb.group({
-      name: [''],
-      email: [''],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      city: [''],
+      road_area_colony: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      city: ['', Validators.required],
       landmark: [''],
-      house_building_name: [''],
-      type: ['Home'],
+      house_building_name: ['', Validators.required],
+      type: ['Home', Validators.required],
       city_id: [this.cityId],
-      road_area_colony: ['']
     });
     this.currentMonth = new Date().getMonth();
     this.currentYear = new Date().getFullYear();
@@ -213,11 +213,19 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   submitAddress() {
-    let payload = { ...this.addressForm.value };
+    if (this.addressForm.invalid) {
+      this.addressForm.markAllAsTouched();
+      return;
+    }
+
+    let payload = this.addressForm.getRawValue(); // ✅ includes disabled fields
+
     if (payload.type === 'Other') {
       payload.type = payload.otherType;
     }
-    payload.phone = 91 + payload.phone; // prepend country code
+
+    payload.phone = 91 + payload.phone;
+
     this.apiService.saveAddress(payload).subscribe({
       next: (response: any) => {
         console.log('Address saved successfully', response);
@@ -226,7 +234,6 @@ export class CartComponent implements OnInit, AfterViewInit {
         localStorage.setItem('addressId', this.addressResponse.id);
         this.successMessage = response.message;
         this.showAddressForm = false;
-        // this.showSuccess = true;
         this.showSlotPopup = true;
         this.generateCalendar();
         this.addItemsToCart();

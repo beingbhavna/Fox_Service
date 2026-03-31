@@ -9,17 +9,16 @@ import { ApiService } from '../../services/api.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-car-page',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ServicesGridComponent, TestimonialsComponent, BrandsComponent, HeaderComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  templateUrl: './car-page.component.html',
+  styleUrl: './car-page.component.scss'
 })
-export class HomeComponent implements OnInit {
-  cityList: any;
+export class CarPageComponent implements OnInit {
+cityList: any;
   selectedCity: any;
   subcategoriesList: any;
-  subcategoriesCarList: any;
   timeSlotsList: any;
   bookingForm: any;
   model: any;
@@ -31,8 +30,6 @@ export class HomeComponent implements OnInit {
   succssMessage: any;
   categoryId: any;
   selectedModelId: any;
-  categoryIdCar: any;
-  activeTab: 'bike' | 'car' = 'bike'; // default bike selected
 
   constructor(private router: Router, private fb: FormBuilder, private service: ApiService, private cd: ChangeDetectorRef) {
     this.loginForm = this.fb.group({
@@ -67,7 +64,6 @@ export class HomeComponent implements OnInit {
   ];
   isSticky = false;
   showPopup = false;
-  showCarPopup = false;
   activeIndex = 0;
   quickBookingShowModal = false;
 
@@ -95,15 +91,6 @@ export class HomeComponent implements OnInit {
   closePopup() {
     this.showPopup = false;
   }
-
-  openCarPopup() {
-    this.showCarPopup = true;
-  }
-
-  closeCarPopup() {
-    this.showCarPopup = false;
-  }
-
 
   selectItem(i: number) {
     this.activeIndex = i;
@@ -147,12 +134,6 @@ export class HomeComponent implements OnInit {
     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
     console.log('Selected category:', category);
     this.router.navigate(['/' + cityName + '/bike-scooty/' + category]);
-  }
-
-  openCarList(category: any) {
-    let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
-    console.log('Selected category:', category);
-    this.router.navigate(['/' + cityName + '/car-suv/' + category]);
   }
 
   //login code
@@ -295,9 +276,6 @@ export class HomeComponent implements OnInit {
         this.service.hide();
         this.subcategoriesList = data.city.categories[0].subcategories || [];
         this.categoryId = data.city.categories[0].pivot.category_id;
-
-        this.subcategoriesCarList = data.city.categories[1].subcategories || [];
-        this.categoryIdCar = data.city.categories[1].pivot.category_id;
       },
       error: (error) => {
         console.error('Error fetching subcategories data:', error);

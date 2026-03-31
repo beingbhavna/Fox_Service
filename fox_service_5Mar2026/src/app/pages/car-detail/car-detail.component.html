@@ -1,0 +1,69 @@
+<!-- <app-header></app-/header> -->
+<!-- HERO SECTION -->
+<section class="hero" [style.backgroundImage]="'url(https://www.foxservice.in/admin/' + carData?.banner + ')'">
+    <div class="overlay">
+        <h1>Car Service in NCR</h1>
+        <p>Get instant access to reliable and affordable services</p>
+    </div>
+</section>
+<div class="floating-buttons">
+  <!-- <a class="quick-booking" (click)="quickBookingOpenModal()">
+    Quick Booking
+  </a> -->
+
+  <a class="whatsapp" (click)="openWhatsApp()">
+    <img src="assets/images/waicongreen.png" alt="WhatsApp">
+  </a>
+
+  <a class="calling" href="tel:+918889998382">
+    <img src="assets/images/calling.jpg" alt="Call">
+  </a>
+</div>
+
+<!-- TITLE -->
+<h2 class="section-title">
+    <img src="assets/images/tag2.png" /> Choose Your Service
+</h2>
+
+<!-- SERVICES GRID -->
+<div class="service-grid">
+    <div class="service-card" *ngFor="let service of services">
+        <img [src]="'https://www.foxservice.in/admin/' + service.image" />
+        <h3>{{service.name}}</h3>
+        <h4>₹{{service.cities[0].pivot.price}} /-</h4>
+
+        <p class="view-link" (click)="openPopup(service)">View whats included</p>
+
+        <!-- <button class="add-btn" (click)="addToCart(service)">ADD TO CART🛒</button> -->
+
+        <button class="cart-btn" [class.added]="cartService.isInCart(service,model)" (click)="addToCart(service)">
+            <span *ngIf="!cartService.isInCart(service, model)">ADD TO CART 🛒</span>
+            <span *ngIf="cartService.isInCart(service, model)">ADDED ✓</span>
+        </button>
+
+    </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showPopup">
+    <div class="modal-box">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <span>{{selectedService?.name}}</span>
+            <span>₹{{selectedService.cities[0].pivot.price}} /-</span>
+            <button class="close-btn" (click)="closePopup()">✖</button>
+        </div>
+
+        <!-- BODY -->
+        <div class="modal-body">
+            <div id="info" class="service-details" [innerHTML]="getSafeDescription(selectedService.specifications)">
+            </div>
+        </div>
+
+        <button class="close-bottom" (click)="closePopup()">CLOSE</button>
+    </div>
+</div>
+
+<div class="floating-cart" routerLink="/cart">
+    🛒
+</div>

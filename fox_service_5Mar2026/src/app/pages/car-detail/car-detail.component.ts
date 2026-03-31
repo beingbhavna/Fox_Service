@@ -3,21 +3,19 @@ import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { ApiService } from '../../services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { RouterModule } from '@angular/router';
-
 @Component({
-  selector: 'app-bike-detail',
+  selector: 'app-car-detail',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, RouterModule],
-  templateUrl: './bike-detail.component.html',
-  styleUrl: './bike-detail.component.scss'
+  imports: [CommonModule, HeaderComponent,RouterModule],
+  templateUrl: './car-detail.component.html',
+  styleUrl: './car-detail.component.scss'
 })
-export class BikeDetailComponent {
+export class CarDetailComponent {
   model: any;
-  bikeData: any;
+  carData: any;
   services: any;
   constructor(public cartService: CartService, private service: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
     this.route.paramMap.subscribe(params => {
@@ -77,7 +75,7 @@ export class BikeDetailComponent {
   getBikeData() {
     let cityName = JSON.parse(localStorage.getItem('cityId') || '{}').slug;
     this.service.getBikeData(this.model, cityName).subscribe((response: any) => {
-      this.bikeData = response.category;
+      this.carData = response.category;
       this.services = response.services;
       localStorage.setItem('categoryId', response.category.id)
       this.service.hide();

@@ -37,20 +37,10 @@
 		</div>
 	</div>
 </section>
-
 <!-- BIKE / SCOOTY ICON -->
-<div class="vehicle-type">
-  <!-- BIKE -->
-  <div class="bike-icon" (click)="openPopup()">
-    <img src="assets/images/bike.png">
-    <p>Bike / Scooty</p>
-  </div>
-
-  <!-- CAR -->
-  <div class="bike-icon" (click)="openCarPopup()">
-    <img src="assets/images/carsuv.png">
-    <p>Car / SUV</p>
-  </div>
+<div class="bike-icon" (click)="openPopup()">
+	<img src="assets/images/bike.png">
+	<p>Bike / Scooty</p>
 </div>
 
 
@@ -74,62 +64,13 @@
 </div>
 
 
-<!-- car Overlay -->
-<div class="overlay" *ngIf="showCarPopup" (click)="closeCarPopup()"></div>
-
-<!--car Popup -->
-<div class="vehicle-popup" *ngIf="showCarPopup">
-	<div class="popup-left">
-		<img src="assets/images/carsuv.png" />
-		<p>Car / SUV</p>
-	</div>
-
-	<div class="popup-right">
-		<div class="item" *ngFor="let item of subcategoriesCarList; let i = index" [class.active]="i === activeIndex"
-			(click)="selectItem(i)" (click)="openCarList(item.slug)">
-			<img [src]="'https://www.foxservice.in/admin/' + item.image" />
-			<span>{{item.name}}</span>
-		</div>
-	</div>
-</div>
-
-<div class="tab-header">
-  <div 
-    class="tab-item"
-    [class.active]="activeTab === 'bike'" 
-    (click)="activeTab = 'bike'">
-    Bike / Scooty
-  </div>
-
-  <div 
-    class="tab-item"
-    [class.active]="activeTab === 'car'" 
-    (click)="activeTab = 'car'">
-    Car / SUV
-  </div>
-</div>
-
 	<!-- BIKE CATEGORY -->
-	<section class="bike-section" *ngIf="activeTab === 'bike'">
-		<!-- <div>Bike / Scooty</div> -->
+	<section class="bike-section">
+		<div>Bike / Scooty</div>
 
 		<div class="bike-grid">
 			<div class="bike-card" (click)="openBikeList(subCategories.slug)"
 				*ngFor="let subCategories of subcategoriesList">
-				<img [src]="'https://www.foxservice.in/admin/' + subCategories.image" alt="{{subCategories.name}}">
-				<p>{{subCategories.name}}</p>
-				<p><b>Book Now →</b></p>
-			</div>
-
-		</div>
-	</section>
-
-	<section class="car-section" *ngIf="activeTab === 'car'">
-		<!-- <div>Car / SUV</div> -->
-
-		<div class="car-grid">
-			<div class="car-card" (click)="openCarList(subCategories.slug)"
-				*ngFor="let subCategories of subcategoriesCarList">
 				<img [src]="'https://www.foxservice.in/admin/' + subCategories.image" alt="{{subCategories.name}}">
 				<p>{{subCategories.name}}</p>
 				<p><b>Book Now →</b></p>
